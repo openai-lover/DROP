@@ -67,6 +67,8 @@ Current installed package/source inspection found `firebase-tools 15.33.0`, `fir
 
 Actual cloud configuration evidence: the selected project is `drop-5a400` / DROP / Spark. CLI inspection confirms `(default)` Firestore, Standard edition / Native mode, `asia-northeast3`, creation `2026-10-13T13:01:16.609278Z`. Rules/indexes-only deployment exited 0, including rules compilation/upload/release and indexes deployment. No billing upgrade or Functions deployment occurred. Vercel IAM and actual app data access are still unverified. This is project-state evidence, separate from general documentation.
 
+Actual public-web evidence: [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/) is production READY in teamstartup/drop/Hobby. Official CLI63.1.2 normal upload from local commit3ff3025 (118records/1.2MB, cloud118files) passed the cloud build. Hosted Playwright30passed/6profile skips44.7s and direct public/status/OG200 /anonymous private APIs401 checks verified public/practice availability. All real integration availability booleans arefalse, demoFallbackfalse. GitHub push403 leaves the requested source remote empty. Web hosting does not verify real Privy, cloud app IAM or Monad payouts; contest submission remains on hold.
+
 ## Contest sources and limits of access
 
 | Source | Access result | What may be claimed |

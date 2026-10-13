@@ -9,10 +9,10 @@
 | Item | Acceptance evidence | Status at document preparation |
 | --- | --- | --- |
 | Raster logo / graphic | Public track: JPG/JPEG/PNG/WEBP ≤3 MB. Actual upload: PNG/JPG/WEBP ≤2 MB, at least 500 px, max 2000×2000. Decode, record origin and conservatively meet both dimensions ≥500 | **Prepared and pixel-inspected:** original temporary wordmark PNG + square PNG; both dimensions 500–2000, both below 2,000,000 bytes. Not an approved final brand; no upload. See evidence below. |
-| Public GitHub | [openai-lover/DROP](https://github.com/openai-lover/DROP), actual latest code pushed, accessible to `metropolis@hackathon.monad.xyz`, no secrets | Publication/access not yet verified |
+| Public GitHub | [openai-lover/DROP](https://github.com/openai-lover/DROP), actual latest code pushed, accessible to `metropolis@hackathon.monad.xyz`, no secrets | Push returned403; requested remote remains empty. Hosted local commit3ff3025 is not GitHub publication |
 | Technical demo | Actual working product, accessible YouTube/Loom/Vimeo URL, measured exported duration ≤ 3:00 | [Script](DEMO_3MIN.md) prepared; no recording/upload supplied |
 | Founder pitch | Team, problem, purpose; verifiable biography; accessible accepted-host URL; measured duration ≤ 2:00 | [Script](PITCH_2MIN.md) prepared; biography/recording/upload absent |
-| Deployed product | Official: live Monad Mainnet/Testnet product URL and access/test credentials. DROP scope additionally requires actual Vercel/Firestore/Privy/escrow and durable payout | Cloud Firestore database/rules/indexes verified; Vercel, live Privy/escrow/funding and cloud processor incomplete. Functions blocked on Spark; no upgrade authorized |
+| Deployed product | Official: live Monad Mainnet/Testnet product URL and access/test credentials. DROP scope additionally requires actual Vercel/Firestore/Privy/escrow and durable payout | [Public web/practice](https://drop-omega-five.vercel.app/) is deployed; Firestore database/rules/indexes verified. Live Privy/app IAM/escrow/funding/processor remain unset; therefore full official product gate remains incomplete |
 | Judge access | Limited testnet budget and roles; two repeatable game flows; private test-account delivery if needed; no public admin bypass | Requires actual configured deployment and rehearsal |
 
 The optional promotional video is ≤30 seconds and is not judged under the verified official track; it is currently absent. No live-judging exemption is inferred from the recorded-pitch requirement.
@@ -24,7 +24,7 @@ The optional promotional video is ≤30 seconds and is not judged under the veri
 | Title / one-line summary | ≤120 / ≤200 characters | Product drafts only; no form changes |
 | Description | ≤8000 characters | Product/source evidence available; live claims must stay incomplete |
 | Go-to-market / user acquisition | ≤8000 characters | Hypotheses and next-100 plan prepared; no invented users/interviews |
-| Repository / logo / live URL / demo / pitch | Required fields; exact artifact limits above | Local PNGs ready; publication/hosting/videos still incomplete |
+| Repository / logo / live URL / demo / pitch | Required fields; exact artifact limits above | PNGs and public web/practice URL ready; GitHub403, actual payout product and videos incomplete; no fields submitted |
 | Selected Best Community bounty / group | Observed selection; requires onboarded campus-group eligibility and required group identification | Eligibility and group identification unproven; selected checkbox is not qualification |
 | Judge instructions | Optional, private, ≤8000 characters | Actual access instructions needed after a verified deployment; no private draft/PII copied into repository |
 | Public video checkboxes / ad / project X | Optional fields visible | No checkbox or value changed; ad absent |
@@ -66,6 +66,7 @@ The official criteria require actual onchain conditional settlement, a non-crypt
 - [x] App typecheck, Functions build and final Next rebuild after the OG fix passed. Local production OG returned actual HTTP200 PNG1200×630 /49,610bytes and pixels were inspected; home/judges200, status200/private cache and anonymous rewards/coupon401/private cache verified. No published campaign, live auth or hosted URL inferred. Later source changes require revalidation.
 - [x] Final Vitest passed 61 tests in seven files, including 20 real Firestore emulator cases with chain responses mocked; actual SDK test-generated JWT signatures exercised.
 - [x] Final Playwright passed 30 checks with six intentional profile skips, exit 0 in 45.5s; local unpaid practice/anonymous API, creator validation, KO/EN, four widths and keyboard/touch scope. No real-auth or paid-flow claim.
+- [x] Vercel production is READY at [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/). Actual hosted suite30passed/6intentional profile skips44.7s, exit0, no page errors; direct public/status/OG checks200 and anonymous private APIs401/no-store/private. Status integrationsfalse/demoFallbackfalse. No real-auth/paid-flow claim.
 - [x] Clean root lint exited 0 with zero warnings; added local-chain files' static checks passed; final Next rebuild after the OG fix exited 0.
 - [x] Recorded official Forge 1.8.5 run uses `network = "monad"`: 42 unit/fuzz tests and two invariant properties passed with zero failures/skips; current contract and ABI hashes match [verification.json](../contracts/verification.json). This is local contract evidence only.
 - [x] Real Firestore emulator started with a demo project, all listeners bound to `127.0.0.1`; Hub/data API and reuse of the same process verified. This is local runtime readiness, not a cloud deployment.
@@ -104,8 +105,9 @@ The official criteria require actual onchain conditional settlement, a non-crypt
 | Portal account / registered team | Existing authenticated session inspected read-only; no private account/team data reproduced |
 | Track | Consumer Products & Payments — user-requested, observed already selected; no choice changed or application submitted |
 | Community bounty | Observed already selected; campus-group eligibility and required group identification unproven |
-| Final source commit | Not recorded |
-| Public app URL | Not recorded |
+| Deployed local source commit | `3ff3025`; GitHub push403/empty remote means public source requirement is not met |
+| Public app URL | https://drop-omega-five.vercel.app/ — production READY /Hobby; anonymous practice only, real integrations unset |
+| Vercel deployment / build | dpl_3o35jn53ucDDU46NBHZZeD9BgeM4; CLI63.1.2 exit0; normal1.2MB/118records/cloud118files; locked install/Next/TS/11pages passed |
 | Firebase project / Functions / billing | drop-5a400 / DROP / Spark; real Firestore database and rules/indexes verified; no Functions or billing change |
 | Chain / escrow / explorer | Real Testnet network/token reads verified; no live DROP escrow/funding/receipt/explorer proof |
 | Technical video URL / duration | Not recorded |

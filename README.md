@@ -8,6 +8,8 @@ DROP lets Telegram KOLs and community operators share a short catch game or quiz
 
 ## Current state
 
+**Public web deployment:** [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/), production **READY** on `teamstartup/drop` (Hobby). The public homepage and anonymous practice are accessible. Login, authenticated creation, app-data access and real payouts remain explicitly unavailable until their integrations are configured.
+
 The implementation targets **Vercel Next.js + Firebase Firestore**, with prepared Firebase Functions processing source and **Monad Testnet** as the default. The confirmed Firebase project is **`drop-5a400`**, display name **DROP**, on the free **Spark** plan. **No billing upgrade is currently authorized; do not upgrade it without a new owner instruction.** Functions cloud deployment requires Blaze and is blocked under the current plan; its durable processing is not operating in the cloud.
 
 The cloud **`(default)` Firestore database exists in `asia-northeast3`**, using Standard edition / Native mode. Its rules and indexes were deployed successfully. This verifies data configuration; hosted application access and cloud payout processing remain unverified.
@@ -16,7 +18,7 @@ Local checks passed: **frozen installation for both workspace packages**, **clea
 
 Two additional [local chain/worker integration tests](docs/LOCAL_CHAIN_VERIFICATION.md) passed with actual Anvil RPC, actual production signing/receipt/worker code and real Firestore transactions. They verify deposit, two-slot/three-player allocation, actual local token balances/events, persisted broadcast→mined restart without another relayer transaction, stale leases and unused-budget refund. Only test configuration is substituted: **isolated chain 31337 and a local mock token**, with test-only time advancement for refund. They are not public Monad/official USDC transactions or real user login.
 
-A read-only real Monad Testnet check verified chain `10143`, official USDC bytecode and six decimals, and finalized block `70687560`. It did **not** verify a public escrow deployment or payment. The final Next production rebuild and local production-server checks passed: home/judges HTTP 200, actual Open Graph PNG HTTP 200 / 1200×630, and anonymous private APIs rejected with no-store/private caching. **Vercel hosting, real Privy onboarding, public Monad funding/payout, authenticated browser flows, real user interviews/traction and final videos are not verified.** This repository does not silently simulate an unavailable login, reward or balance.
+A read-only real Monad Testnet check verified chain `10143`, official USDC bytecode and six decimals, and finalized block `70687560`. It did **not** verify a public escrow deployment or payment. The Vercel cloud build passed locked installation, Next compilation and TypeScript with Node 24.21 / pnpm 11.25.0. A separate run against the actual public URL passed **30 Playwright checks / six intentional profile skips in 44.7s**, covering unpaid catch/quiz, expiry/retry, disabled creation/login, KO/EN, four widths, keyboard/touch and anonymous API privacy, with no runtime page errors. This is the same browser coverage as the local run, not 60 unique tests. **Real Privy onboarding, Vercel app-data IAM, public Monad funding/payout, authenticated browser flows, a cloud payment worker, user interviews/traction and final videos remain incomplete.**
 
 **Contest submission is on hold at the user's explicit instruction.** Reading the logged-in portal does not authorize filling, saving, uploading or submitting an application.
 
@@ -133,11 +135,11 @@ node --env-file=.env.local --import=tsx scripts/worker.ts --reconcile
 
 ## Configuration and deployment
 
-The template lists the exact names. Configure server-only Firebase credentials on Vercel, runtime service identity on Firebase Functions, real Privy app settings, the approved testnet escrow and separate authorization/relayer/coupon/nullifier secrets. Never expose private variables through `NEXT_PUBLIC_`.
+The template lists the exact names. The approved public/practice deployment deliberately leaves integration credentials unset and protected actions disabled. Enable authenticated rewards only after privately configuring and verifying Firebase app access, Privy settings, the approved testnet escrow and separate authorization/relayer/coupon/nullifier secrets plus a durable processor. Never expose private variables through `NEXT_PUBLIC_`.
 
 Receiving a reward uses DROP's restricted claim relayer and its MON budget. Sending received USDC uses the user's Privy wallet and a different sponsorship path: **TEE execution, enabled app-pays sponsorship, configured Monad Testnet support, allowed client transactions and available sponsorship budget** must all be configured. `NEXT_PUBLIC_GAS_SPONSORSHIP_ENABLED=true` only enables the UI; it does not activate or prove the provider service.
 
-Firebase Functions deployment requires **Blaze billing**, while the user's confirmed `drop-5a400` project remains on **Spark**. No plan upgrade was performed or authorized, and no hosted URL/cloud processor is verified. The real Firestore database, rules and indexes are confirmed; Vercel server identity/access still needs verification. Local tests use only `demo-drop`. Follow [DEPLOYMENT.md](docs/DEPLOYMENT.md) for setup boundaries and the actual verification record. Mainnet remains disabled and is not a verified release target.
+Firebase Functions deployment requires **Blaze billing**, while `drop-5a400` remains on **Spark**. No plan upgrade was performed or authorized; the cloud processor is not running. The Vercel website is deployed, and Firestore database/rules/indexes are confirmed; Vercel server identity/data access still needs configuration. Local tests use synthetic emulator projects. Follow [DEPLOYMENT.md](docs/DEPLOYMENT.md) for the pinned normal-upload CLI workflow and evidence. Mainnet remains disabled and unverified.
 
 ## Documentation
 
@@ -147,4 +149,4 @@ Firebase Functions deployment requires **Blaze billing**, while the user's confi
 - [3-minute demo](docs/DEMO_3MIN.md), [2-minute pitch](docs/PITCH_2MIN.md), [submission checklist](docs/SUBMISSION_CHECKLIST.md)
 - [Official sources](docs/OFFICIAL_SOURCES.md), [Korean Metropolis guide](docs/METROPOLIS_GUIDE.ko.md), [AI disclosure](docs/AI_USAGE.md), [requirements audit](docs/REQUIREMENTS_AUDIT.md)
 
-The requested source destination is [openai-lover/DROP](https://github.com/openai-lover/DROP). A prepared repository is not an accepted contest submission. Keep actual credentials, coupon contents and private research outside public source and artifacts.
+The requested source destination is [openai-lover/DROP](https://github.com/openai-lover/DROP). The GitHub push returned **403**, and that remote repository remains empty. Vercel received the local source at commit `3ff3025`; direct deployment is not public GitHub publication or an accepted contest submission. Keep actual credentials, coupon contents and private research outside public source and artifacts.

@@ -2,6 +2,8 @@
 
 The user's later deployment instruction selects **Firebase Firestore for durable data and Vercel for the Next.js website**. It supersedes the initial PostgreSQL/Prisma choice. Privy remains the single participant authentication and wallet provider; Firebase Authentication is not added as a second login. The Telegram app remains a standalone HTTPS website.
 
+The public web is now deployed at [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/), READY production in `teamstartup/drop` /Hobby. Real login/database IAM/escrow/payment processing remain unconfigured; unpaid practice and protected unavailable states are the verified hosted scope.
+
 ## Service responsibilities
 
 | Service | Responsibility | Required boundary |
@@ -76,13 +78,13 @@ The actual project is **drop-5a400 / DROP / Spark**. CLI inspection confirms `(d
 
 Deploying Firebase Functions requires **Blaze**; scheduled recovery also uses Cloud Scheduler. **No billing upgrade is currently authorized. Do not deploy Functions, activate paid processing/scheduling resources or change the plan without a new owner instruction.** Functions source and build are prepared but no cloud payout processor is operating. [Functions deployment prerequisites](https://firebase.google.com/docs/functions/get-started), [Scheduling prerequisites](https://firebase.google.com/docs/functions/schedule-functions)
 
-Before deployment:
+Before enabling authenticated/funded flows:
 
 1. Preserve the confirmed Firestore project/database/region and Spark plan. Source Functions region is also asia-northeast3, but no Function is deployed. Separate development/testnet from mainnet data and keys. [Functions locations](https://firebase.google.com/docs/functions/locations)
 2. Use the repository's final `.env.example` as the variable-name authority. Configure server-only Firebase credentials on Vercel, least-privilege processor identity/secrets on Firebase, Privy credentials and allowed origins, RPC/escrow settings, and separate approval/relayer/coupon keys. Never prefix private credentials with `NEXT_PUBLIC_`.
 3. Rules/indexes are already deployed. Verify actual server data access and an owner-approved durable processor compatible with the no-upgrade instruction before funded public events open. Observe confirmed receipts and safe recovery; do not treat source/build or local execution as cloud processing.
-4. Import the requested GitHub repository into the owner's Vercel account, select the Next.js framework and locked install/build commands, configure server secrets and public app origin, and deploy a preview. Add its precise Privy origin/redirect URLs.
-5. From a signed-out clean browser verify the public pages, real login, both games, persistent rewards, user-approved sponsored transfer, correct error states, operator isolation and running processor. Record actual app/contract/source/video URLs in deployment/submission documents.
+4. Vercel direct normal-file upload is complete from local commit3ff3025; GitHub push403 leaves the requested remote empty. The approved public/practice deployment keeps credentials unset and login/payment actions disabled. Use the pinned normal-upload command in [DEPLOYMENT.md](DEPLOYMENT.md); do not use `--archive tgz` for this checkout, whose excluded directory placeholders were recursively packaged in the aborted large-archive attempt.
+5. Public-page/practice checks passed on the actual URL, including30 Chromium checks /six profile skips and direct HTTP/privacy checks. Before enabling paid/authenticated paths, separately verify real Privy, both funded games, persistence, approved sponsored transfer, tenant isolation and a durable processor. Record actual contract/source/video evidence; web hosting alone does not satisfy them.
 
 All variable values must match actual deployed services. Source publication, Vercel preview, Firestore configuration, durable runtime, actual Monad contract deployment and accepted contest submission are separate artifacts. Missing credentials or runtime remain visibly incomplete and never trigger fake authentication or payouts. Contest submission is explicitly on hold; portal activity is read-only.
 
@@ -100,6 +102,8 @@ All variable values must match actual deployed services. Source publication, Ver
 | Real Firestore transaction tests | Final server run: 61 passing total, including 20 actual emulator cases with chain-response mocks |
 | Actual local chain/worker integration | Two passed in 62.72s; Anvil31337/local mock token/isolated Firestore/production RPC-signing-worker; no public chain proof |
 | Cloud Firestore configuration | Real database/region/mode confirmed; rules/indexes-only deployment exit 0 |
-| Vercel / Functions cloud runtime | Not verified; Functions blocked on Spark, no billing change |
+| Vercel production web | drop-omega-five.vercel.app; READY teamstartup/drop/Hobby, CLI63.1.2 exit0, normal118records/1.2MB/cloud118files |
+| Hosted checks | Production Playwright30passed/6profile skips44.7s; public pages/status/OG200, anonymous rewards/coupon401 no-store/private; real integrations false/demoFallbackfalse |
+| Functions / actual app-data access | Functions blocked on Spark; Vercel Firebase IAM and Privy/escrow/worker unset; no billing change |
 
 In this Codex workspace sandbox, ordinary execution was denied local socket/CIM access. The approved local-runtime verification ran with the tool's required escalation; this is an execution-environment permission boundary, not a cloud credential requirement. Tests must be allowed to reach this local emulator rather than treating a sandbox socket failure as a dead process.

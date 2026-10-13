@@ -2,7 +2,9 @@
 
 Target: **Vercel Next.js web/API + Firebase Firestore + durable payout/retry/reconciliation + Privy + Monad Testnet escrow**. Firebase Functions source implements the planned processor, but its cloud deployment is blocked by the confirmed free Spark plan. Privy remains the sole user identity/wallet provider. DROP uses ordinary HTTPS links, never Telegram Mini App authentication.
 
-The user-confirmed Firebase project is **`drop-5a400`**, display name **DROP**, on the free **Spark** plan. Its **`(default)` Standard / Native Firestore database in `asia-northeast3`** was confirmed by the CLI, created `2026-10-13T13:01:16.609278Z`. Reviewed rules and indexes were successfully deployed. **No billing upgrade is currently authorized; do not upgrade without a new owner instruction.** No hosted app URL, deployed Functions, Privy live flow, live Monad contract/funding or final judge access has been verified. No billing-plan upgrade was performed. The procedures below distinguish completed data configuration from setup still required.
+**Public Vercel web is deployed:** [https://drop-omega-five.vercel.app/](https://drop-omega-five.vercel.app/), production READY in `teamstartup/drop` / Hobby. Anonymous product/practice pages are accessible; actual Privy, Vercel Firestore IAM, public escrow/worker and live payouts are not configured. Deployment inspection: [Vercel record](https://vercel.com/teamstartup/drop/3o35jn53ucDDU46NBHZZeD9BgeM4).
+
+The Firebase project is **`drop-5a400` / DROP / Spark**. Its `(default)` Standard / Native Firestore in `asia-northeast3` was CLI-confirmed, created `2026-10-13T13:01:16.609278Z`; reviewed rules/indexes were deployed. **No billing upgrade is currently authorized.** No Functions or live payment deployment is inferred from web hosting. The instructions distinguish completed web/data configuration from the remaining integrations.
 
 **The user explicitly forbids contest submission at this stage.** Portal inspection is read-only; no application fields, saved drafts, uploads or final submission are authorized.
 
@@ -121,11 +123,19 @@ Then configure the actual escrow on Vercel and Functions. Fund a campaign from i
 
 ## Vercel web deployment
 
-Import [the requested GitHub source](https://github.com/openai-lover/DROP) into the owner's Vercel project. The repository's `vercel.json` selects Next.js, `pnpm install --frozen-lockfile`, `pnpm build`, and `icn1`; validate those against the selected runtime and current lockfile.
+The verified deployment uses the official pinned CLI and **normal file upload** from the checkout. The requested [GitHub destination](https://github.com/openai-lover/DROP) remains empty after a push returned 403, so the successful deploy did not depend on a GitHub import. From the repository root after owner login, the actual command is:
 
-Set the required server-only/private variables and the public Privy app identifier before deploying. Keep emulator flags absent. Use a preview to verify public pages and live Privy behavior, add its precise allowed origins/redirects, then check the final production origin separately. The web/API runtime is Node.js; there is no Firebase Authentication login layer or Vercel timer-based payout worker.
+```text
+pnpm dlx vercel@63.1.2 deploy --project drop --scope teamstartup --prod --yes
+```
 
-Before treating a hosted URL as ready, verify a clean-account catch/quiz flow, actual deposit/payout/transfer receipts, persistent reward access, pending/failure recovery, tenant isolation and coupon privacy. Check mobile widths plus real Android Chrome, iOS Safari and Telegram external-web use. Merely serving the homepage or passing a build is narrower evidence.
+Use normal upload and inspect the selected files/count/bytes. **Do not use `--archive tgz` for this checkout.** In the observed CLI run, excluded-directory placeholders such as `.local` and `.tools` were recursively included by archive packaging, expanding it to about 1.1 GB. That attempt was cancelled at 285.2 MB transferred, before a deployment was created. The successful normal upload was **118 records / 1.2 MB**, and the cloud build confirmed **118 downloaded files**. This is an observed repository/CLI packaging issue, not a claim that every Vercel archive workflow fails.
+
+The repository's `vercel.json` selects Next.js, locked pnpm installation, `pnpm build`, and `icn1`. The successful cloud runtime used Node **24.21** / pnpm **11.25.0**, completed locked installation, Next compilation in 42s, TypeScript in 19.7s and all 11 page builds. Firebase Functions independently targets Node22 and remains undeployed.
+
+**Anonymous/practice deployment is allowed without integration credentials:** leave real auth/payment/database settings unset, keep emulator flags absent, and require protected actions to stay disabled/fail closed. That is the approved current deployment. Before enabling rewards, privately configure/verify Firebase IAM/app access, Privy origins/redirects and app credentials, real escrow and signing/relayer/coupon/nullifier settings, sponsorship and a durable processor. The website's availability does not imply those services are working. No Firebase Authentication layer or Vercel request timer substitutes for them.
+
+At the public URL, a plain unauthenticated request returned200 with DROP content and no Vercel-login page; CUA inspection showed the public homepage and disabled login. Production Playwright then passed **30 checks / six intentional desktop/mobile profile skips**, exit0 in **44.7s**: unpaid catch keyboard/touch/18-second expiry, quiz success/retry, creator validation and disabled creation, KO/EN persistence, widths360/390/768/1440, anonymous API GET/spoofed POST401/no-store, and no runtime page errors. Current `.local/qa/desktop.png` / `mobile.png` capture the deployed site. This repeats the existing suite on hosting, not additional unique tests. Real Android/iOS/Telegram devices and authenticated payout/transfer/recovery still require separate evidence.
 
 ## Operations and recovery
 
@@ -155,12 +165,17 @@ Authenticated winners can request the persisted fixed-recipient proof when avail
 | Vercel IAM / actual cloud application data access | Not verified by configuration deployment |
 | Firebase Functions / scheduled processor | Not deployed; blocked by Spark under the no-upgrade instruction |
 | Firebase Blaze upgrade | Not performed; do not upgrade |
-| Vercel preview / production URL | Not verified |
+| Vercel production web | [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/), READY, targetproduction, `teamstartup/drop`, Hobby |
+| Vercel deployment identity | `dpl_3o35jn53ucDDU46NBHZZeD9BgeM4`; official CLI63.1.2 exit0; inspector URL above |
+| Deployed local source / transfer | Commit `3ff3025`; normal upload118 records /1.2MB; cloud download118files; no archive |
+| Cloud build | Node24.21 /pnpm11.25.0; locked install, Next42s, TypeScript19.7s, 11pages passed |
+| Hosted public/browser scope | Plain GET200 /DROP content/no Vercel login; CUA homepage/login disabled; production Playwright30pass/6profile skips,44.7s, no page errors; auth/payment unavailable |
 | Live Monad escrow / deploy transaction / verified explorer | Not deployed or evidenced here |
 | Real Monad Testnet network/token reads | Read-only network-only pass: chain 10143, official USDC bytecode / six decimals, finalized block 70687560; no escrow verified |
 | Live campaign deposit / payout / user transfer / reclaim | Not evidenced |
 | Real Privy Telegram/email and zero-MON transfer | Not verified |
-| Public source commit / judge access / videos | Final artifacts not recorded here |
+| Public GitHub | Push returned403; openai-lover/DROP remains empty. Local/deployed commit3ff3025 is not a public source commit |
+| Full judge access / videos | Public web/practice accessible; authenticated funded flows/test credentials and actual videos incomplete |
 | Contest application | Explicit user hold: read-only portal research only; no submission or accepted receipt |
 
 Update this record only from actual current-state evidence. Root runtime/tool sessions and local ports are not public hosting URLs.
