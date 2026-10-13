@@ -1,0 +1,89 @@
+{
+  "id": "drop-final-pitch",
+  "kind": "verified-pitch",
+  "notes": "Verified product walkthrough edit. Source screenshots, recordings, audio and evidence files remain ignored local build inputs. Regeneration requires the original genuine captures and independently verified payout evidence.",
+  "shots": [
+    {
+      "id": "hook",
+      "title": "Make a community reward playable",
+      "narration": "Giveaways attract a crowd. DROP turns the reward into something they can play. I'm Gyu-min Kim, the solo creator of DROP. I'm building for Telegram KOLs and community operators running an AMA, a launch, or a thank you event.",
+      "visuals": [
+        {
+          "file": ".local/video/final-public-scenes/home.webm",
+          "trimStart": 3.5611417999999997,
+          "seconds": 16.752
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "title": "Keep every promised reward accountable",
+      "narration": "A reward announcement is easy to share. Completing it means checking who qualified, collecting delivery details, and resolving missing payments. Our customer hypothesis is that operators need one flow that keeps the excitement and makes each promised reward accountable.",
+      "visuals": [
+        {
+          "file": ".local/video/pitch-public-scenes/problem.webm",
+          "trimStart": 3,
+          "seconds": 17.812
+        }
+      ]
+    },
+    {
+      "id": "product",
+      "title": "One link. A game. A confirmed payment.",
+      "narration": "The operator fixes a budget, reward limit, and deadline, then shares one link. Members sign in and play a catch game or three question quiz. Valid play reserves a reward. Paid appears after the payment is confirmed. The server checks participation; a funded Monad escrow enforces payout limits. Monad is our settlement layer for many small rewards, with individually inspectable payments. An embedded wallet keeps the ordinary signup flow. This demonstration uses testnet tokens with no financial value.",
+      "visuals": [
+        {
+          "file": ".local/qa/production-create-review.jpg",
+          "seconds": 7
+        },
+        {
+          "file": ".local/qa/production-quiz-answered.jpg",
+          "seconds": 6.5
+        },
+        {
+          "file": ".local/qa/production-paid-receipt.jpg",
+          "seconds": 8.5
+        },
+        {
+          "file": ".local/qa/production-funded-dashboard.jpg",
+          "seconds": 5.7
+        },
+        {
+          "file": ".local/qa/production-paid-receipt.jpg",
+          "seconds": 8.619
+        }
+      ]
+    },
+    {
+      "id": "pilot",
+      "title": "The next pilot",
+      "narration": "We're at the working testnet prototype stage. Our next pilot observes five people without Monad wallets and interviews ten community operators. We will track unaided completion, confirmed receipt, failures, and whether an operator runs a second event.",
+      "visuals": [
+        {
+          "file": ".local/video/final-public-scenes/quiz.webm",
+          "trimStart": 0.7094297000000006,
+          "seconds": 16.796
+        }
+      ]
+    },
+    {
+      "id": "next-users",
+      "title": "A path to the first hundred participants",
+      "narration": "Our first hundred participant goal is five pilot creators inviting twenty people each. We will test an operator fee separately from the reward budget. The next step is to turn a verified prototype into repeatable community events. DROP: playable participation, verifiable rewards.",
+      "visuals": [
+        {
+          "file": ".local/video/final-public-scenes/closing.webm",
+          "trimStart": 2.744260300000002,
+          "seconds": 12
+        },
+        {
+          "file": ".local/video/final-public-scenes/home.webm",
+          "trimStart": 3.5611417999999997,
+          "seconds": 8.211
+        }
+      ]
+    }
+  ],
+  "sourceUrl": "https://drop-omega-five.vercel.app",
+  "disclosure": "Actual DROP product screens"
+}

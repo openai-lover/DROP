@@ -1,114 +1,76 @@
 # DROP
 
-**Playful rewards for communities. Real payouts, without the wallet hassle.**
+**Make your community's next reward drop a game.**
 
-DROP lets Telegram KOLs and community operators share a short catch game or quiz, then manage its rewards. Participants use an ordinary HTTPS website, one Privy login and an embedded wallet. DROP is not a Telegram Mini App.
+DROP turns a shared link into a short catch game or quiz, with a fixed reward budget and a receipt participants can keep. Community operators create an event; players sign in with Privy and use an embedded wallet. The Monad arcade, English default and five languages make the first visit approachable.
 
-한국어: KOL이 커피와 코인을 재미있게 뿌리고, 지급까지 관리하는 도구. **그냥 뿌리지 말고, 플레이하게 하자.**
+[**Play DROP**](https://drop-omega-five.vercel.app/) · [**Judge guide**](https://drop-omega-five.vercel.app/judges) · [**Public source**](https://github.com/openai-lover/DROP)
 
-## Current state
+## Try it in two minutes
 
-**Public web deployment:** [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/), production **READY** on `teamstartup/drop` (Hobby). The public homepage and anonymous practice are accessible. Login, authenticated creation, app-data access and real payouts remain explicitly unavailable until their integrations are configured.
+1. Open [practice](https://drop-omega-five.vercel.app/practice) and try catch or quiz without an account. Practice awards no tokens or redeemable coupons.
+2. Open [My rewards](https://drop-omega-five.vercel.app/me/rewards), sign in with Google or email, and let Privy create your embedded wallet. Google sign-in, persistent cloud records and actual Monad Testnet balance reads have been verified on production.
+3. Join [the live funded judge catch event](https://drop-omega-five.vercel.app/d/metropolis-play): three catches in 18 seconds, up to three attempts, 20 total rewards of 0.1 test USDC (19 allocations remained after verification). Play closes 20 October 2026 at 16:18 UTC. After qualifying, watch My rewards for the confirmed receipt. No MON is needed to receive through DROP's relayer.
 
-The implementation targets **Vercel Next.js + Firebase Firestore**, with prepared Firebase Functions processing source and **Monad Testnet** as the default. The confirmed Firebase project is **`drop-5a400`**, display name **DROP**, on the free **Spark** plan. **No billing upgrade is currently authorized; do not upgrade it without a new owner instruction.** Functions cloud deployment requires Blaze and is blocked under the current plan; its durable processing is not operating in the cloud.
+Choose English, 한국어, 日本語, 简体中文 or Español in the header. The selected language persists; organizer-written titles and questions retain their original text. DROP is an ordinary HTTPS website suitable for sharing in Telegram, rather than a Telegram Mini App.
 
-The cloud **`(default)` Firestore database exists in `asia-northeast3`**, using Standard edition / Native mode. Its rules and indexes were deployed successfully. This verifies data configuration; hosted application access and cloud payout processing remain unverified.
+Built by **solo developer Gyu-min Kim**. [Technical demo](https://youtu.be/Lfuvsvowj30) · [Founder pitch](https://youtu.be/AlWM6csYk5w). Final155.32s/107.94s exports are uploaded Unlisted and watch playback is observed; signed-out verification is not claimed.
 
-Local checks passed: **frozen installation for both workspace packages**, **clean lint**, **61 server tests across seven files**, **30 Playwright checks with six intentional profile skips**, app typechecking and the Functions build. The server suite includes 20 actual Firestore emulator cases and test-generated Privy JWT signature checks; blockchain responses in those tests are mocked. Browser coverage uses desktop/mobile Chromium against the local app, covering unpaid practice, creator validation, four widths, language, keyboard/touch input and anonymous API/privacy boundaries. Contract checks remain **42 unit/fuzz tests + two invariant properties**, using official Forge 1.8.5 with Monad execution rules.
+## Why DROP
 
-Two additional [local chain/worker integration tests](docs/LOCAL_CHAIN_VERIFICATION.md) passed with actual Anvil RPC, actual production signing/receipt/worker code and real Firestore transactions. They verify deposit, two-slot/three-player allocation, actual local token balances/events, persisted broadcast→mined restart without another relayer transaction, stale leases and unused-budget refund. Only test configuration is substituted: **isolated chain 31337 and a local mock token**, with test-only time advancement for refund. They are not public Monad/official USDC transactions or real user login.
+- **A reward promise with a budget:** the operator fixes reward, quantity, game rules and deadlines before publication, then funds a USDC escrow.
+- **A fair allocation order:** FIRST_N_VERIFIED atomically assigns the first N server-accepted completions, with account and wallet duplicate guards.
+- **A receipt rather than a score:** gameplay, reward reservation, pending transaction and finalized payment are separate states. Confirmed payments require the exact onchain event and canonical finalized receipt.
+- **A complete reward loop:** persistent rewards, private encrypted coupon delivery, user-approved USDC transfers and unused-budget reclaim share the same operator/participant journey.
+- **Recovery that survives a restart:** signed transactions, nonces, leases and progress live in Firestore. Retries preserve the reward and reconcile previous broadcasts before another payment attempt.
 
-A read-only real Monad Testnet check verified chain `10143`, official USDC bytecode and six decimals, and finalized block `70687560`. It did **not** verify a public escrow deployment or payment. The Vercel cloud build passed locked installation, Next compilation and TypeScript with Node 24.21 / pnpm 11.25.0. A separate run against the actual public URL passed **30 Playwright checks / six intentional profile skips in 44.7s**, covering unpaid catch/quiz, expiry/retry, disabled creation/login, KO/EN, four widths, keyboard/touch and anonymous API privacy, with no runtime page errors. This is the same browser coverage as the local run, not 60 unique tests. **Real Privy onboarding, Vercel app-data IAM, public Monad funding/payout, authenticated browser flows, a cloud payment worker, user interviews/traction and final videos remain incomplete.**
+## Live status and proof
 
-**Contest submission is on hold at the user's explicit instruction.** Reading the logged-in portal does not authorize filling, saving, uploading or submitting an application.
+**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
 
-The authenticated portal's displayed deadline is **2026-10-14 12:59 GMT+9 (Asia/Seoul)**. Use this local deadline rather than the public date-only “Oct 13” label. Confirmed portal resources and their limits are recorded in [official sources](docs/OFFICIAL_SOURCES.md).
+Snapshot: **2026-10-14, Asia/Seoul**. Production [DROP](https://drop-omega-five.vercel.app/) is READY at deployed application baseline [`acf5b73`](https://github.com/openai-lover/DROP/commit/acf5b73). Public source, real Google login, embedded wallet creation, server token verification, keyless Vercel-to-Firestore access and a real quiz-to-payment flow are verified. Email login is configured but its delivery flow has not yet been exercised.
 
-See [integration status](docs/INTEGRATION_STATUS.md), [requirements audit](docs/REQUIREMENTS_AUDIT.md) and the [contract run record](contracts/verification.json) for the scope of evidence.
+The real Monad Testnet escrow is **`0x22acf105A1af3f104f62e06fD813e49Af9358379`**, chain **10143**, using Circle's official testnet USDC. Its deployment receipt, compiled runtime and immutable settings were verified; [Sourcify records a perfect source match](https://sourcify-api-monad.blockvision.org/check-by-addresses?addresses=0x22acf105A1af3f104f62e06fD813e49Af9358379&chainIds=10143). The isolated payout relayer received **0.5 test MON**, then a verified **3.4 test MON** replenishment after the first claim. [Deployment](contracts/deployment/testnet-deployment.public.json) · [Initial funding](contracts/deployment/relayer-funding.public.json) · [Replenishment](contracts/deployment/relayer-topup.public.json).
 
-## Product paths
+The first campaign's **5 test USDC budget (0.1 × 50)** was funded through two visible Privy approvals and reconciled by the server. Independent public-chain reads verified the canonical finalized receipt, exact approval/deposit, rules and actual USDC balance deltas. [Funding evidence](contracts/deployment/live-campaign-funding.public.json) · [Funding transaction](https://testnet.monadvision.com/tx/0x4f10e52e5a77c8c24c42dc605e6e3413010fb2ae9dd1b13657eb897f30576637). This first rehearsal event has a short play window; use the judge guide for current event availability.
 
-| Route | Purpose |
+**Actual production payout:** a separate authenticated participant completed the quiz, moved from QUEUED to **Paid**, and saw **0.1 test USDC** plus its receipt in My rewards. Independent chain verification matched the canonical finalized receipt, EIP-712 signer, exact RewardPaid/USDC Transfer and claimed state. The participant's USDC rose from 0 to 0.1 while MON remained 0 and wallet nonce remained 0; DROP's relayer paid 0.043855716 test MON. [Payment proof](contracts/deployment/live-participant-payment.public.json) · [Actual receipt](https://testnet.monadvision.com/tx/0x9cbb35fcc0ba09119e87452ff5f2d6d534d4a1ae55682ce0c080260f98c5678c).
+
+Reloading and actual sign-out/re-login preserved Paid/0.1 test USDC; a repeat attempt was rejected without a second award. This is one technical verification payout; both accounts were controlled by the same human. It is not independent traction or proof all 50 rewards were paid. Outgoing transfer, refund, independent research and final video playback checks remain open. [Current evidence](docs/INTEGRATION_STATUS.md).
+
+The separate [judge catch event](https://drop-omega-five.vercel.app/d/metropolis-play) is actually funded with **2 test USDC (0.1 × 20)**. Independent finalized reads verify its [funding/rules](contracts/deployment/judge-event-funding.public.json). The same technical participant completed Catch and the app showed its second **Paid/0.1** receipt, bringing the real wallet balance to **0.2 test USDC**. [Independent catch proof](contracts/deployment/judge-event-payment.public.json) · [Actual catch receipt](https://testnet.monadvision.com/tx/0xbd8d5ce90d6d059931f19050744b546567215f337532a59fa8a481fe4d15ce6e). Independent catch-payment audit passed; these are two technical payouts controlled by one human, not independent traction.
+
+Recorded checks:
+
+| Evidence | Scope |
 | --- | --- |
-| `/` | Product introduction; actual event availability |
-| `/practice` | Anonymous practice with no reward entitlement |
-| `/d/[slug]` | Public rules → authentication → catch/quiz → verified reward status |
-| `/me/rewards` | Persistent receipts, chain balance, private coupons and approved same-network transfer |
-| `/creators` | Operator introduction |
-| `/dashboard/new` | Game, reward, limits, deadlines and budget preparation |
-| `/dashboard/[id]` | Owner-only participation, funding, payouts and remaining-budget information |
-| `/judges` | Judge entry point and integration-readiness guidance |
-| `/security` | Account, asset and trust-boundary information |
+| 96 passing server/language tests; three additional wallet-request tests | Includes 26 real Firestore emulator cases; chain responses and wallet SDK calls are explicit test adapters |
+| 42 contract unit/fuzz tests + two invariant properties | Official Forge 1.8.5 / Monad execution; local token fixtures |
+| Two actual local chain/worker integration cases | Anvil + Firestore + production signing/receipt code; isolated chain 31337, mock token |
+| Earlier hosted browser suite: 48 passed / six intentional profile skips | Anonymous/practice, languages, responsive layout and private API boundaries on the prior public release |
+| Latest UI: 20 focused browser cases + 20 language/width combinations | Local desktop/mobile Chromium; all five languages at 360/390/768/1440px; no horizontal overflow |
 
-The policy is **FIRST_N_VERIFIED**: the first N authenticated accounts accepted atomically by the server receive one identical reward each, subject to wallet/account duplicate guards. Game success is not payment confirmation. Authentication does not prove a unique human. Coupon delivery/viewing does not prove store redemption. Demo coupons cannot be redeemed; testnet USDC has no financial value.
+The production funding and quiz payout were checked through the actual authenticated UI and independent public-chain reads. A fresh complete hosted browser regression and the remaining feature branches are separate checks. Test counts are not user counts.
 
-## Runtime
+## Deployment model and limits
 
-- Node.js `>=22.12`; Node 22 is the configured Firebase Functions runtime.
-- pnpm `11.25.0`, with the repository lockfile.
-- Java **21+** for the Firebase CLI v15 Firestore emulator.
-- Official Foundry **1.8+** for contract checks/deployment; the recorded run used 1.8.5 and Solidity 0.8.28.
+Next.js runs on **Vercel Hobby**, data on **Firebase Spark**, and identity/wallets through **Privy**. Firestore uses keyless Vercel OIDC / GCP Workload Identity Federation, with production-specific trust and no generated service-account private key.
 
-Pinned application packages include Next 16.4.0, React 19.3.0, Tailwind 4.3.3, Privy React 3.48.1, Privy server-auth 1.32.5, firebase-admin 14.5.0, firebase-functions 7.4.0, firebase-tools 15.33.0, viem 2.57.5 and OpenZeppelin 5.6.1. `package.json` and the lockfile are authoritative; these are implementation pins, not a claim that each is globally latest.
+The free worker mode processes at most one of the authenticated user's rewards after eligible requests; this path completed the real payout above. A protected daily Vercel cron attempts at most three jobs and three expired-award probes, with its hosted invocation still unverified. Firestore keeps the outbox durable; execution is bounded and depends on requests or the daily invocation. It is not a continuously running or minute-scheduled worker. Prepared Firebase Functions are not deployed because Spark cannot deploy them. [Runtime setup and limits](docs/FIREBASE_VERCEL.md).
 
-Install [Node.js](https://nodejs.org/), [Java 21+](https://adoptium.net/temurin/releases/?version=21) and the supported tools if missing. Match the package manager pin, then install the repository dependencies:
+Receiving a reward uses DROP's restricted relayer and its test MON. Operator funding, refund and participant outgoing transfers require a visible user approval and wallet-paid test MON unless genuine Privy sponsorship is separately enabled. No universal zero-fee claim is made.
+
+This release is **testnet only**: test USDC has no financial value. The contract is unaudited; server grading/signing and RPC providers remain trust dependencies. Authentication is not proof of a unique human. Coupon delivery is not store redemption; demo coupons cannot be redeemed. Mainnet and paid plan upgrades are outside the approved scope. [Security](docs/SECURITY.md).
+
+## Local development
+
+Use Node **22.12+**, pnpm **11.25.0**, Java **21+** for Firestore tests, and official Foundry **1.8+** for contract checks. Package manifests and the lockfile are authoritative.
 
 ```text
-node --version
-npm install --global pnpm@11.25.0
-pnpm --version
 pnpm install --frozen-lockfile
 ```
 
-Do not use an unlocked install to hide a manifest/lockfile mismatch. Resolve the mismatch and record the successful locked installation before publishing.
-
-## Windows local setup
-
-Use PowerShell with Node/pnpm available. Copy the template:
-
-```powershell
-Copy-Item -LiteralPath '.env.example' -Destination '.env.local'
-./scripts/start-firebase-emulator.ps1
-# Optional explicit runtime paths:
-# ./scripts/start-firebase-emulator.ps1 -NodePath 'C:/tools/node/node.exe' -JavaHome 'C:/tools/jdk-21'
-```
-
-The emulator uses only `demo-drop`, `127.0.0.1:8089` and an ignored local cache. Load its non-secret test settings into this shell, then start the website:
-
-```powershell
-Get-Content -LiteralPath '.local/firestore-test.env' | ForEach-Object {
-    if ($_ -match '^([^#=]+)=(.*)$') {
-        [Environment]::SetEnvironmentVariable($Matches[1], $Matches[2], 'Process')
-    }
-}
-$env:DROP_LOCAL_EMULATOR = 'true'
-pnpm dev
-```
-
-Open [the local website](http://127.0.0.1:3000). Set actual Privy credentials in the ignored `.env.local` when you are ready to test real login. Without those credentials, the public/practice experience can be inspected, while authenticated rewards remain explicitly unavailable. A synthetic test identity is never a public login option.
-
-After testing, stop only this checkout's emulator with `./scripts/stop-firebase-emulator.ps1`. See [Firebase/Vercel local operations](docs/FIREBASE_VERCEL.md). If Foundry setup on Windows is inconvenient, use an official supported binary or WSL for the contract commands; do not substitute an unrelated EVM runner and report it as Monad Foundry.
-
-## Linux / macOS / WSL local setup
-
-Use the same Node/pnpm pins and Java 21+, then run these in separate shells from the repository root:
-
-```bash
-cp .env.example .env.local
-pnpm firebase:emulators
-```
-
-```bash
-export FIREBASE_PROJECT_ID=demo-drop
-export GCLOUD_PROJECT=demo-drop
-export FIRESTORE_EMULATOR_HOST=127.0.0.1:8089
-export DROP_LOCAL_EMULATOR=true
-pnpm dev
-```
-
-Stop the foreground emulator with Ctrl+C after tests finish. In WSL, keep the application and emulator in the same environment; `127.0.0.1` cannot be assumed to refer to the other environment. No database migrations or additional authentication provider are needed.
-
-## Checks and local processing
+Copy `.env.example` to ignored `.env.local`, then start the local Firestore emulator with `./scripts/start-firebase-emulator.ps1` on Windows or `pnpm firebase:emulators` on other platforms. Use only synthetic project `demo-drop` and loopback `127.0.0.1:8089`; load the generated `.local/firestore-test.env` in the test shell. Start the web with `DROP_LOCAL_EMULATOR=true` and `pnpm dev`. Real login still requires your own Privy configuration; there is no public test identity or fake payout fallback. [Detailed setup](docs/FIREBASE_VERCEL.md).
 
 ```text
 pnpm lint
@@ -120,33 +82,14 @@ pnpm functions:build
 pnpm build
 ```
 
-With compiled contracts and the loopback Firestore emulator available, `node scripts/local-chain-verify.mjs` reproduces the separate opt-in local settlement run. It starts/stops its own isolated Anvil child and project, never a public-network deployment. See its [scope and prerequisites](docs/LOCAL_CHAIN_VERIFICATION.md).
+Firestore integration cases skip without their isolated emulator settings. Browser tests and local-chain verification have separate prerequisites; see [local chain evidence](docs/LOCAL_CHAIN_VERIFICATION.md) and [deployment](docs/DEPLOYMENT.md). Keep secrets, tokens, real coupon payloads and private research out of source and screenshots.
 
-For real Firestore integration coverage, load the emulator settings above before `pnpm test`. Those cases otherwise skip, so a green run without the emulator is narrower evidence. Contract tests use local fixtures. Neither case proves a live Monad transaction or real Telegram/email login. Browser and real-device coverage must be recorded separately.
-
-Next loads `.env.local`; standalone scripts do not automatically inherit it. With an approved private configuration, a Node 22 environment-file invocation can run the diagnostic processor without printing values:
-
-```text
-node --env-file=.env.local --import=tsx scripts/worker.ts --once
-node --env-file=.env.local --import=tsx scripts/worker.ts --reconcile
-```
-
-`pnpm worker` is also available when server variables are already in the process environment. It is a local/manual processor. The prepared Functions created-job, one-minute retry and ten-minute reconciliation handlers define the durable cloud-processing design, but cannot be deployed on the confirmed Spark plan. No timer attached to a Vercel request replaces the missing durable processor. Do not open funded public events until an approved running processor is verified.
-
-## Configuration and deployment
-
-The template lists the exact names. The approved public/practice deployment deliberately leaves integration credentials unset and protected actions disabled. Enable authenticated rewards only after privately configuring and verifying Firebase app access, Privy settings, the approved testnet escrow and separate authorization/relayer/coupon/nullifier secrets plus a durable processor. Never expose private variables through `NEXT_PUBLIC_`.
-
-Receiving a reward uses DROP's restricted claim relayer and its MON budget. Sending received USDC uses the user's Privy wallet and a different sponsorship path: **TEE execution, enabled app-pays sponsorship, configured Monad Testnet support, allowed client transactions and available sponsorship budget** must all be configured. `NEXT_PUBLIC_GAS_SPONSORSHIP_ENABLED=true` only enables the UI; it does not activate or prove the provider service.
-
-Firebase Functions deployment requires **Blaze billing**, while `drop-5a400` remains on **Spark**. No plan upgrade was performed or authorized; the cloud processor is not running. The Vercel website is deployed, and Firestore database/rules/indexes are confirmed; Vercel server identity/data access still needs configuration. Local tests use synthetic emulator projects. Follow [DEPLOYMENT.md](docs/DEPLOYMENT.md) for the pinned normal-upload CLI workflow and evidence. Mainnet remains disabled and unverified.
-
-## Documentation
+## Further reading
 
 - [Product](docs/PRODUCT.md), [architecture](docs/ARCHITECTURE.md), [security](docs/SECURITY.md)
-- [Deployment](docs/DEPLOYMENT.md), [integration status](docs/INTEGRATION_STATUS.md), [Firebase/Vercel](docs/FIREBASE_VERCEL.md)
-- [Research forms](docs/USER_TESTS.md), [distribution and economics hypotheses](docs/DISTRIBUTION.md)
-- [3-minute demo](docs/DEMO_3MIN.md), [2-minute pitch](docs/PITCH_2MIN.md), [submission checklist](docs/SUBMISSION_CHECKLIST.md)
-- [Official sources](docs/OFFICIAL_SOURCES.md), [Korean Metropolis guide](docs/METROPOLIS_GUIDE.ko.md), [AI disclosure](docs/AI_USAGE.md), [requirements audit](docs/REQUIREMENTS_AUDIT.md)
+- [Integration status](docs/INTEGRATION_STATUS.md), [deployment](docs/DEPLOYMENT.md), [Firebase/Vercel](docs/FIREBASE_VERCEL.md)
+- [User research](docs/USER_TESTS.md), [distribution](docs/DISTRIBUTION.md), [AI disclosure](docs/AI_USAGE.md)
+- [Technical demo](docs/DEMO_3MIN.md), [founder pitch](docs/PITCH_2MIN.md), [submission checklist](docs/SUBMISSION_CHECKLIST.md)
+- [Official Metropolis sources](docs/OFFICIAL_SOURCES.md), [한국어 대회 안내](docs/METROPOLIS_GUIDE.ko.md), [경쟁력 검토](docs/COMPETITION_REVIEW.ko.md)
 
-The requested source destination is [openai-lover/DROP](https://github.com/openai-lover/DROP). The GitHub push returned **403**, and that remote repository remains empty. Vercel received the local source at commit `3ff3025`; direct deployment is not public GitHub publication or an accepted contest submission. Keep actual credentials, coupon contents and private research outside public source and artifacts.
+The user authorizes final submission after readiness. Portal6/6 was saved at16:29UTC and actual catch/access updates at16:35UTC on13October; the primary Consumer entry is confirmed READY FOR JUDGING at2026-10-13T16:39:30.988Z. The recorded deadline is **2026-10-14 12:59GMT+9 /Asia/Seoul**. [Submission record](docs/SUBMISSION_CHECKLIST.md).

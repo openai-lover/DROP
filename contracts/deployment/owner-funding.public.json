@@ -1,0 +1,66 @@
+{
+  "scope": "Two exact testnet-only transfers to the real production Privy owner; no campaign funding or creation.",
+  "mode": "explicit-testnet-owner-funding",
+  "chainId": 10143,
+  "sender": "0xCe5FaB914C165ED28DF1886341f644Adb4C39b0b",
+  "owner": "0xa896D06aa2888a749B5460DF3D407F2d9ed666b3",
+  "officialUsdc": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+  "exactAmounts": {
+    "nativeMon": "0.5",
+    "testUsdc": "10"
+  },
+  "feeCapPerTransactionMon": "0.02",
+  "steps": [
+    {
+      "kind": "native",
+      "transactionHash": "0x42e8941a7fd639c39dc98c3fdd2da51b41e1c065f13d4fb1083cded4e0031475",
+      "nonce": 2,
+      "blockNumber": "70723266",
+      "blockHash": "0x69978683e417431e21f124a4d5d2a1a2a0f35eea73622f7a9c232e15de5adaf7",
+      "finalizedBlock": "70723267",
+      "actualGasCostMon": "0.00282744",
+      "gasUsed": "25200",
+      "canonicalFinalizedReceiptVerified": true,
+      "exactMinedInputVerified": true,
+      "senderMonBefore": "4.2757101804",
+      "senderMonAfter": "3.7728827404",
+      "ownerMonBefore": "0",
+      "ownerMonAfter": "0.5",
+      "amountMon": "0.5",
+      "exactBalanceDeltasVerified": true
+    },
+    {
+      "kind": "usdc",
+      "transactionHash": "0xf44f5a5175266bee10a293663cd015427c0dfda2ce8150b6728df98b9de23d6f",
+      "nonce": 3,
+      "blockNumber": "70723272",
+      "blockHash": "0x8196420d8a8670cffbb5d042f91376bf82081b4912c413746389e8fedb97e14c",
+      "finalizedBlock": "70723273",
+      "actualGasCostMon": "0.013533564",
+      "gasUsed": "120620",
+      "canonicalFinalizedReceiptVerified": true,
+      "exactMinedInputVerified": true,
+      "senderMonBefore": "3.7728827404",
+      "senderMonAfter": "3.7593491764",
+      "ownerMonBefore": "0.5",
+      "ownerMonAfter": "0.5",
+      "token": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+      "amountUsdc": "10",
+      "exactBalanceDeltasVerified": true,
+      "exactTransferEventVerified": true,
+      "senderUsdcBefore": "20",
+      "senderUsdcAfter": "10",
+      "ownerUsdcBefore": "0",
+      "ownerUsdcAfter": "10"
+    }
+  ],
+  "ownerIdentity": "Supplied and confirmed by root; this script does not authenticate or create a Privy user.",
+  "complete": true,
+  "finalBalances": {
+    "senderMon": "3.7593491764",
+    "senderUsdc": "10",
+    "ownerMon": "0.5",
+    "ownerUsdc": "10"
+  },
+  "verifiedAtUtc": "2026-10-13T15:59:14.545Z"
+}

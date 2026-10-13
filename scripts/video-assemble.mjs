@@ -10,7 +10,7 @@ if (args.help) {
 if (!args.manifest || !args['audio-dir'] || !args.out) throw new Error('Supply --manifest, --audio-dir and --out.');
 const manifest = await jsonFile(args.manifest);
 if (manifest.status !== 'captured-not-reviewed') throw new Error('All capture shots must finish before assembly.');
-if (manifest.kind !== 'verified-demo' && !args['allow-rehearsal']) throw new Error('Preparation footage requires --allow-rehearsal. It is not a final payout demo.');
+if (!['verified-demo', 'verified-pitch'].includes(manifest.kind) && !args['allow-rehearsal']) throw new Error('Preparation footage requires --allow-rehearsal. It is not a final payout demo.');
 const maximum = Number(args['max-seconds'] || 180);
 if (![120, 180].includes(maximum)) throw new Error('Use 120 seconds for the pitch or 180 for the technical demo.');
 const ffmpeg = await fullFfmpeg(args.ffmpeg), output = localOutput(args.out), scratch = join(dirname(output), 'assembly');
@@ -33,7 +33,9 @@ for (const shot of manifest.shots) {
   const seconds = Math.max(Number(videoProbe.format.duration), voiceSeconds + 0.5);
   const srt = join(scratch, `${shot.id}.srt`), part = join(scratch, `${shot.id}.mp4`);
   await writeFile(srt, captions(shot.narration, voiceSeconds));
-  const filters = `scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=0x101018,tpad=stop_mode=clone:stop_duration=${Math.max(0, seconds - Number(videoProbe.format.duration)) + 0.1},subtitles='${filterPath(srt)}':force_style='FontName=Arial,FontSize=20,Outline=2,MarginV=38'`;
+  // Keep a separate caption band: no reward status, disclosure, approval or
+  // receipt is covered by subtitles. libass font size uses its script scale.
+  const filters = `scale=1920:900:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:0:color=0x101018,tpad=stop_mode=clone:stop_duration=${Math.max(0, seconds - Number(videoProbe.format.duration)) + 0.1},subtitles='${filterPath(srt)}':force_style='FontName=Arial,FontSize=12,Outline=1,MarginV=12'`;
   await run(ffmpeg, ['-hide_banner', '-loglevel', 'error', '-y', '-i', source, '-i', audio, '-map', '0:v:0', '-map', '1:a:0', '-vf', filters, '-af', 'apad', '-t', String(seconds), '-r', '30', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-movflags', '+faststart', part]);
   parts.push(part);
   timings.push({id: shot.id, startsAtSecondsApprox: total, durationSecondsApprox: seconds, narrationSeconds: voiceSeconds});

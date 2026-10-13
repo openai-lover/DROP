@@ -1,0 +1,154 @@
+{
+  "id": "drop-final-demo",
+  "kind": "verified-demo",
+  "notes": "Verified product walkthrough edit. Source screenshots, recordings, audio and evidence files remain ignored local build inputs. Regeneration requires the original genuine captures and independently verified payout evidence.",
+  "shots": [
+    {
+      "id": "intro",
+      "title": "Small games. Shared rewards.",
+      "narration": "DROP turns a community reward into a short game and a payment people can inspect. This is the live product on Monad Testnet. The test tokens shown here have no financial value.",
+      "captions": "DROP turns a community reward into a short game and a payment people can inspect. This is the live product on Monad Testnet. The test tokens shown here have no financial value.",
+      "visuals": [
+        {
+          "file": ".local/video/final-public-scenes/home.webm",
+          "trimStart": 3.5611417999999997,
+          "seconds": 12.66
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "title": "Fix the promise",
+      "narration": "The creator chooses the game, reward amount, number of recipients, and deadlines before sharing. This campaign uses three questions, with zero point one test U S D C for each of the first fifty qualifying accounts. Its total reward budget is five test U S D C.",
+      "captions": "The creator chooses the game, reward amount, number of recipients, and deadlines before sharing. This campaign uses three questions, with 0.1 test USDC for each of the first fifty qualifying accounts. Its total reward budget is 5 test USDC.",
+      "visuals": [
+        {
+          "file": ".local/qa/production-create-review.jpg",
+          "seconds": 7
+        },
+        {
+          "file": ".local/video/event-public-scenes/event.webm",
+          "trimStart": 1.0774027,
+          "seconds": 12.74
+        }
+      ]
+    },
+    {
+      "id": "funding",
+      "title": "Fund before sharing",
+      "narration": "The creator approves the token allowance, then deposits the reward budget into the Monad escrow. The dashboard records the funding transaction before opening the event. The public page shows the published rules, remaining rewards, and payment details. Members enter from one shared link.",
+      "captions": "The creator approves the token allowance, then deposits the reward budget into the Monad escrow. The dashboard records the funding transaction before opening the event. The public page shows the published rules, remaining rewards, and payment details. Members enter from one shared link.",
+      "visuals": [
+        {
+          "file": ".local/qa/production-testnet-approval.jpg",
+          "seconds": 6
+        },
+        {
+          "file": ".local/qa/production-funded-dashboard.jpg",
+          "seconds": 8
+        },
+        {
+          "file": ".local/video/event-public-scenes/event-proof.webm",
+          "trimStart": 5,
+          "seconds": 5.9
+        }
+      ]
+    },
+    {
+      "id": "play",
+      "title": "Sign in. Play. Verify.",
+      "narration": "Here, Google sign in creates an embedded wallet for the participant. No separate wallet installation is needed. The participant answers the three questions and submits them. The server checks the attempt against the campaign rules. Passing reserves a reward; it is not yet a confirmed payment.",
+      "captions": "Here, Google sign in creates an embedded wallet for the participant. No separate wallet installation is needed. The participant answers the three questions and submits them. The server checks the attempt against the campaign rules. Passing reserves a reward; it is not yet a confirmed payment.",
+      "visuals": [
+        {
+          "file": ".local/qa/production-participant-before.jpg",
+          "seconds": 5
+        },
+        {
+          "file": ".local/qa/production-quiz-unanswered.jpg",
+          "seconds": 4.8
+        },
+        {
+          "file": ".local/qa/production-quiz-answered.jpg",
+          "seconds": 5.6
+        },
+        {
+          "file": ".local/qa/production-reward-queued.jpg",
+          "seconds": 4.821
+        }
+      ]
+    },
+    {
+      "id": "receipt",
+      "title": "A confirmed receipt",
+      "narration": "The reward moves through delivery to Paid. Now My rewards shows the received amount and the actual wallet balance. Expanding the receipt reveals the public transaction. This payment was checked on Monad Testnet, including the escrow event, recipient, and token amount. These cuts show observed states, not a settlement speed benchmark.",
+      "captions": "The reward moves through delivery to Paid. Now My rewards shows the received amount and the actual wallet balance. Expanding the receipt reveals the public transaction. This payment was checked on Monad Testnet, including the escrow event, recipient, and token amount. These cuts show observed states, not a settlement speed benchmark.",
+      "visuals": [
+        {
+          "file": ".local/qa/production-reward-queued.jpg",
+          "seconds": 3.2
+        },
+        {
+          "file": ".local/qa/production-paid-receipt.jpg",
+          "seconds": 20.591
+        }
+      ]
+    },
+    {
+      "id": "duplicate",
+      "title": "One reward per account and wallet",
+      "narration": "A repeat attempt from this account is blocked. The campaign permits only one reward per account and wallet.",
+      "visuals": [
+        {
+          "file": ".local/qa/production-duplicate-blocked.jpg",
+          "seconds": 8.8
+        }
+      ]
+    },
+    {
+      "id": "operator",
+      "title": "See what was delivered",
+      "narration": "The operator dashboard keeps the fixed budget and delivery records together. Reserved awards and confirmed payouts have separate counts, so a pending job is not reported as a successful payment. The same award identity is retained when the processor retries a delivery.",
+      "captions": "The operator dashboard keeps the fixed budget and delivery records together. Reserved awards and confirmed payouts have separate counts, so a pending job is not reported as a successful payment. The same award identity is retained when the processor retries a delivery.",
+      "visuals": [
+        {
+          "file": ".local/qa/production-dashboard-paid.jpg",
+          "seconds": 17.657
+        }
+      ]
+    },
+    {
+      "id": "catch",
+      "title": "Another way to play",
+      "narration": "DROP also offers a catch game: catch the moving coffee three times within eighteen seconds. This clip is the clearly labelled practice mode. It lets people try the interaction without signing in or creating a reward record.",
+      "captions": "DROP also offers a catch game: catch the moving coffee three times within eighteen seconds. This clip is the clearly labelled practice mode. It lets people try the interaction without signing in or creating a reward record.",
+      "visuals": [
+        {
+          "file": ".local/video/final-public-scenes/catch.webm",
+          "trimStart": 1.215042599999997,
+          "seconds": 14.91
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "title": "Playful participation. Verifiable rewards.",
+      "narration": "A small game for members. A fixed reward promise for creators. An inspectable receipt on Monad. The judge guide links the live product and supporting evidence. DROP is a working testnet prototype built by solo developer Gyu-min Kim.",
+      "captions": "A small game for members. A fixed reward promise for creators. An inspectable receipt on Monad. The judge guide links the live product and supporting evidence. DROP is a working testnet prototype built by solo developer Gyu-min Kim.",
+      "visuals": [
+        {
+          "file": ".local/video/final-public-scenes/closing.webm",
+          "trimStart": 2.744260300000002,
+          "seconds": 8
+        },
+        {
+          "file": ".local/video/final-public-scenes/home.webm",
+          "trimStart": 3.5611417999999997,
+          "seconds": 9.54
+        }
+      ]
+    }
+  ],
+  "sourceUrl": "https://drop-omega-five.vercel.app",
+  "disclosure": "Edited real product capture"
+}

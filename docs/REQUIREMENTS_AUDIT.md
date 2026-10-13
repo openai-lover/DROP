@@ -1,10 +1,12 @@
 # DROP requirements and completion audit
 
-Scope: the original user-supplied 18-section implementation brief, fixed Consumer Products & Payments product, requested GitHub publication, and complete submission artifacts. The authenticated official [Consumer Products & Payments track](https://hackathon.monad.xyz/tracks/consumer-payments) now confirms the supplied rubric and deliverable limits. **Passing some tests or producing source code does not complete the objective.** Missing external deployment, real studies, or videos remains missing. **The user explicitly instructs that contest submission must not happen yet; portal research is read-only.**
+**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
 
-At task start the checkout was empty with an unborn `main` branch. The selected implementation is now **Vercel Next.js + Firebase Firestore + Firebase Functions**, with Privy authentication/wallets. The user's later deployment instruction replaces the initial persistence choice. Firestore transactions and deterministic guard documents must preserve the original atomicity/uniqueness requirements; event-driven and scheduled Functions must preserve durable payout/recovery.
+Scope: the original 18-section brief, Consumer Products & Payments product, public source and submission artifacts. **Current update: 2026-10-14.** Public application baseline acf5b73 and production are READY; real Privy/Google, WIF Firestore, actual creator funding and one 0.1 test USDC quiz payout/receipt are verified. Refresh and sign-out/re-login retained Paid; duplicate participation was blocked. The separate20-slot catch judge event is actually funded. [Current evidence](INTEGRATION_STATUS.md), [payment proof](../contracts/deployment/live-participant-payment.public.json), [judge funding](../contracts/deployment/judge-event-funding.public.json).
 
-Current evidence: frozen installation/lint/typecheck/builds, **61 Vitest tests**, **two separate actual local Anvil/Firestore worker cases**, hash-matched Forge42unit/fuzz+two invariants, real Testnet network/token reads, cloud Firestore configuration, and **Vercel production READY at [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/)**. Browser coverage passed locally30/6skips45.5s and at the actual public URL30/6skips44.7s; these are the same cases in two environments. Cloud Functions, real Privy, Vercel Firestore IAM, public escrow/worker/funding, real studies and videos remain incomplete. GitHub push returned403 and the remote is empty. Each row separates verified public/anonymous/local/configuration scope from missing live-payment scope.
+The user now authorizes final submission after readiness, superseding the initial hold. Portal **6/6** progress was saved at2026-10-13 16:29UTC; primary Consumer submission is confirmed READY FOR JUDGING. Final155.32s demo and107.94s pitch are uploaded Unlisted and sampled watch playback succeeded; signed-out verification is not claimed. Independent research/traction remains absent. The technical accounts are controlled by one human. No billing upgrade/mainnet is authorized.
+
+The deployed free architecture is Vercel Hobby + Firestore/Spark + bounded request-assisted processing with persistent outbox/leases/nonces and capped daily recovery. Request processing executed the live quiz payment; daily invocation/live outage recovery is unverified. Optional Functions source is undeployed on Spark. Latest recorded local tests are96server/language plus3wallet-request tests;26actual emulator cases use explicit chain mocks, alongside42contract unit/fuzz+2invariants and2actual isolated Anvil/Firestore cases. Earlier browser suites and all detailed matrices/logs below are **historical baseline evidence**, not current missing-integration assertions. Later facts supersede their old unset/403/hold statuses without rewriting the executed runs.
 
 The authenticated portal deadline is **2026-10-14 at 12:59 GMT+9 (Asia/Seoul)**. Its official weights are Technical Execution 20%, Design & Craft 20%, Originality & Track Insight 15%, Founder & Market Readiness 25%, and Traction & Path Forward 20%. These now have independent official-page evidence; their earlier user-provided provenance remains recorded in [OFFICIAL_SOURCES.md](OFFICIAL_SOURCES.md).
 
@@ -14,9 +16,9 @@ Use `verified`, `incomplete`, `unverified`, or `deferred` for each item. Verifie
 
 `deferred` is valid only for explicitly P1/P2 features. An external prerequisite does not redefine P0 or mandatory submission artifacts as optional. Update this file after implementation and each material verification run.
 
-## Original-section coverage
+## Historical baseline: original-section coverage
 
-| Brief section | Requirement retained | Authoritative evidence to inspect | Current status |
+| Brief section | Requirement retained | Authoritative evidence to inspect | Recorded baseline status |
 | --- | --- | --- | --- |
 | 1. Product | KOL/operator rewards; play → real payout; no pivot to gifting, crowdfunding, exchange, launchpad or generic quests | PRODUCT.md and rendered complete participant/operator routes | Scope retained; local and public hosted anonymous/practice UI verified; real authenticated payout incomplete |
 | 2. Entry/priorities | Requested Consumer Products & Payments; consumer-led demo; matching official weights; P0 before P1/P2; honest Social-fit limitation | Official track, PRODUCT.md, submission fields, feature code, scripts | Official rubric/requirements and existing Consumer selection verified read-only; submission remains on explicit hold |
@@ -37,7 +39,7 @@ Use `verified`, `incomplete`, `unverified`, or `deferred` for each item. Verifie
 | 17. Documents | README + product/architecture/security/deployment/integration/research/distribution/scripts/checklist/AI docs updated with code | Actual current file inventory/content and external evidence links | Owned product/submission docs prepared; full document set requires final inspection |
 | 18. Working boundaries | Preserve changes/sources, separate modes/keys, no fake public fallback, no unsafe unauthorized actions, genuine history, truthful report | Git diff/history, secret scan, env, mode guards, deployment evidence | Initial state recorded; final audit outstanding |
 
-## P0 behavior gates
+## Historical baseline: P0 behavior gates
 
 | ID | Exact completion gate | Evidence required | Status |
 | --- | --- | --- | --- |
@@ -119,7 +121,7 @@ Actual public Monad consensus, official issuer behavior, live Privy first-time w
 | Relayer recovery | Persisted usable proof can be re-requested/submitted safely; direct submission may require gas and is an optional documented recovery path | Unverified |
 | Firestore/Functions production | Reviewed rules/indexes, server tenant authorization, deployment region/secrets, created-job trigger and scheduled retry/reconciliation actually run | Cloud Firestore database/region/rules/indexes verified; Vercel IAM/data access and Function execution incomplete, Functions blocked on Spark |
 
-## Browser, real network and device coverage requirements
+## Historical baseline: browser, network and device coverage
 
 | Run | Required coverage | Status |
 | --- | --- | --- |
@@ -138,7 +140,7 @@ Actual public Monad consensus, official issuer behavior, live Privy first-time w
 | Accessibility/localization | KO/EN separate, judge English, focus/labels/reduced-motion/input methods | KO/EN persistence, English creator errors/images, judge English and keyboard/touch verified locally; complete accessibility and real-device audit incomplete |
 | Share metadata | Organizer/game/reward/count; no user identity/answers/coupon secrets | Generic local production OG HTTP200 PNG1200×630 / 49,610bytes inspected; published-campaign title/metadata fixture and complete privacy scan not claimed |
 
-## Commands and evidence log
+## Historical commands and evidence log
 
 Use the Firebase-backed commands below from the repository root with supported runtime/dependencies. Current package scripts were inspected: web build/typecheck run directly against Next.js/TypeScript, and Functions build is separate. No SQL generation or migration is required. A command's definition is not a successful run.
 
@@ -180,6 +182,6 @@ Use the Firebase-backed commands below from the repository root with supported r
 
 ## Evidence still needed before claiming full completion
 
-Approved public Testnet escrow/budget/receipts, real Privy and Vercel Firestore IAM/data access, an authorized durable processor, user-approved transfer/refund, real studies/operator evidence/authorized stock, actual videos and GitHub publication after403. Public Vercel web/practice, hosted anonymous/browser/privacy scope, cloud Firestore configuration, local engineering/integrated-chain proof, real network/token reads and temporary logos are already evidenced. Functions remains blocked on Spark without a new billing authorization. No simulation closes missing payment/research gates. Contest submission remains explicitly on hold and is not attempted.
+Current remaining evidence includes outgoing transfer/refund and live restart/outage/daily recovery as relevant product checks; actual independent participant/operator research and authorized real coupon stock if real coffee is claimed; a complete fresh hosted regression; video signed-out playback. Primary Consumer submission and both independent game payments are confirmed. Real Google/WIF, source publication, verified escrow/funding/quiz payment/re-login, exported/uploaded videos and judge-event funding are already evidenced. Each feature branch is not a separately mandatory portal upload. Functions remains blocked on Spark; no paid upgrade is authorized. [Current checklist](SUBMISSION_CHECKLIST.md) supersedes historical baseline statuses above.
 
 P1 MON, verifiable drawing and approved supplier API; P2 USDT0, additional chains and complex automation remain deferred under the original priorities. They are not missing P0 work and are not advertised as available.

@@ -16,10 +16,10 @@ const out = localOutput(args.out || `.local/video/${scenario.id}`);
 await mkdir(out, {recursive: true});
 const manifestPath = join(out, 'capture.json');
 const manifest = {version: 1, scenario: scenario.id, kind: scenario.kind, sourceUrl: base.origin, recordedAt: new Date().toISOString(), status: 'recording', actualProductScreen: true, apiMocking: false, clockManipulation: false, browserAudioRecorded: false, notes: scenario.notes, shots: []};
-if (scenario.kind === 'verified-demo') {
+if (['verified-demo', 'verified-pitch'].includes(scenario.kind)) {
   if (!args['verified-evidence']) throw new Error('A final demo requires --verified-evidence pointing to an actual current integration evidence JSON.');
   const evidence = await jsonFile(args['verified-evidence']);
-  const required = ['hostedAuthentication', 'firestoreAppAccess', 'publicMonadFunding', 'publicMonadPayout', 'durableProcessor'];
+  const required = ['hostedAuthentication', 'firestoreAppAccess', 'publicMonadFunding', 'publicMonadPayout', 'hostedRequestRecovery'];
   if (required.some(key => evidence[key] !== true) || evidence.chainId !== 10143 || !/^0x[\da-f]{64}$/i.test(evidence.payoutTx || '')) throw new Error('Final recording gates have not passed. Record rehearsal explicitly instead.');
   manifest.verification = {chainId: evidence.chainId, payoutTx: evidence.payoutTx, reviewedAt: evidence.reviewedAt, evidenceFile: resolve(repository, args['verified-evidence'])};
 }
@@ -33,7 +33,7 @@ const locatorFor = (page, target) => {
 const hold = ms => new Promise(accept => setTimeout(accept, ms));
 try {
   browser = await chromium.launch({headless: true});
-  context = await browser.newContext({viewport: scenario.viewport || {width: 1280, height: 720}, reducedMotion: 'reduce', locale: 'en-US', ...(args['storage-state'] ? {storageState: localOutput(args['storage-state'])} : {}), recordVideo: {dir: out, size: scenario.viewport || {width: 1280, height: 720}}});
+  context = await browser.newContext({viewport: scenario.viewport || {width: 1280, height: 720}, reducedMotion: scenario.reducedMotion || 'reduce', locale: 'en-US', ...(args['storage-state'] ? {storageState: localOutput(args['storage-state'])} : {}), recordVideo: {dir: out, size: scenario.viewport || {width: 1280, height: 720}}});
   await context.addInitScript(() => {if (!localStorage.getItem('drop-language')) localStorage.setItem('drop-language', 'en');});
   for (const shot of scenario.shots) {
     if (!/^[a-z0-9-]+$/.test(shot.id)) throw new Error('Shot IDs must use lower-case letters, numbers and hyphens.');
@@ -45,6 +45,8 @@ try {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await page.locator('.language-select').selectOption('en');
     await page.evaluate(() => document.fonts.ready);
+    await hold(350);
+    const contentReadySeconds = (performance.now() - started) / 1000;
     for (const action of shot.actions || []) {
       if (action.type === 'wait') {await hold(action.ms); continue;}
       if (action.type === 'catchPractice') {
@@ -78,7 +80,7 @@ try {
     await page.close();
     const rawPath = await video.path(), path = join(out, `${shot.id}.webm`);
     await rename(rawPath, path);
-    manifest.shots.push({id: shot.id, title: shot.title, path: shot.path, file: path, narration: shot.narration || '', recordedSecondsApprox: (performance.now() - started) / 1000, ...await fileEvidence(path)});
+    manifest.shots.push({id: shot.id, title: shot.title, path: shot.path, file: path, narration: shot.narration || '', contentReadySeconds, recordedSecondsApprox: (performance.now() - started) / 1000, ...await fileEvidence(path)});
     await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
     console.log(`Recorded ${shot.id}; product state unchanged by mocks or clock patches.`);
   }

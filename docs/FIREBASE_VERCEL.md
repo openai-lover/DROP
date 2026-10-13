@@ -1,8 +1,10 @@
 # Firebase + Vercel deployment and local verification
 
+**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
+
 The user's later deployment instruction selects **Firebase Firestore for durable data and Vercel for the Next.js website**. It supersedes the initial PostgreSQL/Prisma choice. Privy remains the single participant authentication and wallet provider; Firebase Authentication is not added as a second login. The Telegram app remains a standalone HTTPS website.
 
-The public web is deployed at [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/), production in `teamstartup/drop` / Hobby. On 2026-10-14 owner-approved production WIF trust and private Vercel settings were configured. The actual Privy server API returned successfully with zero users; production origin, email/Google and automatic EVM wallet creation were configured. Root verification also reports a verified testnet escrow and a relayer balance of 0.5 test MON. The new release, real production sign-in/data access and dapp funding/payment receipts still require separate verification. Earlier hosted checks proved unpaid practice and protected unavailable states.
+**Current,2026-10-14:** production acf5b73 is READY at [DROP](https://drop-omega-five.vercel.app/), Hobby/Spark. Actual Google/Privy, keyless production WIF Firestore access, creator funding and one0.1test-USDC quiz payout/Paid receipt/re-login/duplicate rejection are verified. The request-assisted processor executed the payment; a separate20-slot judge catch event is funded. [Current evidence](INTEGRATION_STATUS.md). Historical first-release anonymous checks below describe the earlier unconfigured state, not today's integration availability.
 
 ## Service responsibilities
 
@@ -27,6 +29,8 @@ Vercel request execution has duration limits. The free source mode `DROP_WORKER_
 The Hobby-compatible cron in `vercel.json` invokes `/api/internal/recovery` once per day at `0 3 * * *` UTC. A private `CRON_SECRET` of at least 32 characters is mandatory. Each accepted run attempts at most three jobs and three expired-award probes, with persistent cooldown/cursor state and a soft 25-second budget. An in-flight RPC may outlast that soft budget; both routes have a 60-second platform limit, and interrupted jobs remain recoverable through their persisted leases. Known receipts and finalized chain state remain necessary before confirmation. The daily path is a low-volume fallback, not minute-by-minute scheduling or unlimited backlog processing. Hobby cron timing can vary within its hour. [Vercel Hobby cron limits](https://vercel.com/docs/cron-jobs/usage-and-pricing)
 
 `DROP_WORKER_MODE=disabled` is the template default. `external` leaves execution to an independently running approved processor. No mode or status flag proves that a real invocation completed. Firebase Functions still cannot be deployed on Spark.
+
+Automatic own-user polling currently considers the latest eight awards. An older pending award can be targeted by the authenticated retry action or reached by the capped global daily sweep. This bounded mode is intended for a small pilot; it is not an unlimited fair queue consumer.
 
 ## Keyless production Firestore access
 
@@ -86,7 +90,7 @@ The stop script checks the saved PID, start time and actual command before stopp
 
 ## Cloud configuration and verification
 
-The actual project is **drop-5a400 / DROP / Spark**. CLI inspection confirms `(default)` Standard / Native Firestore in `asia-northeast3`, created `2026-10-13T13:01:16.609278Z`. Rules/indexes-only deployment exited 0. Production WIF trust and private Vercel settings were subsequently configured with owner approval. Actual app-data access and authentication must still be verified on the new deployment.
+The actual project is **drop-5a400 /DROP /Spark**. CLI confirms `(default)` Standard/Native Firestore in asia-northeast3, created2026-10-13T13:01:16.609278Z; rules/indexes deployment passed. Production WIF and real authenticated account/campaign/game/award reads/writes are now verified through the app. Functions remains undeployed; daily cron/live restart recovery is separate and unverified.
 
 Deploying Firebase Functions requires **Blaze**; scheduled recovery also uses Cloud Scheduler. **No billing upgrade is currently authorized. Do not deploy Functions, activate paid processing/scheduling resources or change the plan without a new owner instruction.** Functions source and build are prepared but no cloud payout processor is operating. [Functions deployment prerequisites](https://firebase.google.com/docs/functions/get-started), [Scheduling prerequisites](https://firebase.google.com/docs/functions/schedule-functions)
 
@@ -96,7 +100,7 @@ Before enabling authenticated/funded flows:
 2. Use `.env.example` as the variable-name authority. Production WIF, Privy and testnet/recovery settings have been uploaded privately; verify their actual operation. Preserve approval/relayer key separation and encryption continuity. Never prefix private credentials with `NEXT_PUBLIC_`.
 3. Rules/indexes are already deployed. Verify server data access, eligible authenticated after-work, daily recovery and actual confirmed receipts before opening funded public events. Do not describe this free cadence as an independent minute-scheduled worker.
 4. Earlier Vercel normal upload succeeded; source publication and the revised release remain separate checks. Use the normal-upload workflow in [DEPLOYMENT.md](DEPLOYMENT.md); avoid the previously observed large archive packaging issue.
-5. Public-page/practice checks passed on the actual URL, including30 Chromium checks /six profile skips and direct HTTP/privacy checks. Before enabling paid/authenticated paths, separately verify real Privy, both funded games, persistence, approved sponsored transfer, tenant isolation and a durable processor. Record actual contract/source/video evidence; web hosting alone does not satisfy them.
+5. Keep historical anonymous/practice coverage distinct from the actual Google/funding/quiz/payout/re-login checks now completed. Judge catch funding is verified; catch payment, outgoing transfer/refund and additional live failure branches are separate checks. Genuine sponsorship is optional and unverified, not a prerequisite for wallet-paid test-MON transactions.
 
 All values must match actual services. Source publication, hosted code, IAM configuration, actual worker invocation, chain receipts and accepted submission are separate artifacts. Missing integrations never trigger fake authentication or payouts. The user now authorizes final submission after readiness checks, including actual demo/pitch upload to SLIME CEO! and the supplied X profile; the earlier submission hold is superseded. No billing upgrade or mainnet action is authorized.
 
@@ -112,11 +116,12 @@ All values must match actual services. Source publication, hosted code, IAM conf
 | Readiness/idempotence | Re-running start script reused PID `29048`; live Firestore data API returned expected HTTP 404 for a missing document |
 | Shutdown script | PowerShell syntax parsed; shutdown deliberately not executed while root/backend tests need the live emulator |
 | Server/language tests after free recovery changes | 96 passing across 12 files, including 26 actual emulator cases with explicit chain-response mocks; web and Functions typechecks passed |
+| User-paid wallet request checks | Three additional tests passed: explicit wallet/chain, sponsor-off execution with visible cancellable confirmation, and rejection before SDK send for invalid/unready/signed-out state; SDK calls are test adapters |
 | Actual local chain/worker integration | Two passed in 62.72s; Anvil31337/local mock token/isolated Firestore/production RPC-signing-worker; no public chain proof |
 | Cloud Firestore configuration | Real database/region/mode confirmed; rules/indexes-only deployment exit 0 |
 | Vercel production web | drop-omega-five.vercel.app; READY teamstartup/drop/Hobby, CLI63.1.2 exit0, normal118records/1.2MB/cloud118files |
 | Hosted checks | Production Playwright30passed/6profile skips44.7s; public pages/status/OG200, anonymous rewards/coupon401 no-store/private; real integrations false/demoFallbackfalse |
-| Production integration configuration | Owner-approved exact-subject WIF trust and private Vercel settings configured; deployed real sign-in/data/worker/chain verification pending |
-| Functions / free recovery | Functions blocked on Spark; request-assisted and daily recovery source prepared; no billing change or proof of hosted recovery invocation |
+| Production integration configuration | Owner-approved exact-subject WIF with actual Google/wallet/cloud data/funding/quiz/Paid/re-login independently evidenced |
+| Functions / free recovery | Functions blocked on Spark; request-assisted processor delivered actual quiz award; daily invocation/live outage recovery unverified; no billing change |
 
 In this Codex workspace sandbox, ordinary execution was denied local socket/CIM access. The approved local-runtime verification ran with the tool's required escalation; this is an execution-environment permission boundary, not a cloud credential requirement. Tests must be allowed to reach this local emulator rather than treating a sandbox socket failure as a dead process.

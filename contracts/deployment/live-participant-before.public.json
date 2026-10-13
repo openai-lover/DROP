@@ -1,0 +1,16 @@
+{
+  "scope": "Baseline for actual authenticated participant technical verification; same human operates two accounts, not user traction.",
+  "mode": "read-only",
+  "chainId": 10143,
+  "participant": "0x5E4C082c7Cff436D9cE8Fb7dA32672b32540313d",
+  "officialUsdc": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+  "finalizedBlock": "70724537",
+  "blockHash": "0xc3bb4c5d86fa30e7f91a4d352659c1c82b29e0a174fb056c504bffdd041048d7",
+  "blockTimestamp": "1791907538",
+  "mon": "0",
+  "usdc": "0",
+  "latestNonce": 0,
+  "codePresent": false,
+  "zeroMonAndUsdcVerified": true,
+  "checkedAtUtc": "2026-10-13T16:05:40.385Z"
+}

@@ -11,7 +11,7 @@ if (args.help) {
 }
 if (!args.manifest || !args.out) throw new Error('Supply --manifest and --out.');
 const capture = await jsonFile(args.manifest);
-if (capture.source !== 'genuine-product-browser-capture' || !capture.sourceUrl?.startsWith('https://drop-omega-five.vercel.app')) throw new Error('Frames must be actual authorized DROP captures, not reconstructed screens or external account pages.');
+if (capture.source !== 'genuine-product-browser-capture' || new URL(capture.sourceUrl).origin !== 'https://drop-omega-five.vercel.app') throw new Error('Frames must be actual authorized DROP captures, not reconstructed screens or external account pages.');
 if (capture.frames?.length < 2 || capture.frames?.[0]?.atSeconds !== 0) throw new Error('Provide at least two actual frames, starting at zero seconds.');
 if (!Number.isFinite(capture.endSeconds) || capture.endSeconds <= capture.frames.at(-1).atSeconds || capture.endSeconds > 180) throw new Error('A valid observed end time ≤180 seconds is required.');
 const ffmpeg = await fullFfmpeg(args.ffmpeg), output = localOutput(args.out);

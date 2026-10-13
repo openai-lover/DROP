@@ -1,69 +1,91 @@
-# DROP technical demo — maximum 3 minutes
+# DROP technical demo — uploaded and playback checked
 
-**2026-10-14 status: storyboard and reusable recording tools; final payout footage and uploaded video are not established.** Record the real deployed product after the gates below pass. Current unpaid practice is not an actual conditional-settlement demo.
+**2026-10-14: uploaded to YouTube as Unlisted; playback confirmed in the signed-in account.** [Watch the demo](https://youtu.be/Lfuvsvowj30). The player advanced from 0 to 13 seconds before being paused. Signed-out playback remains unverified. The measured local file is **155.32 seconds (2:35)**, within the 3-minute limit. The [official track](https://hackathon.monad.xyz/tracks/consumer-payments) requires a working product demo and a separate pitch.
 
-The ≤3-minute limit, YouTube/Loom/Vimeo hosts and working-product requirement are independently confirmed on the authenticated official [Consumer Products & Payments page](https://hackathon.monad.xyz/tracks/consumer-payments). A code/slides-only demonstration does not qualify. The deadline is 2026-10-14 12:59 GMT+9 / Asia/Seoul. The user has now authorized video upload and final application submission, superseding the earlier hold. Account actions and submission are handled by the main task; authorization does not establish completion. See [OFFICIAL_SOURCES.md](OFFICIAL_SOURCES.md).
+DROP is built by **solo developer Gyu-min Kim**. **SLIME CEO!** is only the authorized YouTube upload channel, not the developer or team name. The supplied X profile is [AlphaGgang](https://x.com/AlphaGgang).
 
-The user confirmed: **DROP is built by solo developer Gyu-min Kim.** **SLIME CEO! is only the YouTube upload channel name**, not the developer or team name. The supplied X profile is [AlphaGgang](https://x.com/AlphaGgang). Prior employment, relevant biography and traction remain unprovided. The latest public [DROP](https://drop-omega-five.vercel.app/) offers the Monad arcade design, cute community Molandak reinterpretation, two actual unpaid practice games and five languages with English default; its hosted UI suite passed 48 checks with six intentional profile skips. Root is now configuring real authentication, keyless Firestore access and authorized public Testnet funding. Confirm their final results before recording a successful integrated flow.
+## Delivered local files
 
-## Before recording
-
-- Record commit, public app URL, mode, chain ID, escrow address, official token address, and verified deposit/payout/reclaim transaction receipts in DEPLOYMENT.md.
-- Use a new recipient account with no prior Monad wallet. Configure real Telegram OAuth or email OTP, embedded wallet creation, and allowed origins/redirects. Hide inbox details and credentials.
-- Provide limited, sufficient authorized testnet USDC/MON budget for both games and retries. Testnet labels remain visible. Never show testnet USDC as dollars paid in real life.
-- Prepare a real, separately expired campaign for reclaim; do not alter time on a normal funded campaign to imitate expiry.
-- For an optional outgoing-transfer shot, prepare a permitted same-network test recipient and obtain user approval. Show the actual fee mode: a sponsorship request is not proof of zero cost. If native fees apply, disclose test MON paid from the wallet; claim an empty-MON transfer only after it actually succeeds.
-- Prepare a demo coupon with unmistakable “test coupon — cannot redeem” copy unless authorized real stock exists. Do not expose real coupon contents in a public video.
-- Confirm the Vercel app and a durable payout/retry/reconciliation processor are actually running; auth works from a clean session and receipts survive re-login. Firestore database/rules/indexes alone do not establish application IAM or processor execution. Functions cannot deploy on Spark without a separately approved Blaze upgrade. Its source/build and local tests are not a cloud processor; no billing upgrade is established in this document.
-- Rehearse an interrupted worker or duplicate trigger safely: the persisted lease and fixed award identity must recover without a second payout. A request finishing on Vercel must not abandon the Firestore outbox job.
-
-If a gate is missing, the corresponding shot is **not ready**. Fix/configure it; do not replace it with a simulated success.
-
-Earlier engineering evidence includes 42 escrow unit/fuzz tests + two invariant properties, 61 server tests, clean install/lint/typecheck/builds and two actual local Anvil/Firestore/worker settlement cases. The latest hosted UI release passed 48 checks with six profile skips. The local chain tests use chain31337, a mock token and fixture identities; local time advancement for refund is a test, never a public-demo shortcut. None replaces a shot requiring hosted login or public Monad funding, receipt, transfer and genuine expired reclaim. Recheck [INTEGRATION_STATUS.md](INTEGRATION_STATUS.md) for newly verified public integration before final narration.
-
-## Shot list and English narration
-
-| Time | Actual product shot | Narration / point to demonstrate |
-| --- | --- | --- |
-| 0:00–0:20 | Mobile `/d/[slug]` showing organizer, reward, fixed rule, quantity, end/claim times, testnet label, funded status | “DROP turns a community reward into a short game and a funded payout. This event pays the first verified accounts that finish the game. The amount, limit, and deadline are fixed before it opens. This demonstration uses Monad Testnet; these tokens have no financial value.” |
-| 0:20–1:00 | One authentication, catch game, server result, live queued/submitted/confirmed progression, recipient receipt | “I join with Telegram or email. I do not install a wallet or buy gas. Catching the third target starts verification; it does not mean payment is complete. The server reserves an award, the relayer submits it, and the escrow pays this recipient. Now the receipt is confirmed.” |
-| 1:00–1:30 | `/me/rewards`, actual balance, short re-login proof if time permits, confirmed user-approved outgoing USDC transaction | “The reward stays in my account. I can see its details and choose to send it on the same network. I check the address, amount, and cost before approving. Receiving a reward and sending it are separate actions.” |
-| 1:30–1:55 | Real quiz questions and server result; authenticated coupon detail with visible demo warning | “The same award engine also serves a three-question quiz. Answers are checked on the server. This coupon is a non-redeemable test coupon. Real coffee delivery requires authorized operator stock; automatic supplier issuance is future work.” |
-| 1:55–2:25 | `/dashboard/[id]`: actual funding/deposit detail, Firestore-persisted allocated slots, confirmed/failed jobs, verified processor recovery/reconciliation and remaining budget | “The operator funds the campaign before sharing. This view distinguishes reserved rewards from confirmed payouts and shows failures to recover. Rules cannot be silently changed after publication. Retry jobs keep the same award identity.” |
-| 2:25–2:50 | Actual duplicate-rejection response **or** actual reclaim receipt for separately expired campaign | “An account and recipient wallet cannot receive twice in one campaign. Unclaimed budget can return to the original operator only after the claim deadline. The contract enforces these limits; the server still decides valid game results.” |
-| 2:50–3:00 | Product screen, `/judges` link, plain limitation footnote | “Playful rewards, real payout controls. Try both games and inspect the evidence from the judge guide. Our server verification is not proof of a unique human, and this contract has not received an external audit.” |
-
-The narration is a draft. Replace claims only with demonstrated current behavior. Aim for 2:40–2:55; measured duration must stay within 3:00. The core sign-in/game/actual-payout sequence has priority over optional coupon, outgoing transfer and refund scenes. Omit an optional claim if its shot is not verified. Show the actual product throughout; slides, source code and architecture explanations cannot replace the core flow.
-
-## Recording and publishing checks
-
-Use real normal-speed interaction for the core flow. Cuts to remove idle waiting are acceptable only when marked so they do not imply a measured end-to-end latency. Keep network and mode labels legible at mobile resolution. Blur email addresses, private identifiers, test credentials, account tokens, private keys, and real coupon secrets. Onchain recipient addresses and hashes are public but should not disclose unrelated accounts.
-
-Record actual duration from the exported file, file metadata, host availability, unauthenticated video playback, and link accessibility. Save the final URL in SUBMISSION_CHECKLIST.md. A prepared script, local video file, and successfully uploaded accessible video are three different completion states.
-
-| Artifact | Current evidence |
+| Item | Local artifact / result |
 | --- | --- |
-| Final video file | None supplied |
-| Measured duration ≤ 3:00 | Not measured |
-| YouTube/Loom/Vimeo URL | None supplied |
-| Unauthenticated playback | Not verified |
+| Final video | `.local/video/final/DROP-demo.mp4` — ignored local media |
+| Measured duration | 155.32 seconds; limit 180 seconds |
+| Video / audio | 1920 × 1080, 30 fps, H.264 / AAC, 48 kHz |
+| English captions | Burned in a separate 180-pixel bottom band; companion `DROP-demo.srt` |
+| Evidence and hashes | `.local/video/final/DROP-demo.mp4.json` |
+| Upload title / description | `.local/video/upload-metadata.json` |
+| YouTube URL | [Unlisted demo](https://youtu.be/Lfuvsvowj30); signed-in playback confirmed; signed-out playback pending |
 
-## Reusable local video tools
+## What the video establishes
 
-[Playwright video recording](https://playwright.dev/docs/videos) saves the recording when the page/context closes. `scripts/video-capture.mjs` records actual DROP pages with fixed viewport/video size, normal-time keyboard interactions, no API mocks and no patched clock. Files, narration and optional authorized storage-state files stay in ignored `.local/`. Keep inboxes, OTPs, tokens, private keys and credential-bearing screens out of raw footage; this recorder does not automatically redact them or automate external OAuth/account pages.
+The genuine hosted sequence shows a creator fixing a 50 × 0.1 test USDC campaign, funding its 5 test USDC budget, a different user-owned account completing the three-question quiz, delivery queued, the **Paid** receipt and 0.1 test USDC balance, a rejected repeat attempt, and the creator dashboard with Attempts 1 / Reserved 1 / Delivered 1 / Delayed 0. The catch-game clip is explicitly unpaid practice.
 
-Installed Playwright FFmpeg 1013 is a VP9/PNG-only build and cannot mix narration. Audio, subtitles and MP4 use a portable **Gyan FFmpeg 9.0.2 essentials build**, a Windows distributor linked by [the official FFmpeg download page](https://ffmpeg.org/download.html#build-windows). The pinned [archive](https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-9.0.2-essentials_build.zip) matches its [published SHA-256](https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-9.0.2-essentials_build.zip.sha256): `60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba`. Provenance is `.local/video-tools/source.json`; nothing is installed globally.
+Actual production Google/Privy login, embedded wallets, Firestore access, funding and request-assisted payout were observed. [independent public payout proof](../contracts/deployment/live-participant-payment.public.json) verifies the canonical finalized receipt, signer signature, exact escrow and token transfer events, and recipient balance changing from 0 to 0.1 test USDC. The recipient retained 0 test MON; the relayer paid the receiving gas. This does not imply creator funding or outgoing transfers are sponsored.
 
-Windows **Microsoft Zira Desktop** can produce neutral English WAV narration with [Microsoft's SpeechSynthesizer](https://learn.microsoft.com/en-us/dotnet/api/system.speech.synthesis.speechsynthesizer.setoutputtowavefile?view=netframework-4.8.1). It is a synthetic narrator, not the developer's voice or a voice clone. Review DROP, Monad, USDC and Gyu-min Kim pronunciation.
+- Funding: [5 test USDC transaction](https://testnet.monadvision.com/tx/0x4f10e52e5a77c8c24c42dc605e6e3413010fb2ae9dd1b13657eb897f30576637).
+- Reward: [0.1 test USDC transaction](https://testnet.monadvision.com/tx/0x9cbb35fcc0ba09119e87452ff5f2d6d534d4a1ae55682ce0c080260f98c5678c).
+- Funding and rule checks: [public campaign evidence](../contracts/deployment/live-campaign-funding.public.json).
 
-The supplied scene is explicitly a rehearsal of unpaid public practice. The completed tool rehearsal used the previous published home and produced a 58.56-second H.264/AAC MP4; it is neither final payout footage nor an uploaded video. The scene's headline assertions now follow the new quiet home.
+Processing uses a persistent Firestore outbox and bounded request-assisted recovery. The final-export evidence gate is named `hostedRequestRecovery`, not an always-on cloud-worker claim. The live demonstration uses two accounts controlled by the same human for technical verification, not an independent user study.
+
+## Editing and QA
+
+All visuals are actual DROP screens. Authenticated interactions were captured as genuine browser screenshots; anonymous homepage and practice clips are normal-speed browser recordings. The edit uses cuts and screen holds, not reconstructed UI or altered state. Waiting is omitted, and the video makes no end-to-end latency claim. Login account-picker pages, private email, credentials, wallet keys and tokens are excluded.
+
+Narration is **neutral synthetic Microsoft Zira Desktop**, not a recording or clone of the developer's voice. The narration distinguishes game verification from confirmed payment and labels practice as unpaid. Testnet tokens have no financial value. No real coffee redemption, outgoing transfer, refund or independent external audit is claimed.
+
+FFprobe confirmed both streams and the duration; the complete exports decoded without error. Sampled chapter frames were inspected for legibility, privacy, claims and unobscured payment states. Audio decoded successfully, had nonempty narration and no clipping (final peak −2.4 dB). These are signal checks; an independent human listening review is not claimed. Caption timing is approximate.
+
+## Final narration and edit timing
+
+### 0:00 — Small games. Shared rewards.
+
+DROP turns a community reward into a short game and a payment people can inspect. This is the live product on Monad Testnet. The test tokens shown here have no financial value.
+
+### 0:12 — Fix the promise
+
+The creator chooses the game, reward amount, number of recipients, and deadlines before sharing. This campaign uses three questions, with zero point one test U S D C for each of the first fifty qualifying accounts. Its total reward budget is five test U S D C.
+
+### 0:32 — Fund before sharing
+
+The creator approves the token allowance, then deposits the reward budget into the Monad escrow. The dashboard records the funding transaction before opening the event. The public page shows the published rules, remaining rewards, and payment details. Members enter from one shared link.
+
+### 0:52 — Sign in. Play. Verify.
+
+Here, Google sign in creates an embedded wallet for the participant. No separate wallet installation is needed. The participant answers the three questions and submits them. The server checks the attempt against the campaign rules. Passing reserves a reward; it is not yet a confirmed payment.
+
+### 1:12 — A confirmed receipt
+
+The reward moves through delivery to Paid. Now My rewards shows the received amount and the actual wallet balance. Expanding the receipt reveals the public transaction. This payment was checked on Monad Testnet, including the escrow event, recipient, and token amount. These cuts show observed states, not a settlement speed benchmark.
+
+### 1:36 — One reward per account and wallet
+
+A repeat attempt from this account is blocked. The campaign permits only one reward per account and wallet.
+
+### 1:45 — See what was delivered
+
+The operator dashboard keeps the fixed budget and delivery records together. Reserved awards and confirmed payouts have separate counts, so a pending job is not reported as a successful payment. The same award identity is retained when the processor retries a delivery.
+
+### 2:02 — Another way to play
+
+DROP also offers a catch game: catch the moving coffee three times within eighteen seconds. This clip is the clearly labelled practice mode. It lets people try the interaction without signing in or creating a reward record.
+
+### 2:17 — Playful participation. Verifiable rewards.
+
+A small game for members. A fixed reward promise for creators. An inspectable receipt on Monad. The judge guide links the live product and supporting evidence. DROP is a working testnet prototype built by solo developer Gyu-min Kim.
+
+## Reproduction
+
+The sanitized edit manifest is [video-demo-final.json](../scripts/video-demo-final.json). All original screenshots, browser clips, generated audio, evidence gate files, assembly parts and exports remain in ignored `.local/`. The repository keeps only scripts, public proof records and documentation. Reproduction requires those original genuine capture inputs; do not recreate a success state or extract a logged-in browser session.
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/video-speech.ps1 -ScenarioPath scripts/video-rehearsal.json -OutputDirectory .local/video/rehearsal-voice
-node scripts/video-capture.mjs --scenario scripts/video-rehearsal.json --url https://drop-omega-five.vercel.app --audio-dir .local/video/rehearsal-voice --out .local/video/rehearsal
-node scripts/video-assemble.mjs --manifest .local/video/rehearsal/capture.json --audio-dir .local/video/rehearsal-voice --out .local/video/rehearsal.mp4 --max-seconds 180 --allow-rehearsal --ffmpeg .local/video-tools/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/video-speech.ps1 -ScenarioPath scripts/video-demo-final.json -OutputDirectory .local/video/demo-candidate/audio
+
+node scripts/video-final.mjs --manifest scripts/video-demo-final.json --audio-dir .local/video/demo-candidate/audio --out .local/video/final/DROP-demo.mp4 --max-seconds 180 --verified-evidence .local/video/verified-evidence.json --ffmpeg .local/video-tools/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe
+
 ```
 
-For a final demo, prepare an ignored scenario using real funded event paths and current selectors, set `kind` to `verified-demo`, and supply `--verified-evidence .local/video/verified-evidence.json`. Reviewed evidence must identify hosted authentication, Firestore app access, public Monad funding/payout, durable processing, chain 10143 and the payout transaction. This metadata gate is not a chain audit; actual RPC receipt checks remain necessary. Do not extract the user's logged-in browser storage, tokens or private authentication. The main task will capture the genuinely authenticated UI and confirmed receipt through its authorized browser; local assembly may combine those supplied artifacts with actual anonymous product footage. `--storage-state` is restricted to a separately authorized disposable test fixture, never an extracted user session; `--allow-product-actions` is required outside practice.
+The portable Gyan FFmpeg 9.0.2 essentials build is linked by the [official FFmpeg download page](https://ffmpeg.org/download.html#build-windows). Its downloaded archive matched the published SHA-256 `60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba`. Provenance is in ignored `.local/video-tools/source.json`; no global installation is required. Speech uses the installed Microsoft Zira Desktop voice through Windows System.Speech.
 
-`scripts/video-assemble.mjs` normalizes clips to 1920×1080, adds neutral narration and approximate English captions without changing playback speed, checks measured duration and actual audio/video streams with FFprobe, and decodes the export for corruption. Review pixels, captions, pronunciation, privacy and all claims before upload. Holding a genuine screen for narration does not prove faster settlement. Local rehearsal, final edited file, published video and submitted application remain distinct completion states.
+The authorized upload is complete and its title, description and synthetic-narration disclosure were checked. Signed-in playback evidence is saved locally in `.local/qa/youtube-demo-published.jpg`. Verify signed-out playback and record final submission status in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md). Video upload does not establish an accepted application.

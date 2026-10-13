@@ -26,7 +26,7 @@ export function argumentsFor(argv = process.argv.slice(2)) {
   }
   return result;
 }
-export async function jsonFile(path) { return JSON.parse(await readFile(resolve(repository, path), 'utf8')); }
+export async function jsonFile(path) { return JSON.parse((await readFile(resolve(repository, path), 'utf8')).replace(/^\uFEFF/, '')); }
 export async function fileEvidence(path) {
   const data = await readFile(path);
   return {bytes: (await stat(path)).size, sha256: createHash('sha256').update(data).digest('hex')};

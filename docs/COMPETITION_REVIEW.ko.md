@@ -1,74 +1,79 @@
-# DROP — Metropolis 경쟁력 재검토
+# DROP — Metropolis 경쟁력 검토
 
-확인일: **2026-10-13, Asia/Seoul**. 현재 공개 웹은 [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/)이며, 평가 대상은 실제로 열려 있는 공개 페이지·무보상 연습과 기록된 구현 증거다. 이번 Monad 캐릭터·로고·영어 기본·다국어 개편의 완료나 검증 결과는 이 문서에서 앞서 주장하지 않는다.
+**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
 
-**개편 완료 후 추가 기록:** 모나드 테마, 귀엽게 재해석한 몰랜닥, 영어 기본 및 5개 언어를 공개 주소에 배포했다. 실제 공개 주소의 데스크톱·모바일 검사 48개가 통과했고 6개는 기기별 조건에 따른 의도적 생략이다. [개편·배포 검증](MONAD_UI_VERIFICATION.md). 아래 실제 지급·사용자 증거·공개 소스·영상의 빈틈은 이 UI 개편만으로 해결되지 않았으며, 수상 준비에 대한 판단은 그대로다.
+업데이트: **2026-10-14, Asia/Seoul**. [실제 제품](https://drop-omega-five.vercel.app/)과 [공개 GitHub](https://github.com/openai-lover/DROP)를 심사자가 열 수 있다. 최신 공개 소스 application baseline acf5b73과 배포는 READY다. 실제 Google 로그인·WIF Firestore·운영자의 5 test USDC 입금에 이어 별도 참가자의 **퀴즈→QUEUED→Paid→0.1 test USDC와 영수증**까지 공개 앱에서 확인됐다. 독립 체인 검증도 실제 지급을 확인했다.
 
-**현재 공개 버전만으로 Consumer Products & Payments 우승 준비가 됐다고 보기 어렵다.** 디자인을 개선할 기반과 로컬 지급 엔진 검증은 있지만, 심사에서 중요한 실제 Monad 정산과 실제 사용자·시장 증거가 아직 없다. 이는 확인된 기준과 현재 상태를 비교한 판단이며, 경쟁 팀을 조사해 계산한 순위·점수·확률 예측이 아니다. 우승 보장이나 임의의 예상 점수를 제시하지 않는다.
+**실제 정산의 핵심 흐름은 연결됐다. 다음 경쟁력 증거는 독립 사용자의 경험과 심사자의 재현이다.** 공개 소스·계약·로그인·데이터·실제 퀴즈 지급과 재로그인까지 확인됐다. 충분한 기간의 Catch 이벤트도 실제 입금됐고 최종 demo/pitch는 업로드됐다. 독립 사용자 연구와 영상의 signed-out 재생은 아직 확인 전이다. 아래 판단은 공식 기준과 현재 증거를 비교한 것이며 수상 확률·예상 점수가 아니다.
 
-## 이번에 다시 확인한 공식 출처
+개발자는 **솔로 개발자 Gyu-min Kim**이다. 사용자는 준비 후 제출을 승인했고 이전 보류는 대체됐다. [X](https://x.com/AlphaGgang), SLIME CEO! 업로드 채널과 개발자 이름을 구분한다. [데모155.32초](https://youtu.be/Lfuvsvowj30)·[피치107.94초](https://youtu.be/AlWM6csYk5w)는 Unlisted watch 일부 재생을 확인했다. signed-out 검증은 요장하지 않는다. 포털6/6을16:29UTC에 저장했고 실제 Catch/접근 안내를16:35UTC에 추가 저장했다. 최종 Consumer 접수는16:39:30.988UTC에 READY FOR JUDGING으로 확인됐으며 Best Community는 근거 없어 해제됐다. 유료 전환·메인넷은 범위 밖이다.
 
-| 공식 출처 | 이번 확인 방법 / 범위 |
-| --- | --- |
-| [Consumer Products & Payments](https://hackathon.monad.xyz/tracks/consumer-payments) | **현재 턴에 로그인된 공식 페이지를 읽기 전용으로 다시 확인.** 아래 비중, 실제 정산·사용자 기준, 트랙 상금과 제출물 제한 확인 |
-| [실제 제출 양식](https://hackathon.monad.xyz/project?tab=submission) | **현재 턴에 로그인된 화면을 읽기 전용으로 확인.** 정확한 마감과 2 MB / 500–2000px 업로드 조건 확인; 비공개 초안·개인 정보는 옮기지 않음 |
-| [공식 소개·FAQ](https://monad.xyz/developers/hackathons/metropolis?utm_source=luma) | 공식 주최 측 링크를 통해 공개 웹 본문 새로 읽음. 참가·기존 작업·일정·트랙·상금·혜택 확인 |
-| [Monad Foundation / Encode 행사](https://luma.com/metropolis-lon-oct-2026) | 공식 주최 측 공개 본문 새로 읽음. 대회 소개와 트랙·상금 확인; 지역 행사 참가와 해커톤 접수는 별도 |
-| [Tracks](https://hackathon.monad.xyz/tracks), [Prizes](https://hackathon.monad.xyz/prizes), [Resources](https://hackathon.monad.xyz/resources) | 공개 웹 도구로 직접 재시도했으나 본문 접근 실패. 이번 공개 소개 페이지에서 본상·혜택을 재확인했고, 이전 같은 날짜의 인증 포털 기록은 [출처 장부](OFFICIAL_SOURCES.md)에 구분돼 있음. 개별 바운티 조건을 새로 전부 읽었다고 주장하지 않음 |
+## 공식 기준
 
-정확한 마감은 **2026년 10월 14일 12:59 GMT+9 / Asia/Seoul**, 즉 **03:59 UTC**다. 공개 소개의 날짜만 있는 “Oct 13” 안내와 로그인 포털의 구체적 현지 시간 표시를 구분한다. 공개 일정에는 심사 **10월 14–27일**, 수상 발표 **11월 3일**이 표시되며 그 두 일정의 시간대는 명시되지 않았다. [공식 일정](https://monad.xyz/developers/hackathons/metropolis?utm_source=luma)
+대회 기준은2026-10-13에 읽은 공식 Consumer 페이지와 로그인 제출 양식에 근거한다. 이번 문서 업데이트에서 포털을 다시 읽었다고 요장하지 않는다. [기준·접근 범위 기록](OFFICIAL_SOURCES.md), [공식 트랙](https://hackathon.monad.xyz/tracks/consumer-payments), [제출 양식](https://hackathon.monad.xyz/project?tab=submission).
 
-**제출 보류는 유지한다.** 포털 값 수정·저장·업로드·접수, 계정·클라우드·요금제 변경을 하지 않았다. 이번 요청은 UI 개선과 경쟁력 검토이며 제출 승인으로 해석하지 않는다.
-
-## 확인된 심사 기준과 현재 빈틈
-
-아래 비중은 이번에 다시 읽은 공식 트랙의 값이다. 비중은 획득 점수가 아니다. [공식 트랙](https://hackathon.monad.xyz/tracks/consumer-payments)
-
-| 기준 | 비중 | 공식 기준 요지 | DROP의 현재 증거 / 결정적인 부족분 |
+| 항목 | 비중 | DROP의 강점 | 아직 필요한 증거 |
 | --- | --- | --- | --- |
-| Technical Execution | **20%** | 조건부 지급·정산이 실제 온체인에서 동작해야 함. 시뮬레이션을 실제 정산으로 보여주면 안 됨 | 계약·서버와 격리된 로컬 체인 지급/복구 테스트는 있음. 공개 Monad 에스크로·입금·보상·잔액·회수 영수증과 실행 중인 지속 처리기는 없음 |
-| Design & Craft | **20%** | 비암호화폐 사용자가 도움 없이 핵심 흐름을 완료; 블록체인 복잡성이 사용자에게 드러나지 않는 경험 | 공개 연습·모바일/키보드·언어·오류 상태는 검증됨. 실제 첫 로그인→지갑 생성→수령→재로그인·전송을 독립 사용자가 완료한 증거는 없음 |
-| Originality & Track Insight | **15%** | 새 소비자 금융 경험과 결제 레일이 주는 이점 | 게임→확보된 보상→정산→후속 전송이라는 방향은 설명 가능. 실제 정산 연결이 없고, 캐릭터 교체 자체가 새로운 결제 경험이라는 근거는 없음 |
-| Founder & Market Readiness | **25%** | 구체적으로 이름 붙일 수 있는 소비자 집단과 실제 문제 이해 | Telegram KOL·커뮤니티 운영자라는 목표는 있음. 실제 운영자 인터뷰·최근 이벤트 문제·반복 사용·지불 의향·제공된 팀 배경 증거는 없음 |
-| Traction & Path Forward | **20%** | 작은 실제 사용자 연구도 인정; 다섯 친구 수준의 실험과 구체적인 다음 100명 확보 계획 | 조사 양식과 확보 계획은 있음. 실제 연구 결과·독립 사용자 수·재사용 또는 참여 전환 증거는 없음 |
+| Technical Execution |20%| 실제 Testnet 계약·소스 perfect 검증, 로그인·WIF, 입금·퀴즈·0.1 test USDC 지급과 정규 확정 영수증 | 후속 전송·회수·복구 등의 추가 제품 검증; 실제 정산 영상 |
+| Design & Craft |20%| Monad arcade, 영어 기본과5개 언어, 모바일/키보드/터치·명확한 상태, 실제 Google 로그인 | 비암호화폐 독립 사용자가 도움 없이 지급 핵심 흐름을 끝내는 관찰 |
+| Originality & Track Insight |15%| 짧은 게임→예산이 확보된 약속→보관 가능한 영수증→후속 전송의 연결 | 그 연결이 실제 정산에서 제공하는 이점을 실사용으로 보여요기 |
+| Founder & Market Readiness |25%| Telegram KOL·커뮤니티 운영자라는 구체적 대상과 이벤트 설계 | 실제 운영자의 최근 문제·재사용/지불 의향, 확인 가능한 창업자 배경 |
+| Traction & Path Forward |20%| 작은 실험을 위한 양식과 다음100명 확보 계획 | 실제 참가자 연구·운영자 반복 사용·채널별 유입 관찰 |
 
-Founder/Market와 Traction은 합쳐 **45%의 심사 비중**이다. 그 비중을 지금 얻었다는 뜻은 아니며, UI에만 시간을 쓰면 그 부분의 증거가 계속 비어 있게 된다는 의미다.
+Founder/Market와 Traction은 합쳐45%다. 디자인·테스트 수가 그 비중의 실제 사람·시장 증거를 대신하지 않는다. 공식 기준은 다섯 친구 수준의 작은 실제 연구도 인정하지만, 생성된 인터뷰나 빈 설문은 연구 결과가 아니다. [공식 Consumer 기준](https://hackathon.monad.xyz/tracks/consumer-payments).
 
-현재 강점은 조작 가능한 공개 가짜 지급 없이 연습과 미설정 상태를 분리한 점, 배포된 웹의 안정성, 검증 가능한 지급·동시 배정·복구 로직이다. 기록된 로컬 계약 42개 unit/fuzz 테스트·두 invariant 속성, 서버 61개 테스트, 실제 로컬 체인/Firestore 통합 두 사례는 구현 기반을 뒷받침한다. 공개 주소의 Chromium 30개 통과·의도적 프로필 생략 6개도 실제 UI 증거다. 이 수치들은 동일한 사례를 중복 집계한 사용자 수나 공개 Monad 지급 건수가 아니다. [현재 통합 상태](INTEGRATION_STATUS.md), [로컬 체인 검증](LOCAL_CHAIN_VERIFICATION.md)
+## 확인된 제품 강점
 
-## 참가·제출 요건
+DROP은 운영자가 게임·수량·기한·보상을 고정하고 예산을 넣은 뒤 링크로 배포하는 도구다. 참가자는 한 번의 Privy 로그인과 임베디드 지갑으로 참여한다. FIRST_N_VERIFIED는 게임 점수를 그대로 믿지 않고 서버가 검증한 완료를 Firestore 트랜잭션으로 배정한다. 성공·예약·리리 중·실제 지급 확정을 구분하므로 참여자는 점수와 돈의 상태를 혼동하지 않는다.
 
-공식 공개 FAQ는 개인과 팀, 온체인 경험이 없는 참가자도 받아들이며 온라인·글로벌 대회라고 설명한다. 구체적인 국가·기타 자격 제한은 신청 플랫폼의 공식 규칙을 따른다. 기존 팀이나 아이디어를 가져올 수 있지만 제출하는 새 작업은 6주 빌드 기간에 만들어져야 한다. 모든 참가자의 세부 자격을 이 공개 FAQ만으로 승인했다고 볼 수는 없다. [공식 FAQ](https://monad.xyz/developers/hackathons/metropolis?utm_source=luma)
+실제 Monad Testnet 에스크로 **0x22acf105A1af3f104f62e06fD813e49Af9358379**는 정규 확정 영수증·런타임·불변 설정을 확인했고 Sourcify의 **perfect** 소스 일치를 얻었다. 운영자는 보이는 Privy 승인 두 번을 거쳐 **5 test USDC = 0.1 × 50**을 실제 입금했다. 독립 조회도 정확한 규칙·이벤트·상태와 운영자 USDC 10→5·계약 0→5를 검증했다. 이후 참가자가 퀴즈를 통과해 **0.1 test USDC**를 받고 앱의 **Paid/영수증**을 확인했다. 독립 검증은 정규 확정 영수증·EIP-712 signer·RewardPaid/Circle Transfer·claimed 상태, 참가자 USDC **0→0.1**과 MON **0→0**, nonce **0**을 확인했다. 실제 릴레이어 지급 수수료는 **0.043855716 test MON**이다. [실제 지급 기록](../contracts/deployment/live-participant-payment.public.json), [입금 기록](../contracts/deployment/live-campaign-funding.public.json), [소스 일치](https://sourcify-api-monad.blockvision.org/check-by-addresses?addresses=0x22acf105A1af3f104f62e06fD813e49Af9358379&chainIds=10143).
 
-현재 Consumer 선택은 확인돼 있다. 앞선 포털 관찰에서 선택돼 있던 Best Community 바운티는 온보딩된 캠퍼스 그룹 요건·그룹 식별이 미확인이다. 일반 Telegram 커뮤니티 제품이라는 사실이 그 자격을 대신하지 않는다. Privy 바운티는 로그인만으로 자격이 되지 않고 실제 추가 기능이 필요하며 현재 선택돼 있지 않다. 이번에는 선택을 변경하거나 자격을 새로 인정받지 않았다. [Community 규칙](https://hackathon.monad.xyz/tracks/best-community-team-project), [Privy 규칙](https://hackathon.monad.xyz/tracks/privy), [같은 날짜의 확인 기록](OFFICIAL_SOURCES.md)
+현재 운영자·참가자 계정은 한 사람이 제어하는 기술 검증용 두 계정이다. 실제 서비스 연결을 보여요지만 독립 사용자 두 명이나 traction으로 세지 않는다.
 
-| 제출물 | 확인된 요건 | 현재 상태 |
+참가자의 새로고침과 실제 로그아웃/Google 재로그인 모두 Paid와0.1test USDC를 유지했다. 재참여는 “This account or wallet already has a reward.”로 거부돼 두 번째 보상이 생기지 않았다. 기술 계정의 지속성·중복 방지 증거이며 독립 사용자 연구는 아니다.
+
+별도 [심사용 Catch](https://drop-omega-five.vercel.app/d/metropolis-play)는 **20×0.1=2test USDC**를 실제 입금하고16:33UTC에 열렸다. 기술 참가자는 첫3keyboard catches에 성공해 두 번째 Paid/0.1을 받았고 실제 총잔액0.2가 표시됐다. 확인 후19/20배정이 남았다. 독립 catch-payment 검증도 통과했다. 종료10월20일16:18UTC(21일01:18KST), 수령27일16:18UTC. [입금 증거](../contracts/deployment/judge-event-funding.public.json), [실제 catch 거래](https://testnet.monadvision.com/tx/0xbd8d5ce90d6d059931f19050744b546567215f337532a59fa8a481fe4d15ce6e).
+
+보상 지급 엔진은 서명된 거래·nonce·임대·복구 위치를 Firestore에 남기고, 이미 알려진 영수증과 확정 체인 상태부터 확인한다. 정확한 RewardPaid 이벤트와 정규 확정 영수증 없이는 지급 완료를 만들지 않는다. 실제 Google 로그인과 서버 JWT/profile 검증, WIF의 Firestore 쓰기·조회 및 실제 잔액 읽기도 최신 배포에서 확인됐다. 개인 프로필·로그인 지갑은 공개 증거에 넣지 않는다.
+
+무료 범위의 운용은 작은 파일럿에 맞춘다. Vercel Hobby의 인증 요청 후 리리에는 한 번에 최대 1작업, 하루 1회 복구에는 최대 3작업과 3만료 점검을 둔다. **요청 기반 리리기는 이번 실제 지급을 완료했다.** 데이터와 작업은 지속 저장되지만 실행은 요청·일일 호출에 의존한다. 매분 가동되는 독립 worker가 아니며 일일 cron과 실제 장애/재시작 복구는 아직 관찰 전이다. Firebase Spark의 Functions는 배포되지 않았다. [정확한 운용 한도](FIREBASE_VERCEL.md).
+
+수령은 제한된 릴레이어의 MON 예산으로 리리한다. 운영자 입금·회수와 사용자의 외부 USDC 전송은 취소 가능한 지갑 승인을 거치고, 진짜 sponsorship을 별도 설정하지 않았다면 본인 지갑의 test MON이 필요하다. 전 과정이 항상 무료라는 요장은 하지 않는다.
+
+## 테스트를 읽는 방법
+
+| 증거 | 실제 범위 |
+| --- | --- |
+|96개 서버/언어 테스트 + 추가 지갑 요청3개 통과| 실제 Firestore emulator26사례 포함. 체인 응답·시험 JWT·지갑 SDK는 명시된 테스트 어댑터 |
+|계약42unit/fuzz +2invariant 속성| 공식 Forge1.8.5/Monad 실행 설정; 로컬 토큰 fixture |
+|실제 로컬 체인/worker 통합2사례| Anvil·Firestore·운영용 서명/영수증 코드; 격리된31337체인·모의 토큰 |
+|이전 공개 요소48브라우저 통과/6의도적 생략| 이전35ad6d7배포의 무보상 연습·언어·모바일·비공개 API 경계 |
+|최신 UI20E2E +20언어/폭 조합| 로컬 Chromium의 새 카피·CTA·5언어×360/390/768/1440; 가로 넘침·runtime 오류 없음 |
+|최신 실제 production 직접 검증| 운영자 로그인·입금, 별도 참가자 로그인·퀴즈·QUEUED·실제 Paid/0.1 test USDC/영수증; 독립 체인 확인 |
+
+테스트 횟수는 사용자 수나 공개 지급 건수가 아니다. 실제 공개 지급은 위 기술 검증 1건이며 50명 모두 지급했다는 뜻이 아니다. 최신 전체 hosted 회귀검사와 실제 기기 연구는 별도 항목이다. 브라우저 에뮬레이션은 실제 iOS Safari·Android·Telegram 내부 브라우저 사용과 다르다. [현재 통합 상태](INTEGRATION_STATUS.md), [로컬 체인 검증](LOCAL_CHAIN_VERIFICATION.md).
+
+## 제출물과 자격
+
+| 제출물 | 기록된 공식 요건 | 현재 상태 |
 | --- | --- | --- |
-| 제품 URL | Monad Mainnet 또는 Testnet의 실제 제품과 필요한 접근 정보 | Vercel 공개 웹·연습은 있음. 실제 Privy·Vercel Firestore IAM·공개 에스크로·지급 기능은 미설정 |
-| 소스 | Consumer 안내: 공개 GitHub와 `metropolis@hackathon.monad.xyz` 접근 | 요청 저장소 push403·원격 비어 있음. 직접 Vercel 배포는 공개 소스를 대신하지 못함 |
-| 기술 데모 | 실제 작동 제품, **≤3분**, YouTube/Loom/Vimeo. 코드·슬라이드만의 설명은 부족 | 대본만 있고 실제 영상·길이 측정·접근 가능한 URL 없음 |
-| 피치 | 팀·문제·만드는 이유, **≤2분** | 대본만 있음; 실제 팀 배경·녹화·업로드 없음 |
-| 로고 | 트랙 안내 **≤3 MB**; 실제 양식 **PNG/JPG/WEBP ≤2 MB**, 최소500px·최대2000×2000 | 임시 PNG 두 파일은 더 엄격한 양식을 만족. 최종 브랜드 승인·업로드는 안 됨. 새 브랜드 결과도 같은 조건으로 다시 확인 필요 |
-| 선택 광고 | **≤30초**, 심사 대상 아님 | 없음. 핵심 데모보다 우선할 이유가 없음 |
+|제품 URL| 실제 Monad Mainnet 또는 Testnet 제품과 필요한 접근 안내 | 진짜 로그인·funding·quiz·Paid/영수증 완료; 지속 judge 접근 안내 마무리 |
+|소스| 공개 GitHub, `metropolis@hackathon.monad.xyz` 접근 | application baseline acf5b73 공개 완료; 이전403 해결 |
+|기술 데모| 실제 제품≤3분, YouTube/Loom/Vimeo | quiz/funding/Paid155.32초 [Unlisted](https://youtu.be/Lfuvsvowj30); watch 일부 재생 확인 |
+|피치| 팀·문제·이유≤2분 | Gyu-min Kim solo107.94초 [Unlisted](https://youtu.be/AlWM6csYk5w); watch 일부 재생 확인 |
+|로고| 트랙≤3MB; 실제 양식 PNG/JPG/WEBP≤2MB,500–2000px | purple PNG1200×600/1024×1024 픽셀·해시 확인; square 업로드/표시/저장 완료 |
+|선택 광고|≤30초, 심사 대상 아님 | 미완료; 필수 demo/pitch보다 후순위 |
 
-위 제출물 제한은 이번 공식 Consumer 페이지·실제 양식 재확인에 근거한다. 공개 FAQ의 “오픈소스 권장, 필수 아님”이라는 일반 안내와 개별 Consumer의 공개 저장소 요구를 구분하고, 이 프로젝트는 해당 트랙의 더 구체적인 요건을 충족해야 한다. 공개 코드를 제공하는 것과 오픈소스 라이선스를 새로 부여하는 것도 같은 조치가 아니다. [공식 Consumer](https://hackathon.monad.xyz/tracks/consumer-payments), [공식 양식](https://hackathon.monad.xyz/project?tab=submission)
+실제 양식이 더 엄격하므로 로고에는2MB/500–2000px조건을 적용한다. 현재 파일과 제출 체크는 [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md)에 기록했다. 공개 FAQ의 일반적인 오픈소스 권장과 개별 Consumer의 공개 저장소 요구를 구분한다. 소스 공개가 자동으로 별도 공개 라이선스를 부여하지는 않는다. [공식 Consumer](https://hackathon.monad.xyz/tracks/consumer-payments), [제출 양식](https://hackathon.monad.xyz/project?tab=submission).
 
-Consumer 본상은 **$30,000을 세 팀에 동일하게 나눠 각 $10,000**이다. 공식 공개 소개에는 전체 트랙을 통합한 Grand Champion **$25,000**도 확인된다. 광고의 **$250,000+에는 서비스 혜택·크레딧 등이 포함**되므로 전액 현금으로 읽지 않는다. 개발 혜택을 이용할 수 있다는 사실은 실제 지급·연구·제출물을 완료했다는 증거가 아니다. [공식 상금·혜택](https://monad.xyz/developers/hackathons/metropolis?utm_source=luma)
+Consumer 선택은 기존 포털에서 확인됐다. Best Community는 캠퍼스 그룹 증거가 없어 선택 해제하고 저장했다. 일반 커뮤니티 제품이라는 사실만으로 해당 바운티 자격이 생기지 않는다. Privy 바운티 역시 로그인 이외의 기능과 설명을 요구하며 완료된 신규 선택은 아직 기록되지 않았다. [Community 조건](https://hackathon.monad.xyz/tracks/best-community-team-project), [Privy 조건](https://hackathon.monad.xyz/tracks/privy).
 
-## Monad 브랜딩과 영어 기본이 돕는 범위
+기록된 구체적 마감은 **2026-10-14 12:59GMT+9 /Asia/Seoul (03:59UTC)**다. 공개 소개에는 심사10월14–27일, 발표11월3일이 있으며 두 일정의 시간대는 명시되지 않았다. Consumer 본상은3팀 각$10,000, Grand Champion은$25,000이다. 광고의$250,000+에는 서비스 혜택도 포함되므로 모두 현금으로 읽지 않는다. [공식 일정·상금·FAQ](https://monad.xyz/developers/hackathons/metropolis?utm_source=luma).
 
-Monad 캐릭터·로고, 선명한 색과 짧고 재미있는 문장은 게임의 기억성과 첫인상을 높일 수 있다. 영어 기본과 여러 언어의 일관된 버튼·검증 오류·상태 문구는 글로벌 심사자와 사용자에게 흐름을 이해시키는 데 도움이 된다. 이는 Design & Craft **20%의 기준에 대응하는 개선 방향**이며, 캐릭터나 언어 수에 공식 가산점이 붙는다고 확인한 것은 아니다. 영어 기본 역시 이번 사용자 선택이지 확인된 필수 대회 언어 규칙은 아니다.
+## 마무리 우선순위
 
-핵심은 새 모습으로 실제 사용자가 도움 없이 끝내는 경험이다. 연습·테스트넷·쿠폰 데모의 가치 표시, 아직 안 되는 로그인·지급 상태, 읽기 쉬운 보상 규칙, 취소 가능한 전송 확인, 모바일 터치·키보드 접근을 함께 유지해야 한다. 캐릭터 때문에 수량·기한·처리 중/확정 상태가 가려지거나, 새 언어에서만 실제 기능인 것처럼 표현되면 디자인 기준에 역효과가 난다. 개편 후 실제 공개 주소에서 같은 기능·언어·기기 검사를 다시 수행해야 한다.
+1. **완료된 실제 지급을 심사자가 재현할 수 있게 한다.** quiz와Catch 모두 실제 Paid이며 재로그인·영수증·총잔액0.2를 확인했다. 독립 catch proof도 통과했으므로 저장된 접근 안내를 유지한다. 남은 refund 등 기능을 별도 필수 제출물로 부풀리지 않는다.
+2. **실제 사람과 운영자의 증거를 남긴다.** 최소5명의 독립 참여에서 도움 여부·막힘·완료 시간·보상 이해를 관찰한다. 최근 보상 이벤트를 진행한 운영자의 과정과 재사용 의사를 확인한다. 연락·연구가 실제로 이루어지기 전에는 가상 인터뷰·파트너·전환율을 쓰지 않는다.
+3. **심사자가 확인할 패키지를 마무리한다.** 최종 demo/pitch 파일·길이·업로드 URL은 준비됐다. 리리 완료·signed-out 재생을 확인하고 새 영어 소개/GTM/access를 저장한 뒤 현재 승인에 따라 포털을 검증·제출하고 영수증을 기록한다.
 
-공식 Monad 자산을 사용해도 공식 후원·제휴·심사 승인으로 표시하지 않는다. 이 검토가 자산 사용 권한을 새로 부여하는 것은 아니며, UI 작업에서 확인한 공식 배포 자산·용도를 따른다.
-
-## 가장 먼저 닫을 세 가지 빈틈
-
-1. **독립 사용자가 재현할 수 있는 실제 Testnet 지급 흐름.** 실제 Privy·임베디드 지갑·Vercel Firestore IAM, 승인된 한도 안의 에스크로 입금·지급·지속 처리기, 정확한 영수증·잔액과 복구를 연결한다. 첫 목표는 운영자가 예산을 넣고 새 사용자가 게임을 끝내 실제 수령을 확인하는 한 흐름이다. 사용자 승인 전송과 진짜 만료 후 잔액 회수도 별도 검증한다. Spark에서 Functions가 운영 중인 것처럼 표현하거나 임의 Blaze 업그레이드로 처리하지 않는다. 필요한 소유자 설정이 없으면 그 부분을 미완료로 둔다.
-
-2. **실제 사람·실제 운영자 증거.** 독립 참가자 다섯 명의 도움 없는 완료·막힘·시간·재로그인·보상 이해를 관찰하고, 최근 보상 이벤트를 진행한 운영자의 실제 과정과 재사용 의사를 기록한다. 아직 지급이 안 되면 연습 사용성 연구만 수행하고 지급 완료율로 발표하지 않는다. 다음100명 계획에는 실제로 접근 가능한 배포 채널, 담당 운영자, 구체적인 참여 유도와 측정 방식을 붙인다. 가상의 인터뷰·전환율·파트너·매출은 만들지 않는다.
-
-3. **심사자가 직접 확인할 수 있는 제출 패키지.** GitHub403·소스 공개 문제를 해결하고, 새 영어 기본 UI로 실제 제품 ≤3분 데모와 팀·문제·목적 ≤2분 피치를 녹화해 길이·공개 재생을 확인한다. 실제 지급이 없는 상태에서 로컬 모의 토큰 영수증을 공개 Monad 증거처럼 영상에 넣지 않는다. 링크·실제 접근 방법·로고 제한·선택 바운티 자격을 점검해 준비하되, 현재 제출 보류는 유지한다.
-
-브랜딩 개편은 진행할 가치가 있다. 다만 이 트랙에서 강한 출품작으로 만들려면 **새 UI로 실제 지급을 보여주고, 실제 사용자가 끝내며, 그 증거를 심사자가 확인할 수 있어야 한다.** 현재는 그 세 부분을 완료했다고 말할 수 없다.
+Monad 브랜딩과5언어는 첫인상과 사용성을 돕는 개선이다. 공식 후원·제휴나 별도 가산점으로 표현하지 않는다. 실제 지급과 사람의 사용 증거가 이 디자인을 경쟁력 있는 Consumer 출품작으로 연결할 것이다.

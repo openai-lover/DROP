@@ -1,0 +1,43 @@
+{
+  "scope": "One exact additional3.4 test MON native topup for the isolated relayer; no USDC transfer.",
+  "chainId": 10143,
+  "sender": "0xCe5FaB914C165ED28DF1886341f644Adb4C39b0b",
+  "recipient": "0xc67AABf3Ded43fA2C2E29e24809C1BD50af9393f",
+  "amountMon": "3.4",
+  "transactionHash": "0x4a29acad2c349576798a84943ba967c6cceab5c37b450ce1e4bf0aefc1a30341",
+  "blockNumber": "70727368",
+  "blockHash": "0xc0f6e341339e201b3e8176dcf153c9e2cabcb39716f9e882a3d72ebc9eafbf6f",
+  "finalizedBlock": "70727368",
+  "gasUsed": "25200",
+  "effectiveGasPriceGwei": "112.2",
+  "actualGasCostMon": "0.00282744",
+  "balancesAtTransferBlock": {
+    "senderBeforeMon": "3.7593491764",
+    "senderAfterMon": "0.3565217364",
+    "recipientBeforeMon": "0.456144284",
+    "recipientAfterMon": "3.856144284"
+  },
+  "canonicalFinalizedReceiptVerified": true,
+  "exactValueAndRecipientVerified": true,
+  "exactBalanceDeltasVerified": true,
+  "currentSenderMon": "0.3565217364",
+  "currentRelayerMon": "3.856144284",
+  "verifiedAtUtc": "2026-10-13T16:20:03.201Z",
+  "liveRelayerTopup": true,
+  "budgetEstimate": {
+    "mode": "read-only-estimate",
+    "remainingFirstCampaignClaims": 49,
+    "plannedAdditionalJudgeCampaignClaims": 20,
+    "totalPotentialRemainingClaims": 69,
+    "observedClaimFeeMon": "0.043855716",
+    "observedClaimTransaction": "0x9cbb35fcc0ba09119e87452ff5f2d6d534d4a1ae55682ce0c080260f98c5678c",
+    "estimatedRemainingClaimCostMon": "3.026044404",
+    "relayerBalanceAfterTopupMon": "3.856144284",
+    "estimatedSurplusMon": "0.83009988",
+    "estimatedMarginPercent": 27.4318,
+    "estimatedCostWith25PercentFeeIncreaseMon": "3.782555505",
+    "sufficientAtObservedFee": true,
+    "scope": "Uses one observed successful claim fee for69 potential remaining claims; planned20-slot campaign is not established by this proof.",
+    "limits": "Future gas prices, gas limits, retries, nonce drains and other activity can change costs. This is a funded balance and estimate, not a guarantee all69 future claims execute."
+  }
+}

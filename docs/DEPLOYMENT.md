@@ -1,10 +1,12 @@
 # DROP deployment and operations
 
+**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
+
 Target: **Vercel Next.js web/API + Firebase Firestore + persistent payout/recovery records + Privy + Monad Testnet escrow**. Free request-assisted processing and a protected daily Vercel cron are now prepared. Firebase Functions provides an optional frequent processor, but deployment remains blocked by Spark. Privy is the sole user identity/wallet provider. DROP uses ordinary HTTPS links, never Telegram Mini App authentication.
 
-**Public Vercel web is deployed:** [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/), in `teamstartup/drop` / Hobby. On 2026-10-14 owner-approved exact-production-subject WIF trust and private Vercel integration settings were configured, including the actual Privy app and testnet/recovery settings. The revised code release, real sign-in/data access, escrow receipts and worker execution still require production verification. Earlier deployment evidence covers anonymous practice; configuration alone does not prove a working payout flow.
+**Current release,2026-10-14:** [DROP](https://drop-omega-five.vercel.app/) is READY at deployed application baseline acf5b73, deployment `dpl_DWyZ5hV9WFPTyVs551DqjTKWmqss`, Hobby/Spark. Actual Google/Privy, WIF Firestore, creator funding and one 0.1 test USDC quiz payout with Paid receipt/re-login/duplicate protection are verified. The separate20-slot catch judge event is actually funded. [Current matrix](INTEGRATION_STATUS.md) distinguishes these from historical first-release runs below.
 
-Latest root verification reports the real Privy server API succeeded with zero users, the exact production origin and email/Google/EVM wallet settings are configured, the Monad Testnet escrow is verified, and the relayer holds 0.5 test MON. This does not yet prove a real production sign-in, game qualification, funded campaign payout or outgoing user transaction.
+Independent public records verify the escrow/source,5test-USDC funding,0.1test-USDC quiz payout and2test-USDC judge funding. Initial relayer0.5test MON was replenished by3.4 after the first claim; current proof snapshot is3.856144284. Receiving used zero participant MON/nonce, while operator funding used actual wallet-paid fees. Outgoing transfer/refund and daily cron remain unverified live branches. [Public payment proof](../contracts/deployment/live-participant-payment.public.json).
 
 The Firebase project is **`drop-5a400` / DROP / Spark**. Its `(default)` Standard / Native Firestore in `asia-northeast3` was CLI-confirmed, created `2026-10-13T13:01:16.609278Z`; reviewed rules/indexes were deployed. **No billing upgrade is currently authorized.** No Functions or live payment deployment is inferred from web hosting. The instructions distinguish completed web/data configuration from the remaining integrations.
 
@@ -85,6 +87,8 @@ In `DROP_WORKER_MODE=request`, successful authenticated reward-list, game-submit
 
 This is request-assisted execution with a low-volume daily fallback, not an independent minute-scheduled consumer. Hobby cron can run at any point within its scheduled hour. Under no traffic or a large backlog, completion can be delayed; do not advertise an unconditional payout-latency guarantee. Full frequent execution still needs a separately authorized consumer. Spark Functions and paid resources remain unavailable under the current no-upgrade instruction.
 
+Own-user automatic polling currently examines the newest eight awards; older pending records can use the authenticated targeted retry or the daily sweep. The batch limits are appropriate to a small pilot, not an unlimited backlog. Three separate wallet request tests passed after the source change, covering sponsor-off test-MON execution, correct selected wallet/chain and visible confirmation, plus invalid/unready/signed-out rejection. They validate SDK call boundaries and do not constitute real wallet transactions.
+
 ## Firebase cloud data and durable processing
 
 Deploying Functions requires **Blaze**, and scheduled retry/reconciliation uses billable Cloud Scheduler. The confirmed project remains **Spark** and **no billing upgrade is currently authorized**. Therefore **do not deploy Functions, activate paid scheduling/Secret Manager resources, or change the plan as part of these steps**. A future owner instruction can change that authorization; it has not happened. Local Functions source/build is useful engineering work, but it does not operate a cloud payout queue. [Firebase deployment prerequisites](https://firebase.google.com/docs/functions/get-started), [Scheduler prerequisites](https://firebase.google.com/docs/functions/schedule-functions)
@@ -145,7 +149,7 @@ Then configure the actual escrow on Vercel and Functions. Fund a campaign from i
 
 ## Vercel web deployment
 
-The verified deployment uses the official pinned CLI and **normal file upload** from the checkout. The requested [GitHub destination](https://github.com/openai-lover/DROP) remains empty after a push returned 403, so the successful deploy did not depend on a GitHub import. From the repository root after owner login, the actual command is:
+Deployments use the official pinned CLI and **normal file upload**. The [public GitHub source](https://github.com/openai-lover/DROP) is populated on main; the initial403 was resolved using the already authorized account. The first direct upload preceded source publication, so its historical build was not a GitHub import. From the repository root after owner login, the command is:
 
 ```text
 pnpm dlx vercel@63.1.2 deploy --project drop --scope teamstartup --prod --yes
@@ -163,11 +167,13 @@ At the public URL, a plain unauthenticated request returned200 with DROP content
 
 Observe Firestore outbox age and job states, request wakeups, `recoveryRuns/daily`, daily cron outcomes, relayer MON/fee caps, test-MON sender balances, reconciliation differences and coupon inventory. Observe Functions only if a separately approved processor is actually deployed. Keep logs private; never log provider secrets, identity tokens, quiz answers or coupons. Avoid CLI commands that dump authenticated account objects.
 
-A timeout may leave a live or already-mined transaction. Inspect persisted transaction bytes/hash/history and contract used-award state before resubmission; retain the same award identity. An expired prepared transaction must resolve its nonce before completion so later payouts are not blocked. Stale worker leases must not overwrite a confirmed award. The 61-test suite exercises chain response scenarios with mocks; the separate two-case local Anvil run additionally exercises actual broadcast/mining/receipt and durable restart without an extra relayer transaction. Public-network recovery remains to be observed.
+A timeout may leave a live or already-mined transaction. Inspect persisted transaction bytes/hash/history and contract used-award state before resubmission; retain the same award identity. An expired prepared transaction must resolve its nonce before completion so later payouts are not blocked. Stale leases must not overwrite a confirmed award. The latest 96-check server/language run includes explicit chain-response mocks and 26 real emulator cases; the separate two-case local Anvil run exercises actual broadcast/mining/receipt and durable restart without an extra relayer transaction. Public-network recovery remains to be observed.
 
 Authenticated winners can request the persisted fixed-recipient proof when available. Direct recovery submission may require MON gas and is optional; do not make it the default consumer path. Preserve keys, project data, proofs and current campaign budgets when changing configuration. New data/project/secret settings require an explicit migration plan for outstanding campaigns, not a silent reset.
 
-## Actual deployment record
+## Historical deployment record with current integration updates
+
+The first-upload identities, timings, screenshot paths and anonymous test counts below retain their original scope. Current production is acf5b73; later verified integrations supersede old disabled-login observations. Portal6/6 was saved16:29UTC; primary Consumer receipt is confirmed READY FOR JUDGING at2026-10-13T16:39:30.988Z. Both Unlisted video watch pages play sampled segments; no signed-out playback claim is made.
 
 | Artifact | Verified value |
 | --- | --- |
@@ -184,8 +190,8 @@ Authenticated winners can request the persisted fixed-recipient proof when avail
 | Actual Firebase project | User-confirmed `drop-5a400`, display DROP, Spark free plan |
 | Cloud Firestore database | `(default)`, Standard edition / Native mode, `asia-northeast3`; creation `2026-10-13T13:01:16.609278Z` confirmed by CLI |
 | Cloud Firestore rules / indexes | Data-only deployment exited 0; rules compiled/uploaded/released and indexes deployed |
-| Vercel IAM / integration environment | Owner-approved exact-production WIF trust and private settings configured on 2026-10-14; actual deployed exchange/login/app-data access pending |
-| Free request/daily recovery | Source and typechecks ready; eligible own-user after-work plus protected once-daily Hobby cron; actual hosted invocation pending |
+| Vercel IAM / integration environment | Exact-production WIF and actual Google/JWT/profile/cloud account/campaign/session/award data access verified |
+| Free request/daily recovery | Request-assisted processor actually delivered quiz payout; bounded daily invocation/restart-outage behavior remains unverified |
 | Firebase Functions / scheduled processor | Not deployed; blocked by Spark under the no-upgrade instruction |
 | Firebase Blaze upgrade | Not performed; do not upgrade |
 | Vercel production web | [drop-omega-five.vercel.app](https://drop-omega-five.vercel.app/), READY, targetproduction, `teamstartup/drop`, Hobby |
@@ -193,12 +199,12 @@ Authenticated winners can request the persisted fixed-recipient proof when avail
 | Deployed local source / transfer | Commit `3ff3025`; normal upload118 records /1.2MB; cloud download118files; no archive |
 | Cloud build | Node24.21 /pnpm11.25.0; locked install, Next42s, TypeScript19.7s, 11pages passed |
 | Hosted public/browser scope | Plain GET200 /DROP content/no Vercel login; CUA homepage/login disabled; production Playwright30pass/6profile skips,44.7s, no page errors; auth/payment unavailable |
-| Live Monad Testnet escrow / relayer | Root reports escrow verification and 0.5 test MON relayer funding; actual dapp campaign/payout evidence still pending |
+| Live Monad Testnet escrow / relayer | Real escrow/perfect source,5-USDC quiz funding/payout and2-USDC judge funding independently verified; initial0.5MON plus3.4 replenishment recorded |
 | Real Monad Testnet network/token reads | Read-only network-only pass: chain 10143, official USDC bytecode / six decimals, finalized block 70687560; no escrow verified |
-| Live campaign deposit / payout / user transfer / reclaim | Not evidenced |
-| Real Privy email/Google and user-paid test-MON operations | Configured; actual production sign-in and operations pending; Telegram OAuth/zero-MON sponsorship not verified |
-| Public GitHub | Push returned403; openai-lover/DROP remains empty. Local/deployed commit3ff3025 is not a public source commit |
-| Full judge access / videos | Public web/practice accessible; authenticated funded flows/test credentials and actual videos incomplete |
+| Live campaign deposit / payout / user transfer / reclaim | Real quiz deposit/payout and judge deposit verified; outgoing user transfer/reclaim remain pending |
+| Real Privy / wallet fees | Google onboarding/re-login and real wallet-paid funding verified; email configured, Telegram OAuth/sponsored outgoing transfer unverified |
+| Public GitHub | Public application baseline acf5b73 at openai-lover/DROP; earlier403/empty state is historical |
+| Judge access / videos | Actual funded week-long catch event; final155.32s/107.94s Unlisted videos uploaded and sampled watch playback observed; signed-out verification not claimed; primary Consumer entry READY FOR JUDGING |
 | Contest application | User explicitly authorizes final submission after readiness checks; no accepted submission receipt is evidenced by these changes |
 
 Update this record only from actual current-state evidence. Root runtime/tool sessions and local ports are not public hosting URLs.
