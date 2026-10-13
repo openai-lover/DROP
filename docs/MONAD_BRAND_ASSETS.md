@@ -1,6 +1,6 @@
 # Monad brand assets
 
-Retrieved and checked on **2026-10-13**. The **15 official logo, avatar and token files** listed below are unchanged originals from Monad's own brand downloads. No transformation was applied to those official files. The additional `molandak.png` is an **AI-adapted community image**, documented separately below; it is not an official original or a pixel-identical extraction.
+Retrieved and checked on **2026-10-13**. The **15 official logo, avatar and token files** listed below are unchanged originals from Monad's own brand downloads. No transformation was applied to those official files. The additional `molandak-cute.png` is an **AI-reimagined community character**, documented separately below; it is not an official original or a pixel-identical extraction.
 
 ## Official source chain
 
@@ -61,7 +61,7 @@ Source: the [brand page's color section](https://monad.xyz/brand-and-media-kit).
 
 ## Character search result
 
-**No original transparent Molandak PNG was verified in the source search.** `public/brand/monad/molandak.png` is now supplied as an adapted community illustration, described in the next section. Checked the official brand page/ZIP, current Monad homepage, Monad Foundation, current consumer app and its asset bundles, the official 2048 game, and selected verified `monad-developers` public repositories. `testnet.monad.xyz` now redirects to the developer hub. None provided a separately named Molandak, Moyaki or Chog download.
+**No original transparent Molandak PNG was verified in the source search.** `public/brand/monad/molandak-cute.png` is now supplied as a cute reimagining of the community character, described in the next section. Checked the official brand page/ZIP, current Monad homepage, Monad Foundation, current consumer app and its asset bundles, the official 2048 game, and selected verified `monad-developers` public repositories. `testnet.monad.xyz` now redirects to the developer hub. None provided a separately named Molandak, Moyaki or Chog download.
 
 The user authorized acquiring a community character image with honest attribution. A bounded follow-up checked the [FrenchNads resource page](https://frenchnads.wixsite.com/frenchnads) and its exact linked assets:
 
@@ -78,22 +78,24 @@ The user authorized acquiring a community character image with honest attributio
 
 Neither source candidate was published directly because of its unsuitable image content/transparency. No explicit community image license was found on the retrieved pages. The user expressly requested using the Monad character; a community adaptation was prepared with honest provenance rather than treating the absence of an explicit license as an automatic approval requirement. Community art and AI-adapted illustrations must not be described as official Monad assets or endorsement.
 
-## Molandak community adaptation
+## Cute Molandak community reimagining
 
-Ready-to-use file: `/brand/monad/molandak.png`.
+Ready-to-use file: `/brand/monad/molandak-cute.png`.
 
 Source artwork: [Moyaki community `cast-molandak.png`](https://www.moyakimonad.com/assets/cast-molandak.png), linked and named Molandak on the [community character page](https://www.moyakimonad.com/). That page attributes the character to Bill Monday. This attribution comes from the community page; it does not verify authorship or official Monad approval of this particular image.
 
-The built-in image generation tool was used in its **background-extraction** editing mode with the source image as its reference. The output retains a recognizable purple, squat, spiky character, sideways gaze, dark feet and the source pose, but it visibly cleans and re-renders the illustration. **It is not pixel-identical to the source and is not merely the original image with an alpha mask.** It is a community image adapted using AI for DROP, not an official Monad original. The official logo files were left unchanged.
+The user explicitly rejected the sharp, spiky appearance and requested a much cuter character. The built-in image generation tool was used in its **style-transfer** editing mode with the community character as its reference. The current output reimagines Molandak as a soft purple toy illustration with rounded bumps, a smiling duck-like mouth, friendly glossy eyes and rosy cheeks. **It is an intentional visual redesign, not pixel-identical to the source and not merely the original image with an alpha mask.** It is an AI-reimagined community character for DROP, not an official Monad original or approved brand asset. The official logo files were left unchanged.
 
-The output was decoded and visually inspected. It is a **1592×988 RGBA PNG**, with actual alpha transparency (minimum alpha 0, maximum 255). Of 1,572,896 pixels, **1,031,130 are fully transparent**, 541,614 have partial alpha and 152 are fully opaque. No asset transformation was performed during this provenance check.
+The output was decoded and visually inspected. It is a **1254×1254 RGBA PNG**, with actual alpha transparency (minimum alpha 0, maximum 255). Of 1,572,516 pixels, **655,306 are fully transparent**, 915,735 have partial alpha and 1,475 are fully opaque. No asset transformation was performed during this provenance check.
 
 | Adapted public asset | Bytes | SHA-256 |
 |---|---:|---|
-| `public/brand/monad/molandak.png` | 883,499 | `fa1b326d74c1e5fd6ac2caa67ffc6953f606437349190bba1d6f0cf0ec1e35a6` |
+| `public/brand/monad/molandak-cute.png` | 1,356,671 | `0816b2d0b9ba20ab88c989552e966c4c5725e3cc8c386ba202462cd8706e73c8` |
+
+The earlier rough background-extraction adaptation is no longer published. It is archived only under `.local/monad-brand-kit-reference/molandak-first-adaptation.png` as an ignored research reference.
 
 Exact image editing prompt used:
 
 ```text
-Use case: background-extraction. Asset type: transparent Molandak community mascot cutout for the DROP website. Input image 1 is the edit target: the existing purple squat spiky Molandak character from the Monad community. Remove only the white rectangular background and the dark rounded-corner page frame. Keep the full character, purple colors, round spiky hedgehog body, same face and sideways gaze, small dark feet, exact pose, proportions, and cheeky expression. Preserve the identity and original meme illustration style; clean the rough compression edges for a usable web asset without redesigning it or adding anything. Center the complete character on an actual transparent background, with a modest even transparent margin. No text, no logo, no additional props, no shadow or ground, no scenery. The background must have true alpha transparency.
+Use case: style-transfer. Asset type: one transparent mascot sticker for a playful Monad community website. The input is a Molandak community character reference. The user finds this spiky version disgusting and explicitly wants a much cuter version. Reimagine the same recognizable purple round Molandak as an irresistibly cute, friendly collectible vinyl toy. Keep its purple round body, small horizontal duck-like mouth, four little feet and sideways three-quarter pose, but remove every sharp spike, busy fur mark, wrinkle, menacing detail and sad Pepe expression. Smooth plump lavender body, just a few soft rounded bumps suggesting the hedgehog silhouette, stubby rounded paws, a small gentle smile, big glossy friendly eyes with soft highlights, rosy tiny cheek accents. A warm adorable happy expression with a slight mischievous Monad community vibe. Polished soft 3D toy illustration, simple broad color shapes, soft lilac and Monad purple accents. Single character only, full body centered, filling most of a square composition with modest even margins. No text, no lettering, no logos, no additional objects, no scenery, no ground plane, no cast ground shadow, no simulated checkerboard. True transparent alpha background. Prioritize cute and comforting over resemblance to the harsh spiky texture of the reference.
 ```
