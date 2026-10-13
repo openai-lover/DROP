@@ -1,6 +1,6 @@
 # DROP deployment and operations
 
-**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
+**Final submission:** Consumer Products & Payments + **Privy** is **READY FOR JUDGING**, re-submission confirmed `2026-10-13T16:57:26.785Z` (Oct14 01:57 KST); portal Save16:56UTC7/7. Initial primary confirmation: `2026-10-13T16:39:30.988Z`. Required Privy integration description:1,808characters. Separate optional Privy video omitted. Actual wallet creation/creator contract transactions are verified; DROP pays receiving gas through its own relayer, not Privy sponsorship. `acf5b73` is the deployed app baseline; same-human technical accounts are not traction.
 
 Target: **Vercel Next.js web/API + Firebase Firestore + persistent payout/recovery records + Privy + Monad Testnet escrow**. Free request-assisted processing and a protected daily Vercel cron are now prepared. Firebase Functions provides an optional frequent processor, but deployment remains blocked by Spark. Privy is the sole user identity/wallet provider. DROP uses ordinary HTTPS links, never Telegram Mini App authentication.
 

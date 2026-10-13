@@ -1,6 +1,6 @@
 # DROP submission checklist
 
-**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
+**Final submission:** Consumer Products & Payments + **Privy** is **READY FOR JUDGING**, re-submission confirmed `2026-10-13T16:57:26.785Z` (Oct14 01:57 KST); portal Save16:56UTC7/7. Initial primary confirmation: `2026-10-13T16:39:30.988Z`. Required Privy integration description:1,808characters. Separate optional Privy video omitted. Actual wallet creation/creator contract transactions are verified; DROP pays receiving gas through its own relayer, not Privy sponsorship. `acf5b73` is the deployed app baseline; same-human technical accounts are not traction.
 
 Snapshot: **2026-10-14, Asia/Seoul — primary submission completed.** Solo developer Gyu-min Kim's actual quiz and catch each produced Paid/0.1test USDC; combined balance0.2. Both final Unlisted videos play sampled watch segments. Portal6/6 was saved16:29UTC and catch/access update16:35UTC. The user authorizes final submission; the primary entry is **READY FOR JUDGING**, confirmed2026-10-13T16:39:30.988Z. SLIME CEO! is the upload channel, not developer identity. Billing/mainnet remain outside scope.
 
@@ -36,7 +36,7 @@ The old58.56-second rehearsal verified recording tools only. Final actual-produc
 | Best Community bounty / group | Onboarded campus-group eligibility and group identification required | **Deselected and saved:** required evidence absent |
 | Video publicity / optional ad | Optional visible fields | Publicity unchecked; ad absent |
 
-Consumer Products & Payments remains the selected track. Best Community was removed and saved rather than claiming unsupported eligibility. Privy was not selected in the earlier observation. If added later within the authorized submission work, its official requirements must be checked and the integration described; authentication alone is insufficient. [Community rules](https://hackathon.monad.xyz/tracks/best-community-team-project), [Privy rules](https://hackathon.monad.xyz/tracks/privy).
+Consumer Products & Payments remains the selected track. Best Community was removed and saved rather than claiming unsupported eligibility. Privy was absent from the initial observation/primary entry, then explicitly authorized and included with its required1,808-character description in re-submission16:57:26.785UTC. Optional≤2-minute Privy video omitted; required2:35main demo referenced. Receiving uses DROP's relayer, not Privy sponsorship. [Community rules](https://hackathon.monad.xyz/tracks/best-community-team-project), [Privy rules](https://hackathon.monad.xyz/tracks/privy).
 
 ## Current logo evidence
 
@@ -93,7 +93,7 @@ These checks describe DROP's claimed feature scope and useful rehearsal, not add
 - [ ] App/source/contract/source-match/video links work for a signed-out judge; private test access, if needed, is delivered through the private field.
 - [ ] Final public source/artifact scan passes after all changes; no tokens, actual keys, private account objects or coupon/barcode contents.
 - [ ] Founder/build-window/AI disclosures match actual history. Unqualified Best Community is already deselected; any new bounty claim needs actual eligibility.
-- [x] Final primary Consumer submission confirmed READY FOR JUDGING at2026-10-13T16:39:30.988Z; no bounties. Private .local/submission-receipt.json and metropolis-submitted.jpg retain evidence.
+- [x] Final primary Consumer submission confirmed READY FOR JUDGING at2026-10-13T16:39:30.988Z; Privy included after authorized re-submission; original primary receipt preserved. Private .local/submission-receipt.json and metropolis-submitted.jpg retain evidence.
 
 ## Final submission record
 

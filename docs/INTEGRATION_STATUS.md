@@ -1,10 +1,12 @@
 # DROP integration status
 
-**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
+**Final submission:** Consumer Products & Payments + **Privy** is **READY FOR JUDGING**, re-submission confirmed `2026-10-13T16:57:26.785Z` (Oct14 01:57 KST); portal Save16:56UTC7/7. Initial primary confirmation: `2026-10-13T16:39:30.988Z`. Required Privy integration description:1,808characters. Separate optional Privy video omitted. Actual wallet creation/creator contract transactions are verified; DROP pays receiving gas through its own relayer, not Privy sponsorship. `acf5b73` is the deployed app baseline; same-human technical accounts are not traction.
 
 Snapshot: **2026-10-14, Asia/Seoul**. [Production](https://drop-omega-five.vercel.app/) is READY at deployed application baseline [`acf5b73`](https://github.com/openai-lover/DROP/commit/acf5b73), deployment `dpl_DWyZ5hV9WFPTyVs551DqjTKWmqss` in `teamstartup/drop` / Hobby. The [public repository](https://github.com/openai-lover/DROP) is populated on `main`. Real Google login/wallet, server identity verification, production WIF Firestore transactions, creator funding and a participant quiz payout are verified. The new release includes the reviewed dates and automatic opening/closing UI.
 
 DROP is built by solo developer **Gyu-min Kim**. Both final Unlisted videos now play on their watch pages; no signed-out verification is claimed. Portal **6/6** was saved2026-10-13 16:29UTC and actual catch/access updates were saved16:35UTC. The primary Consumer submission is confirmed READY FOR JUDGING at2026-10-13T16:39:30.988Z. SLIME CEO! is the upload channel, not the developer identity; X is AlphaGgang. Best Community was removed for absent campus evidence. Billing upgrades/mainnet remain outside scope.
+
+Privy was later authorized, added with its required1,808-character description, saved7/7 at16:56UTC and re-submitted READY FOR JUDGING16:57:26.785UTC. The initial no-bounty primary receipt remains historical. No optional separate video or Privy gas sponsorship is claimed.
 
 ## Current evidence
 
@@ -100,6 +102,6 @@ No production mode silently substitutes fake identity, balances, receipts or cou
 2. Additional product checks as relevant: retry handling, approved outgoing transfer and unused-budget reclaim. These are not separate mandatory portal uploads.
 3. Protected daily recovery and live outage/restart behavior; the normal request-assisted payout path is already observed.
 4. Keep video watch playback distinct from an optional additional signed-out check, and gather actual independent user/operator evidence.
-5. Primary Consumer submitted/READY FOR JUDGING; optional Privy bounty remains separate. The unqualified Community bounty is already deselected.
+5. Primary Consumer submitted/READY FOR JUDGING; Privy bounty was added and re-submitted. The unqualified Community bounty is already deselected.
 
 See [submission checklist](SUBMISSION_CHECKLIST.md), [deployment](DEPLOYMENT.md) and [competition review](COMPETITION_REVIEW.ko.md). This snapshot supersedes older “integrations unset / GitHub403 / submission hold” statements; those remain historical in earlier run logs.

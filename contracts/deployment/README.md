@@ -1,6 +1,6 @@
 # DROP Monad Testnet deployment
 
-**Final primary submission:** Consumer Products & Payments is **READY FOR JUDGING**, confirmed `2026-10-13T16:39:30.988Z` (Oct14 01:39 KST). No bounties were selected. Both actual quiz and catch payments are independently verified; these are same-human technical accounts, not traction. Optional Privy bounty consideration is separate. `acf5b73` identifies the deployed application baseline; later documentation/proof commits may advance public main.
+**Final submission:** Consumer Products & Payments + **Privy** is **READY FOR JUDGING**, re-submission confirmed `2026-10-13T16:57:26.785Z` (Oct14 01:57 KST); portal Save16:56UTC7/7. Initial primary confirmation: `2026-10-13T16:39:30.988Z`. Required Privy integration description:1,808characters. Separate optional Privy video omitted. Actual wallet creation/creator contract transactions are verified; DROP pays receiving gas through its own relayer, not Privy sponsorship. `acf5b73` is the deployed app baseline; same-human technical accounts are not traction.
 
 This workflow is restricted to **Monad Testnet 10143** and Circle's test USDC at **`0x534b2f3A21130d7a60830c2Df862319e593943A3`**. Mainnet, real funds, existing personal wallets and paid infrastructure are outside this workflow. A real empty escrow was deployed and independently verified; the public proof is recorded below. That deployment does not imply funded campaigns or live reward payments.
 
