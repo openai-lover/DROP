@@ -21,5 +21,6 @@ contracts/broadcast/
 .DS_Store
 .local/
 .firebase/
+.vercel/
 functions/lib/
 functions/node_modules/
