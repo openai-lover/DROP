@@ -13,6 +13,8 @@ export function Event({slug}:{slug:string}){
  const [attempt,setAttempt]=useState<GameSessionView>();
  const [error,setError]=useState(''),[busy,setBusy]=useState(false);
  const [answers,setAnswers]=useState<number[]>([]),[outcome,setOutcome]=useState('');
+ const [currentTime,setCurrentTime]=useState(()=>Date.now());
+ useEffect(()=>{const timer=window.setInterval(()=>setCurrentTime(Date.now()),5000);return()=>window.clearInterval(timer);},[]);
  useEffect(()=>{let active=true;void api<CampaignView>(`/campaigns/${encodeURIComponent(slug)}`).then(value=>{if(active)setCampaign(value);}).catch(error=>{if(active)setError(error.message);});return()=>{active=false;};},[slug]);
  const start=async()=>{
   if(!auth.authenticated){auth.login();return;}
@@ -30,7 +32,7 @@ export function Event({slug}:{slug:string}){
  const date=(value:string)=>new Date(value).toLocaleString(locale);
  if(!campaign)return <main className="page narrow">{error?<div role="alert" className="notice error">{errorText(error)}<Link className="text-button" href="/practice">{t('보상 없는 연습하기','Try without a reward')} →</Link></div>:<p className="loading">{t('이벤트 확인 중…','Loading event…')}</p>}</main>;
  const reward=campaign.rewardType==='USDC'?`${formatUnits(BigInt(campaign.rewardAmountAtomic),6)} USDC`:campaign.rewardType==='COUPON_DEMO'?t('테스트 커피 쿠폰','Test coffee coupon'):t('커피 쿠폰','Coffee coupon');
- const open=campaign.status==='OPEN'&&new Date(campaign.startsAt)<=new Date()&&new Date(campaign.endsAt)>new Date()&&campaign.remaining>0;
+ const open=campaign.status==='OPEN'&&new Date(campaign.startsAt).getTime()<=currentTime&&new Date(campaign.endsAt).getTime()>currentTime&&campaign.remaining>0;
  const walletPending=auth.authenticated&&!auth.wallet;
  return <main className="page narrow">
   <p className="eyebrow">{campaign.organizer} · DROP</p>
