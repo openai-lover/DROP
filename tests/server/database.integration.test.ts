@@ -1,11 +1,12 @@
-import { randomBytes, randomUUID } from "node:crypto";
+import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { keccak256, serializeTransaction, toBytes } from "viem";
 import type { Principal } from "../../src/server/auth";
 import { database, read, type Award, type Campaign, type PayoutJob } from "../../src/server/db";
 import { catchTarget, DEFAULT_CATCH } from "../../src/server/catch-engine";
 import { createGameSession, creatorCampaign, importCoupons, listRewards, publicCampaign, publishCouponCampaign, revealCoupon, submitGameSession, verifyFunding, verifyRefund } from "../../src/server/api";
-import { leaseNextJob, processJob, reconcileCampaign } from "../../src/server/worker";
+import { leaseNextJob, processJob, reconcileCampaign, reviveFinalizedReward } from "../../src/server/worker";
+import { recoverDaily, recoverOwnRewards } from "../../src/server/request-recovery";
 import { proofJson } from "../../src/server/chain";
 import { rateLimit } from "../../src/server/rate-limit";
 const chainMocks = vi.hoisted(() => ({ claimed: vi.fn(), logs: vi.fn(), receipt: vi.fn(), prepare: vi.fn(), nonce: vi.fn(), broadcast: vi.fn(), head: vi.fn(), wait: vi.fn(), block: vi.fn(), rawReceipt: vi.fn() }));
@@ -28,11 +29,13 @@ async function preparedFixture(expired = false) { const { c, id } = await queueU
 
 describe.skipIf(!enabled)("real Firestore emulator domain integration (demo-drop only)", { timeout: 20_000 }, () => {
   beforeAll(() => { if (process.env.NODE_ENV !== "test" || !enabled) throw new Error("Tests require NODE_ENV=test, demo-drop and the loopback Firestore emulator."); process.env.PARTICIPANT_NULLIFIER_SECRET = "integration-only-nonproduction-secret-32chars"; process.env.COUPON_ENCRYPTION_KEY = "c3".repeat(32); });
-  beforeEach(() => { vi.clearAllMocks(); chainMocks.claimed.mockResolvedValue(false); chainMocks.receipt.mockResolvedValue({ state: "pending" }); chainMocks.nonce.mockResolvedValue(7); chainMocks.head.mockResolvedValue(100n); chainMocks.block.mockResolvedValue({ number: 100n, hash: `0x${"55".repeat(32)}` }); chainMocks.broadcast.mockResolvedValue(`0x${"41".repeat(32)}`); chainMocks.wait.mockRejectedValue(new Error("adapter timeout")); });
+  beforeEach(() => { vi.clearAllMocks(); vi.stubEnv("DROP_WORKER_MODE", "disabled"); vi.stubEnv("CRON_SECRET", ""); chainMocks.claimed.mockResolvedValue(false); chainMocks.receipt.mockResolvedValue({ state: "pending" }); chainMocks.nonce.mockResolvedValue(7); chainMocks.head.mockResolvedValue(100n); chainMocks.block.mockResolvedValue({ number: 100n, hash: `0x${"55".repeat(32)}` }); chainMocks.broadcast.mockResolvedValue(`0x${"41".repeat(32)}`); chainMocks.wait.mockRejectedValue(new Error("adapter timeout")); });
   afterAll(async () => {
     for (const name of ["payoutJobs", "awards", "coupons", "qualifications", "gameSessions", "analyticsEvents", "auditLogs"]) { const rows = name === "payoutJobs" ? await col(name).get() : await col(name).where("campaignId", "in", campaignIds.slice(0, 30)).get(); const batch = database().batch(); for (const doc of rows.docs) { if (name !== "payoutJobs" || (await read<Award>("awards", doc.id))?.campaignId && campaignIds.includes((await read<Award>("awards", doc.id))!.campaignId)) batch.delete(doc.ref); } if (!rows.empty) await batch.commit(); }
     for (const id of campaignIds) { await database().recursiveDelete(col("campaigns").doc(id)); await col("campaignSlugs").doc(id).delete(); await col("campaignSecrets").doc(id).delete(); }
-    for (const id of userIds) await col("users").doc(id).delete();
+    for (const id of userIds) { await col("users").doc(id).delete(); await col("workerWakeups").doc(createHash("sha256").update(id).digest("hex")).delete(); }
+    await col("recoveryRuns").doc("daily").delete();
+    vi.unstubAllEnvs();
   });
   it("checks tenant ownership for private campaign details", async () => { const owner = await user(), attacker = await user(), c = await campaign(owner); await expect(creatorCampaign(attacker, c.id)).rejects.toMatchObject({ status: 404 }); });
   it("never exposes quiz answers through public metadata or sessions", async () => { const owner = await user(), participant = await user(), questions = Array.from({ length: 3 }, (_, i) => ({ prompt: `Question ${i}`, options: ["A", "B"], correctIndex: 1, explanation: "Private explanation" })); const c = await campaign(owner, { gameType: "QUIZ", gameConfig: { questions: questions.map(({ prompt, options }) => ({ prompt, options })), passScore: 3 } }); await col("campaignSecrets").doc(c.id).set({ questions, passScore: 3, commitmentSalt: "private test salt" }); await inventory(owner, c); expect(JSON.stringify(await publicCampaign(c.slug)) + JSON.stringify(await createGameSession(participant, c.slug))).not.toMatch(/correctIndex|Private explanation|commitmentSalt/); });
@@ -146,4 +149,64 @@ describe.skipIf(!enabled)("real Firestore emulator domain integration (demo-drop
     expect((await read<PayoutJob>("payoutJobs", id))!.completedAt).toBeNull();
   });
   it("shares persistent rate limits across requests", async () => { const identity = `it-rate-${randomUUID()}`; await rateLimit(identity, "integration", 2, 60); await rateLimit(identity, "integration", 2, 60); await expect(rateLimit(identity, "integration", 2, 60)).rejects.toMatchObject({ code: "RATE_LIMITED", status: 429 }); });
+  it("never leases another user's reward through a request wakeup", async () => {
+    vi.stubEnv("DROP_WORKER_MODE", "request");
+    const owner = await user(), winner = await user(), attacker = await user(), c = await campaign(owner);
+    await inventory(owner, c); const a = await attempt(winner, c.slug), result = await submitGameSession(winner, a.session.id, a.input), id = result.award!.id;
+    expect(await recoverOwnRewards(attacker, id)).toEqual({ enabled: true, processed: 0 });
+    expect((await read<PayoutJob>("payoutJobs", id))!.attempts).toBe(0);
+    expect((await read<Award>("awards", id))!.status).toBe("QUEUED");
+    expect((await recoverOwnRewards(winner, id)).processed).toBe(1);
+    expect((await read<Award>("awards", id))!.status).toBe("DELIVERED");
+  });
+  it("shares the request wakeup throttle across simultaneous requests", async () => {
+    vi.stubEnv("DROP_WORKER_MODE", "request");
+    const owner = await user(), participant = await user(), ids: string[] = [];
+    for (let i = 0; i < 2; i++) { const c = await campaign(owner); await inventory(owner, c); const a = await attempt(participant, c.slug); ids.push((await submitGameSession(participant, a.session.id, a.input)).award!.id); }
+    const results = await Promise.all(ids.map(id => recoverOwnRewards(participant, id)));
+    expect(results.reduce((count, result) => count + result.processed, 0)).toBe(1);
+    const awards = await Promise.all(ids.map(id => read<Award>("awards", id)));
+    expect(awards.filter(award => award!.status === "DELIVERED")).toHaveLength(1);
+    expect((await recoverOwnRewards(participant)).processed).toBe(0);
+  });
+  it("yields an expired invocation budget while preserving the signed nonce for a later worker", async () => {
+    const { id, job } = await preparedFixture();
+    await processJob(job, { deadlineAt: Date.now() - 1, receiptWaitMs: 0, recoveryPages: 1 });
+    const persisted = (await read<PayoutJob>("payoutJobs", id))!;
+    expect(persisted.lastError).toBe("WORKER_BUDGET_YIELDED");
+    expect(persisted.serializedTx).toBe("0x1234");
+    expect(persisted.nonce).toBe(7);
+    expect(persisted.completedAt).toBeNull();
+    expect(chainMocks.broadcast).not.toHaveBeenCalled();
+  });
+  it("allows request execution to submit without claiming a pending receipt is complete", async () => {
+    const { id, job } = await preparedFixture();
+    await processJob(job, { deadlineAt: Date.now() + 25_000, receiptWaitMs: 0, recoveryPages: 1 });
+    expect(chainMocks.wait).not.toHaveBeenCalled();
+    expect((await read<Award>("awards", id))!.status).toBe("SUBMITTED");
+    expect((await read<PayoutJob>("payoutJobs", id))!.completedAt).toBeNull();
+  });
+  it("reopens a previously expired job only after a finalized direct claim is observed", async () => {
+    const { id, c } = await queueUsdc();
+    await col("campaigns").doc(c.id).update({ fundingTx: `0x${"77".repeat(32)}` });
+    await col("awards").doc(id).update({ status: "EXPIRED" }); await col("payoutJobs").doc(id).update({ completedAt: new Date() });
+    expect(await reviveFinalizedReward(id)).toBe(false);
+    chainMocks.claimed.mockResolvedValue(true);
+    const resumed = await Promise.all([reviveFinalizedReward(id), reviveFinalizedReward(id)]);
+    expect(resumed.filter(Boolean)).toHaveLength(1);
+    expect((await read<PayoutJob>("payoutJobs", id))!.completedAt).toBeNull();
+    expect((await read<Award>("awards", id))!.status).toBe("EXPIRED");
+  });
+  it("allows only one bounded daily invocation and retains a persistent cooldown", async () => {
+    vi.stubEnv("DROP_WORKER_MODE", "request"); vi.stubEnv("CRON_SECRET", "unit-only-cron-secret-at-least-32-characters");
+    await col("recoveryRuns").doc("daily").delete();
+    const owner = await user(), c = await campaign(owner, { maxRecipients: 3 }), ids: string[] = [];
+    await inventory(owner, c);
+    for (let i = 0; i < 3; i++) { const participant = await user(), a = await attempt(participant, c.slug), id = (await submitGameSession(participant, a.session.id, a.input)).award!.id; ids.push(id); await col("payoutJobs").doc(id).update({ availableAt: new Date(0) }); }
+    const results = await Promise.all([recoverDaily(), recoverDaily()]);
+    expect(results.filter(result => result.accepted)).toHaveLength(1);
+    expect(results.reduce((count, result) => count + result.processed, 0)).toBe(3);
+    for (const id of ids) expect((await read<Award>("awards", id))!.status).toBe("DELIVERED");
+    expect((await recoverDaily()).reason).toBe("cooldown");
+  });
 });

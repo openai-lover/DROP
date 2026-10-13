@@ -101,6 +101,7 @@ const CLIENT_ERRORS: Readonly<Record<string, string>> = {
   'Check the Monad Testnet recipient address.': 'Monad Testnet 수령 주소를 확인해 주세요.',
   'Check the amount and your actual balance.': '전송 금액과 실제 잔액을 확인해 주세요.',
   'Transfer confirmation could not be verified. Check the transaction record.': '전송 완료를 확인하지 못했습니다. 거래 기록을 확인해 주세요.',
+  'The selected wallet does not match this account. Refresh and sign in again.': '선택된 지갑이 이 계정과 일치하지 않습니다. 새로고침 후 다시 로그인해 주세요.',
 };
 
 export const SERVICE_ERROR_MESSAGES: Readonly<Record<string, readonly [string, string, string, string]>> = {

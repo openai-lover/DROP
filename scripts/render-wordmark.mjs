@@ -6,7 +6,7 @@ import sharp from 'sharp';
 
 const repository = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const outputDirectory = join(repository, 'assets', 'submission');
-const colors = {ink: '#20231e', coral: '#f6503d', paper: '#faf9f5'};
+const colors = {ink: '#17142b', accent: '#6e54ff', paper: '#fbfaff'};
 // Authenticated portal upload is stricter than the public track's 3 MB description.
 const maxBytes = 2_000_000;
 const minDimension = 500;
@@ -20,12 +20,12 @@ const glyphs = {
   P: 'M710 0H804C867 0 897 45 897 98C897 158 867 182 804 182H768V256H710Z M768 56V127H798C824 127 839 116 839 92C839 68 824 56 798 56Z',
 };
 const fullMark = Object.values(glyphs).map(d => `<path d="${d}" fill="${colors.ink}" fill-rule="evenodd"/>`).join('\n')
-  + `\n<circle cx="943" cy="225" r="31" fill="${colors.coral}"/>`;
+  + `\n<circle cx="943" cy="225" r="31" fill="${colors.accent}"/>`;
 
 function svgDocument({width, height, title, body}) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title description">
 <title id="title">${title}</title>
-<desc id="description">Original temporary DROP branding: geometric dark letters, coral period and an off-white background. Not approved final branding.</desc>
+<desc id="description">Original DROP branding: geometric dark letters, a Monad-purple period and a soft white background.</desc>
 <rect width="${width}" height="${height}" fill="${colors.paper}"/>
 ${body}
 </svg>\n`;
@@ -34,12 +34,12 @@ ${body}
 const designs = [
   {
     base: 'drop-wordmark', width: 1200, height: 600,
-    svg: svgDocument({width: 1200, height: 600, title: 'DROP temporary wordmark', body: `<g transform="translate(113 172)">${fullMark}</g>`}),
+    svg: svgDocument({width: 1200, height: 600, title: 'DROP wordmark', body: `<g transform="translate(113 172)">${fullMark}</g>`}),
   },
   {
     base: 'drop-square', width: 1024, height: 1024,
-    svg: svgDocument({width: 1024, height: 1024, title: 'DROP temporary square monogram', body: `<g transform="translate(262 142) scale(2.5)"><path d="${glyphs.D}" fill="${colors.ink}" fill-rule="evenodd"/></g>
-<circle cx="802" cy="720" r="62" fill="${colors.coral}"/>
+    svg: svgDocument({width: 1024, height: 1024, title: 'DROP square monogram', body: `<g transform="translate(262 142) scale(2.5)"><path d="${glyphs.D}" fill="${colors.ink}" fill-rule="evenodd"/></g>
+<circle cx="802" cy="720" r="62" fill="${colors.accent}"/>
 <g transform="translate(356 866) scale(.32)">${fullMark}</g>`}),
   },
 ];
@@ -66,7 +66,7 @@ for (const design of designs) {
   });
 }
 const manifest = {
-  status: 'original-temporary-branding-not-final-approved',
+  status: 'original-project-branding',
   origin: 'Original code-native geometric SVG outlines created for DROP; PNGs rendered with the pinned Sharp package.',
   externalFontsOrArtwork: false,
   assetSpecificLicense: 'NOASSERTION',

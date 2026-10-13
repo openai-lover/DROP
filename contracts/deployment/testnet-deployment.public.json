@@ -1,0 +1,47 @@
+{
+  "checkedAtUtc": "2026-10-13T15:26:25.715Z",
+  "scope": "One empty DROPRewardEscrow deployed on Monad Testnet; no campaign funding or reward payment.",
+  "chainId": 10143,
+  "officialUsdc": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+  "deployer": "0xCe5FaB914C165ED28DF1886341f644Adb4C39b0b",
+  "deployerBalanceAfterDeployment": {
+    "mon": "4.7785376204",
+    "usdc": "20"
+  },
+  "deployment": {
+    "escrow": "0x22acf105A1af3f104f62e06fD813e49Af9358379",
+    "transactionHash": "0xb17568879280ebdd217af621d0d7aab95aa2bf8f421bbc66e890e6c3d69cfeb5",
+    "blockNumber": "70715601",
+    "blockHash": "0xa0ea6f1bab0c3de45f1bb1515f2e102e135ad1b61d2bea918e05b691d38e2016",
+    "finalizedBlock": "70716825",
+    "gasUsed": "1973818",
+    "actualGasCostMon": "0.2214623796",
+    "runtimeCodeHash": "0x573018238213b8b6666eb0d6ba4f2a0843dc654873b2345e0d387fd2c2d5df8e",
+    "canonicalReceiptVerified": true,
+    "compiledRuntimeVerified": true,
+    "immutableGettersVerified": true
+  },
+  "compilerPackage": {
+    "compiler": "0.8.28+commit.7893614a",
+    "evmVersion": "prague",
+    "viaIR": true,
+    "optimizerRuns": 200,
+    "openZeppelinVersion": "5.6.1",
+    "sourceSha256": "1df6b743f59935af9814e786f04cf1d8984960a797ee1ebaa16c020482115fa6",
+    "compilerInputSha256": "34dcf2ee39224ec745d61e78ca971a7299cea48eacb7660e688274aecc513a9b",
+    "abiSha256": "608359de45ca7e332ba1f07853ba246d8a6cadff90dd3de7b18fb96603e1cd7c",
+    "metadataSha256": "d97f0679cab3864481cae3956e7a2748a42b5429b23b083709d5aca61d068fe2",
+    "creationDataHash": "0x0c0cf69d510516de63cd0bd42700796c18327c38b2b2b58d23c5a5084df85f9b",
+    "publicSourceCount": 24
+  },
+  "sourceVerification": {
+    "status": "perfect",
+    "mode": "read-only-public-record",
+    "statusUrl": "https://sourcify-api-monad.blockvision.org/check-by-addresses?addresses=0x22acf105A1af3f104f62e06fD813e49Af9358379&chainIds=10143",
+    "metadataUrl": "https://sourcify-api-monad.blockvision.org/repository/contracts/full_match/10143/0x22acf105A1af3f104f62e06fD813e49Af9358379/metadata.json",
+    "metadataMatchesCompiledArtifact": true,
+    "checkedAtUtc": "2026-10-13T15:26:25.715Z"
+  },
+  "liveDeployment": true,
+  "sourceVerified": true
+}

@@ -1,13 +1,13 @@
 {
-  "status": "original-temporary-branding-not-final-approved",
+  "status": "original-project-branding",
   "origin": "Original code-native geometric SVG outlines created for DROP; PNGs rendered with the pinned Sharp package.",
   "externalFontsOrArtwork": false,
   "assetSpecificLicense": "NOASSERTION",
   "licenseNote": "No asset-specific public license is assigned by this task. The project owner may choose one. No third-party font or artwork license is required by these source assets.",
   "palette": {
-    "ink": "#20231e",
-    "coral": "#f6503d",
-    "paper": "#faf9f5"
+    "ink": "#17142b",
+    "accent": "#6e54ff",
+    "paper": "#fbfaff"
   },
   "renderer": {
     "sharp": "0.34.4",
@@ -20,9 +20,9 @@
       "format": "png",
       "width": 1200,
       "height": 600,
-      "bytes": 9979,
-      "sha256": "41adccd9bf69ab9dbad15ac3ca3b8bdb24618a5fc2af954879dd7d2ec4f079bd",
-      "sourceSha256": "0020812e27462d1e51adac39df796af021bbfb41a5a4be40fd2376ab022277f7",
+      "bytes": 10545,
+      "sha256": "86aaf8ab6a4ad3826ff27cf110cc6d86174c0bbc90f3f393be89a2574cbd38cc",
+      "sourceSha256": "8c90596a903d59ef776974368a2e1444e7d135e46882070bd3679c4758d3d43b",
       "submissionLimitBytes": 2000000,
       "minimumDimension": 500,
       "maximumDimension": 2000,
@@ -34,9 +34,9 @@
       "format": "png",
       "width": 1024,
       "height": 1024,
-      "bytes": 11914,
-      "sha256": "9fa9cd116e95b1d56706979556682d40f093d8740e3a8aa6e039f50c95b0f2d4",
-      "sourceSha256": "b3c453ff4c414b92f9bbed64fdf6d84451d02622e70aa615cf5ad79f68e20ed7",
+      "bytes": 10804,
+      "sha256": "2c04f76af48adc0154bbf98f83c90f8826695b8f56f4b42be1b9d33e5f898673",
+      "sourceSha256": "33f6991a322828c0a79f066943bec277b42bc0feea49d00b8e184c72a8f9d321",
       "submissionLimitBytes": 2000000,
       "minimumDimension": 500,
       "maximumDimension": 2000,

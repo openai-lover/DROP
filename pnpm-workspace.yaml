@@ -15,3 +15,4 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - viem@2.57.5
   - zod@4.6.7
+  - google-auth-library@11.3.0

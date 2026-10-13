@@ -1,3 +1,5 @@
+import {HOME_TRANSLATIONS} from './home';
+
 export const LOCALES = ['en', 'ko', 'ja', 'zh-CN', 'es'] as const;
 export type Locale = (typeof LOCALES)[number];
 export type TranslationValues = Readonly<Record<string, string | number>>;
@@ -21,6 +23,11 @@ export function normalizeLocale(value: unknown): Locale {
 // Keys are the existing English service phrases. User content never enters this catalog.
 // Tuple order: Japanese, simplified Chinese, Spanish.
 export const TRANSLATIONS: Readonly<Record<string, readonly [string, string, string]>> = {
+  ...HOME_TRANSLATIONS,
+  'Network fees are paid from your wallet in test MON. Review the fee before approving.': ['ネットワーク手数料はウォレットのテストMONで支払います。承認前に手数料を確認してください。', '网络手续费由钱包中的测试MON支付。请在授权前确认费用。', 'Las comisiones de red se pagan desde tu cartera con MON de prueba. Revisa la comisión antes de autorizar.'],
+  'Gas sponsorship is requested. Confirm the fee shown before approving.': ['ガス代の代納をリクエストします。承認前に表示される手数料を確認してください。', '将申请Gas代付。请在授权前确认页面显示的费用。', 'Se solicita patrocinio del gas. Comprueba la comisión mostrada antes de autorizar.'],
+  'Network: Monad Testnet (10143). Fiat withdrawals and exchange deposits are not guaranteed.': ['ネットワーク：Monad Testnet（10143）。法定通貨の出金や取引所への入金は保証されません。', '网络：Monad Testnet（10143）。不保证法币提现或交易所入金。', 'Red: Monad Testnet (10143). No se garantizan retiros en moneda fiat ni depósitos en exchanges.'],
+  'The selected wallet does not match this account. Refresh and sign in again.': ['選択したウォレットがこのアカウントと一致しません。更新して再度ログインしてください。', '所选钱包与此账户不符。请刷新并重新登录。', 'La cartera seleccionada no coincide con esta cuenta. Actualiza e inicia sesión de nuevo.'],
   'Language': ['言語', '语言', 'Idioma'],
   'Practice · No payout': ['練習 · 報酬なし', '练习 · 无奖励', 'Práctica · Sin recompensa'],
   'Reward attempt': ['報酬への挑戦', '奖励挑战', 'Intento con recompensa'],

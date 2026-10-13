@@ -1,0 +1,27 @@
+{
+  "scope": "One exact 0.5 test MON native transfer to the isolated payout relayer; no USDC transfer or campaign funding.",
+  "chainId": 10143,
+  "sender": "0xCe5FaB914C165ED28DF1886341f644Adb4C39b0b",
+  "recipient": "0xc67AABf3Ded43fA2C2E29e24809C1BD50af9393f",
+  "amountMon": "0.5",
+  "transactionHash": "0xbbaf81383995baa5b1162bd5b67781d6d69e2e62d2083582eae02c70bd407d2c",
+  "blockNumber": "70718377",
+  "blockHash": "0xbfb52eeb233c0452caab3ee2e1a50c271ffd8252cb4f3a999d0f1fac6fb309f6",
+  "finalizedBlock": "70718379",
+  "gasUsed": "25200",
+  "effectiveGasPriceGwei": "112.2",
+  "actualGasCostMon": "0.00282744",
+  "balancesAtTransferBlock": {
+    "senderBeforeMon": "4.7785376204",
+    "senderAfterMon": "4.2757101804",
+    "recipientBeforeMon": "0",
+    "recipientAfterMon": "0.5"
+  },
+  "canonicalFinalizedReceiptVerified": true,
+  "exactValueAndRecipientVerified": true,
+  "exactBalanceDeltasVerified": true,
+  "currentSenderMon": "4.2757101804",
+  "currentRelayerMon": "0.5",
+  "verifiedAtUtc": "2026-10-13T15:34:20.295Z",
+  "liveRelayerFunding": true
+}

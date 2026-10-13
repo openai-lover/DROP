@@ -3,7 +3,7 @@ import {useCallback,useEffect,useState} from 'react';
 import Link from 'next/link';
 import {formatUnits,type Address,type Hex} from 'viem';
 import {api,type CampaignView} from './api';
-import {useSession} from './session';
+import {transactionFeeHint,useSession} from './session';
 import {useLanguage} from './shell';
 import {waitForFinalizedTransaction} from './transactions';
 
@@ -35,8 +35,9 @@ export function Dashboard({id}:{id?:string}){
  });
  const verify=()=>action(async()=>{await api(`/creator/campaigns/${id}/funding`,await getToken(),{txHash});setMessage(t('계약의 실제 입금과 규칙을 확인했습니다.','The contract funding and rules were verified.'));});
  const recover=()=>action(async()=>{
-  const plan=await api<{chainId:number;to:Address;data:Hex}>(`/creator/campaigns/${id}/refund`,await getToken());
+  const plan=await api<{chainId:number;owner:string;to:Address;data:Hex}>(`/creator/campaigns/${id}/refund`,await getToken());
   if(plan.chainId!==10143)throw new Error(t('Monad Testnet 회수만 지원합니다.','Only Monad Testnet recovery is supported.'));
+  if(plan.owner.toLowerCase()!==auth.wallet?.toLowerCase())throw new Error(t('이벤트 소유자와 Monad Testnet 지갑을 확인해 주세요.','Check the event owner and Monad Testnet wallet.'));
   const hash=await auth.send(plan.to,plan.data);setTxHash(hash);
   if((await waitForFinalizedTransaction(hash)).status!=='success')throw new Error(t('회수 거래가 실패했습니다.','Recovery failed.'));
   await api(`/creator/campaigns/${id}/refund`,await getToken(),{txHash:hash});
@@ -64,9 +65,9 @@ export function Dashboard({id}:{id?:string}){
   <div className="two-column"><section className="card"><h3>{t('예산과 지급','Budget and delivery')}</h3><p className="lead">{campaign.rewardType==='USDC'?`${formatUnits(BigInt(campaign.totalBudgetAtomic??'0'),6)} USDC`:t('운영자 제공 쿠폰 재고','Organizer-supplied coupon inventory')}</p>
    {campaign.rewardType==='USDC'?<>
     <p className="fine-print">{t('Monad Testnet · 금전적 가치 없는 테스트 USDC. 입금 확인 전에는 참여가 열리지 않습니다.','Monad Testnet · USDC without monetary value. Participation stays closed until funding is confirmed.')}</p>
-    {campaign.status==='DRAFT'&&<><button className="button" disabled={busy||!auth.wallet||process.env.NEXT_PUBLIC_GAS_SPONSORSHIP_ENABLED!=='true'} onClick={()=>{void fund();}}>{busy?t('예산 준비 중…','Preparing budget…'):t('고정 예산 입금하기','Fund the fixed budget')} ↗</button><details style={{marginTop:22}}><summary>{t('이미 입금한 거래 다시 확인','Recheck an existing deposit')}</summary><label className="field" style={{marginTop:15}}>{t('입금 거래 기록','Deposit transaction')}<input value={txHash} onChange={event=>setTxHash(event.target.value)} placeholder="0x…"/></label><button className="button button-small button-ghost" disabled={busy||!/^0x[0-9a-f]{64}$/i.test(txHash)} onClick={()=>{void verify();}}>{t('실제 입금 확인','Verify funding')}</button></details></>}
+    {campaign.status==='DRAFT'&&<><p className="fine-print">{transactionFeeHint(t)}</p><button className="button" disabled={busy||!auth.wallet||!auth.ready} onClick={()=>{void fund();}}>{busy?t('예산 준비 중…','Preparing budget…'):t('고정 예산 입금하기','Fund the fixed budget')} ↗</button><details style={{marginTop:22}}><summary>{t('이미 입금한 거래 다시 확인','Recheck an existing deposit')}</summary><label className="field" style={{marginTop:15}}>{t('입금 거래 기록','Deposit transaction')}<input value={txHash} onChange={event=>setTxHash(event.target.value)} placeholder="0x…"/></label><button className="button button-small button-ghost" disabled={busy||!/^0x[0-9a-f]{64}$/i.test(txHash)} onClick={()=>{void verify();}}>{t('실제 입금 확인','Verify funding')}</button></details></>}
     {campaign.fundingTx&&<a className="proof-link" href={`https://testnet.monadvision.com/tx/${campaign.fundingTx}`} target="_blank" rel="noreferrer">{t('예산 입금 영수증','Funding receipt')} ↗</a>}
-    {campaign.status!=='DRAFT'&&campaign.status!=='REFUNDED'&&<div style={{marginTop:26}}><p className="fine-print">{t('수령 기한 이후 남은 예산을 원래 운영자 지갑으로 회수할 수 있습니다.','Unused budget returns to the original creator after the receipt deadline.')}</p><button className="button button-ghost" disabled={busy||!auth.wallet||process.env.NEXT_PUBLIC_GAS_SPONSORSHIP_ENABLED!=='true'||new Date()<=new Date(campaign.claimDeadline)} onClick={()=>{void recover();}}>{t('남은 예산 회수','Recover unused budget')}</button></div>}
+    {campaign.status!=='DRAFT'&&campaign.status!=='REFUNDED'&&<div style={{marginTop:26}}><p className="fine-print">{t('수령 기한 이후 남은 예산을 원래 운영자 지갑으로 회수할 수 있습니다.','Unused budget returns to the original creator after the receipt deadline.')}</p><p className="fine-print">{transactionFeeHint(t)}</p><button className="button button-ghost" disabled={busy||!auth.wallet||!auth.ready||new Date()<=new Date(campaign.claimDeadline)} onClick={()=>{void recover();}}>{t('남은 예산 회수','Recover unused budget')}</button></div>}
     {campaign.refundTx&&<p><a className="proof-link" href={`https://testnet.monadvision.com/tx/${campaign.refundTx}`} target="_blank" rel="noreferrer">{t('회수 영수증','Recovery receipt')} ↗</a></p>}
    </>:<>
     <div className="metric-grid" style={{gridTemplateColumns:'1fr 1fr'}}><div className="metric"><span>{t('배정 가능','Available')}</span><strong>{campaign.inventory?.AVAILABLE??0}</strong></div><div className="metric"><span>{t('전달 완료','Delivered')}</span><strong>{campaign.inventory?.DELIVERED??0}</strong></div></div>

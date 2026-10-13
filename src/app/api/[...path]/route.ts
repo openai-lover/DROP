@@ -1,18 +1,20 @@
-import {NextResponse} from 'next/server';
+import {after,NextResponse} from 'next/server';
 import {ZodError} from 'zod';
 import * as service from '@/server/api';
-export const runtime='nodejs';export const dynamic='force-dynamic';
+import {recoverOwnRewards,workerMode} from '@/server/request-recovery';
+export const runtime='nodejs';export const dynamic='force-dynamic';export const maxDuration=60;
 type Context={params:Promise<{path:string[]}>};
 async function handle(request:Request,context:Context){
  const {path}=await context.params;const key=path.join('/');const method=request.method;
  try{
   let data:unknown;
+  let principal:service.Principal|undefined;
   if(method==='GET'&&key==='status')data=service.getIntegrationStatus();
   else if(method==='GET'&&key==='campaigns')data=await service.listPublicCampaigns();
   else if(method==='GET'&&path[0]==='campaigns'&&path.length===2)data=await service.publicCampaign(path[1]);
   else if(method==='GET'&&path[0]==='campaigns'&&path[2]==='answers')data=await service.quizReveal(path[1]);
   else{
-   const principal=await service.authenticate(request);
+   principal=await service.authenticate(request);
    let body:unknown;
    if(method==='POST'){
     const text=await request.text();if(text.length>600_000)throw new service.DomainError('PAYLOAD_TOO_LARGE','Request content is too large.',413);
@@ -40,6 +42,12 @@ async function handle(request:Request,context:Context){
    else if(method==='POST'&&path[0]==='rewards'&&path[2]==='retry')data=await service.queueReward(principal,path[1]);
    else if(method==='GET'&&path[0]==='rewards'&&path[2]==='proof')data=await service.getRewardProof(principal,path[1]);
    else throw new service.DomainError('NOT_FOUND','Not found.',404);
+  }
+  if(principal&&workerMode()==='request'&&(key==='rewards'||(method==='POST'&&path[0]==='sessions'&&path[2]==='submit')||(method==='POST'&&path[0]==='rewards'&&path[2]==='retry'))){
+   const verifiedPrincipal=principal;
+   const result=data as {award?:{id?:string}};
+   const awardId=path[0]==='rewards'&&path[2]==='retry'?path[1]:result.award?.id;
+   after(async()=>{try{await recoverOwnRewards(verifiedPrincipal,awardId);}catch{console.error('DROP bounded reward recovery is pending; persistent jobs will be retried.');}});
   }
   return NextResponse.json({data}, {headers:{'Cache-Control':'no-store, private','Referrer-Policy':'no-referrer'}});
  }catch(error){

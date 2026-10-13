@@ -4,7 +4,9 @@
   "private": true,
   "description": "Playful rewards for communities. Real payouts, without the wallet hassle.",
   "packageManager": "pnpm@11.25.0",
-  "engines": { "node": ">=22.12" },
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
@@ -23,8 +25,10 @@
     "@openzeppelin/contracts": "5.6.1",
     "@privy-io/react-auth": "3.48.1",
     "@privy-io/server-auth": "1.32.5",
+    "@vercel/oidc": "4.0.0",
     "firebase-admin": "14.5.0",
     "firebase-functions": "7.4.0",
+    "google-auth-library": "11.3.0",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",

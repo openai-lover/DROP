@@ -1,0 +1,12 @@
+{
+  "id": "practice-rehearsal",
+  "kind": "rehearsal",
+  "viewport": {"width": 1280, "height": 720},
+  "notes": "Preparation footage only. Actual public unpaid practice and disabled protected flows. Never label this a funded payout demo.",
+  "shots": [
+    {"id":"home","title":"English public home","path":"/","minimumSeconds":10,"narration":"DROP is a community reward game built for Monad. This preparation recording shows the current website. The games here are unpaid practice, not a completed payout.","actions":[{"type":"text","selector":"h1","value":"Small games."},{"type":"text","selector":"h1","value":"Shared rewards."},{"type":"text","selector":".hero-footnote","value":"Practice has no payout"}]},
+    {"id":"catch","title":"Actual catch practice","path":"/practice","minimumSeconds":14,"narration":"The catch game works with a keyboard or touch. Three catches finish this practice. Practice creates no reward, qualification, or payment record.","actions":[{"type":"click","role":"button","name":"Start playing ↗"},{"type":"catchPractice"},{"type":"visible","role":"heading","name":"Caught it! Practice complete"}]},
+    {"id":"quiz","title":"Actual quiz practice","path":"/practice?game=quiz","minimumSeconds":14,"narration":"The other game is a three question quiz. This example explains server verification and the difference between test tokens and rewards with real value.","actions":[{"type":"check","role":"radio","name":"A game with no payout"},{"type":"check","role":"radio","name":"The server"},{"type":"check","role":"radio","name":"No"},{"type":"click","role":"button","name":"Check practice answers"},{"type":"text","role":"status","value":"Practice complete!"}]},
+    {"id":"limits","title":"Honest current integration limits","path":"/me/rewards","minimumSeconds":10,"narration":"Real reward participation still needs configured authentication, application database access, funded escrow, and a running payout processor. This screen does not invent a balance or a successful payment.","actions":[{"type":"visible","role":"heading","name":"My rewards"},{"type":"disabled","selector":".empty-state button"}]}
+  ]
+}

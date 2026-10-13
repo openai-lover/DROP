@@ -41,10 +41,10 @@ test("the homepage leads to explicitly unpaid anonymous practice", async ({ page
   const rewardRequests: string[] = [];
   page.on("request", request => { if (request.method() === "POST" && /\/api\/(sessions|campaigns|creator)/.test(request.url())) rewardRequests.push(request.url()); });
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("좋은 바이브.");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("짜릿한 드롭.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("작은 플레이.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("함께 나누는 보상.");
   await expect(page.getByText("Monad Testnet · 테스트 보상에는 금전적 가치가 없습니다.", { exact: true })).toBeVisible();
-  await page.getByRole("link", { name: /^플레이 시작/ }).click();
+  await main(page).locator(".drop-hero").getByRole("link", { name: /^플레이 시작/ }).click();
   await expect(page).toHaveURL(/\/practice$/);
   await expect(main(page).getByText("로그인 없는 연습입니다. 실제 보상·자격·지급 기록은 생성되지 않습니다.", { exact: true })).toBeVisible();
   await expect(main(page).getByText("연습 · 보상 없음", { exact: true })).toBeVisible();

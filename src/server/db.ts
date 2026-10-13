@@ -1,12 +1,17 @@
 import { applicationDefault, cert, getApps, initializeApp } from "firebase-admin/app";
-import { getFirestore, Timestamp, type DocumentSnapshot, type Firestore } from "firebase-admin/firestore";
+import { Firestore, getFirestore, Timestamp, type DocumentSnapshot } from "firebase-admin/firestore";
 import { DomainError, required } from "./errors";
+import { federatedFirestoreAuth } from "./firebase-credentials";
 let storage: Firestore | undefined;
 export function database(): Firestore {
   if (storage) return storage;
   const projectId = required("FIREBASE_PROJECT_ID");
   if (process.env.FIRESTORE_EMULATOR_HOST && process.env.NODE_ENV !== "test" && !(process.env.NODE_ENV === "development" && process.env.DROP_LOCAL_EMULATOR === "true")) throw new DomainError("EMULATOR_FORBIDDEN", "The local database emulator is not allowed in this deployment.", 503);
   if (process.env.FIRESTORE_EMULATOR_HOST && process.env.VERCEL) throw new DomainError("EMULATOR_FORBIDDEN", "Hosted deployments cannot use a local database emulator.", 503);
+  if (process.env.FIREBASE_CREDENTIAL_MODE === "vercel-oidc" && !process.env.FIRESTORE_EMULATOR_HOST) {
+    storage = new Firestore({ projectId, authClient: federatedFirestoreAuth(), preferRest: true, ignoreUndefinedProperties: true });
+    return storage;
+  }
   const app = getApps().find(app => app.name === "drop-server") ?? initializeApp({ projectId, ...(process.env.FIRESTORE_EMULATOR_HOST ? {} : { credential: process.env.FIREBASE_SERVICE_ACCOUNT_JSON ? cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON)) : applicationDefault() }) }, "drop-server");
   storage = getFirestore(app);
   storage.settings({ ignoreUndefinedProperties: true });

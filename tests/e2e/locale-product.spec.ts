@@ -17,35 +17,35 @@ test.afterEach(({ page }) => { expect(runtimeErrors.get(page)).toEqual([]); });
 
 const locales = [
   {
-    id: "en", selectorLabel: "Language", hero: ["GOOD VIBES.", "GREAT DROPS."], play: "Let’s play",
+    id: "en", selectorLabel: "Language", hero: ["Small games.", "Shared rewards."], play: "Let’s play",
     practiceTitle: "Try your first drop.", quiz: "Quiz", noPayout: "Practice · No payout",
     questions: ["What does practice mode give you?", "Who verifies a reward attempt?", "Does testnet USDC have monetary value?"],
     correctAnswers: ["A game with no payout", "The server", "No"], submit: "Check practice answers",
     completed: "Practice complete! Join a published event and sign in to qualify for a reward.", back: "Back to DROP",
   },
   {
-    id: "ko", selectorLabel: "언어", hero: ["좋은 바이브.", "짜릿한 드롭."], play: "플레이 시작",
+    id: "ko", selectorLabel: "언어", hero: ["작은 플레이.", "함께 나누는 보상."], play: "플레이 시작",
     practiceTitle: "먼저, 한번 즐겨봐요.", quiz: "나 얼마나 알아?", noPayout: "연습 · 보상 없음",
     questions: ["DROP에서 연습 모드로 받을 수 있는 것은?", "보상 참여 결과는 어디에서 확인하나요?", "테스트넷 USDC에는 금전적 가치가 있나요?"],
     correctAnswers: ["보상 없는 게임 체험", "서버의 검증으로", "없습니다"], submit: "연습 결과 확인",
     completed: "연습 성공! 실제 이벤트에서 로그인 후 보상 참여를 할 수 있어요.", back: "DROP으로 돌아가기",
   },
   {
-    id: "ja", selectorLabel: "言語", hero: ["いい雰囲気。", "最高のDROP。"], play: "遊ぼう",
+    id: "ja", selectorLabel: "言語", hero: ["小さなゲーム。", "みんなで分け合う報酬。"], play: "遊ぼう",
     practiceTitle: "初めてのDROPを体験しよう。", quiz: "クイズ", noPayout: "練習 · 報酬なし",
     questions: ["練習モードで得られるものは？", "報酬への挑戦を確認するのは？", "テストネットUSDCに金銭的な価値はありますか？"],
     correctAnswers: ["報酬なしのゲーム体験", "サーバー", "ありません"], submit: "練習の回答を確認",
     completed: "練習クリア！公開イベントに参加し、ログインして報酬に挑戦しましょう。", back: "DROPに戻る",
   },
   {
-    id: "zh-CN", selectorLabel: "语言", hero: ["好氛围。", "精彩DROP。"], play: "开始玩吧",
+    id: "zh-CN", selectorLabel: "语言", hero: ["小游戏。", "共享的奖励。"], play: "开始玩吧",
     practiceTitle: "体验你的第一个DROP。", quiz: "知识问答", noPayout: "练习 · 无奖励",
     questions: ["练习模式会给你什么？", "谁来验证奖励挑战？", "测试网USDC有货币价值吗？"],
     correctAnswers: ["无奖励的游戏体验", "服务器", "没有"], submit: "查看练习答案",
     completed: "练习完成！加入已发布的活动并登录，即可挑战奖励。", back: "返回DROP",
   },
   {
-    id: "es", selectorLabel: "Idioma", hero: ["BUENA ONDA.", "GRANDES DROPS."], play: "Vamos a jugar",
+    id: "es", selectorLabel: "Idioma", hero: ["Pequeños juegos.", "Recompensas compartidas."], play: "Vamos a jugar",
     practiceTitle: "Prueba tu primer DROP.", quiz: "Cuestionario", noPayout: "Práctica · Sin recompensa",
     questions: ["¿Qué ofrece el modo de práctica?", "¿Quién verifica un intento con recompensa?", "¿Tiene valor monetario el USDC de prueba?"],
     correctAnswers: ["Un juego sin recompensa", "El servidor", "No"], submit: "Comprobar respuestas",
@@ -61,9 +61,9 @@ test("a fresh visitor starts in English with all five explicit language choices"
   await expect(language(page).locator("option")).toHaveText(["English", "한국어", "日本語", "简体中文", "Español"]);
   expect(await language(page).locator("option").evaluateAll(options => options.map(option => (option as HTMLOptionElement).value)))
     .toEqual(["en", "ko", "ja", "zh-CN", "es"]);
-  await expect(main(page).getByRole("heading", { level: 1 })).toContainText("GOOD VIBES.");
-  await expect(main(page).getByRole("heading", { level: 1 })).toContainText("GREAT DROPS.");
-  await expect(main(page).getByRole("link", { name: /^Let’s play/ })).toBeVisible();
+  await expect(main(page).getByRole("heading", { level: 1 })).toContainText("Small games.");
+  await expect(main(page).getByRole("heading", { level: 1 })).toContainText("Shared rewards.");
+  await expect(main(page).locator(".drop-hero").getByRole("link", { name: /^Let’s play/ })).toBeVisible();
   const disclosure = main(page).locator(".hero-footnote");
   await expect(disclosure).toBeVisible();
   await expect(disclosure).toContainText("No signup to try · Practice has no payout");
@@ -79,7 +79,7 @@ for (const locale of locales) test(`${locale.id} translates the actual home and 
   await expect(language(page)).toHaveAccessibleName(locale.selectorLabel);
   await expect(page.locator("html")).toHaveAttribute("lang", locale.id);
   for (const phrase of locale.hero) await expect(main(page).getByRole("heading", { level: 1 })).toContainText(phrase);
-  await main(page).getByRole("link", { name: locale.play, exact: true }).click();
+  await main(page).locator(".drop-hero").getByRole("link", { name: locale.play, exact: true }).click();
   await expect(page).toHaveURL(/\/practice$/);
   await expect(language(page)).toHaveValue(locale.id);
   await expect(main(page).getByRole("heading", { level: 1 })).toHaveText(locale.practiceTitle);
@@ -152,7 +152,8 @@ test("the Monad assets load before capturing the English desktop and mobile home
   await expect(language(page)).toHaveValue("en");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   // The header logo is intentionally hidden below 900px. The footer brand,
-  // stage logo and mascot are the visible assets shared by both profiles.
+  // receipt-preview logo and hero mascot load on both profiles. Reduced motion
+  // also keeps the one-time receipt illustration stable while scrolling.
   const images = [page.locator(".footer-monad img"), main(page).locator(".stage-coin img"), main(page).getByRole("img", { name: "Molandak", exact: true })];
   for (const image of images) {
     await image.scrollIntoViewIfNeeded();

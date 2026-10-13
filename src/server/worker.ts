@@ -8,6 +8,8 @@ import { DomainError } from "./errors";
 const LEASE_MS = 120_000;
 type RecoverableJob = PayoutJob & { recoveryCursor?: string; settlementTxHash?: string };
 export type LeasedJob = RecoverableJob & { award: Award & { campaign: Campaign } };
+export type WorkerBudget = { deadlineAt?: number; receiptWaitMs?: number; recoveryPages?: number };
+function checkBudget(budget: WorkerBudget) { if (budget.deadlineAt !== undefined && Date.now() >= budget.deadlineAt) throw new DomainError("WORKER_BUDGET_YIELDED", "Bounded worker invocation yielded.", 503); }
 const col = (name: string) => database().collection(name);
 const terminal = (a: Award) => a.status === "CONFIRMED" || a.status === "DELIVERED";
 const validLease = (current: PayoutJob, expected: LeasedJob) => !current.completedAt && current.leaseOwner === expected.leaseOwner && current.leasedUntil !== null && current.leasedUntil.getTime() > Date.now();
@@ -73,14 +75,17 @@ async function persistRecovery(job: LeasedJob, recoveryCursor: string, settlemen
     tx.update(col("payoutJobs").doc(job.id), { recoveryCursor, ...(settlementTxHash ? { settlementTxHash } : {}) });
   });
 }
-async function recoverExistingSettlement(job: LeasedJob, proof: RewardAuthorization): Promise<"unpaid" | "done" | "paid-needs-drain"> {
+async function recoverExistingSettlement(job: LeasedJob, proof: RewardAuthorization, budget: WorkerBudget): Promise<"unpaid" | "done" | "paid-needs-drain"> {
+  checkBudget(budget);
   const { config, publicClient } = chainClients();
   const finalized = await finalizedBlock(publicClient);
   if (!await publicClient.readContract({ address: config.escrow, abi: escrowAbi, functionName: "isRewardClaimed", args: [proof.campaignId, proof.rewardId], blockNumber: finalized.number })) return "unpaid";
   const floor = job.award.campaign.fundingBlock ? BigInt(job.award.campaign.fundingBlock) : 0n;
   let toBlock = job.recoveryCursor === undefined ? finalized.number : BigInt(job.recoveryCursor);
   if (toBlock > finalized.number) toBlock = finalized.number;
-  for (let page = 0; page < RECOVERY_PAGES_PER_TICK && toBlock >= floor; page++) {
+  const pages = Math.min(RECOVERY_PAGES_PER_TICK, Math.max(1, Math.floor(budget.recoveryPages ?? RECOVERY_PAGES_PER_TICK)));
+  for (let page = 0; page < pages && toBlock >= floor; page++) {
+    checkBudget(budget);
     const fromBlock = toBlock >= floor + RECOVERY_PAGE_BLOCKS ? toBlock - RECOVERY_PAGE_BLOCKS + 1n : floor;
     const logs = await publicClient.getContractEvents({ address: config.escrow, abi: escrowAbi, eventName: "RewardPaid", args: { campaignId: proof.campaignId, rewardId: proof.rewardId }, fromBlock, toBlock });
     const event = logs.find(log => log.transactionHash);
@@ -131,9 +136,9 @@ async function bumpPendingFee(job: LeasedJob, proof: RewardAuthorization, signat
 }
 async function resetConsumedTransaction(job: LeasedJob): Promise<LeasedJob> { return database().runTransaction(async tx => { const { current, award } = await leasedRecords(tx, job); const updated = { ...current, serializedTx: null, txHash: null, nonce: null, relayer: null, chainId: null, preparedAt: null, maxFeePerGas: null, maxPriorityFeePerGas: null, txHistory: [] }; tx.set(col("payoutJobs").doc(job.id), updated); tx.create(col("auditLogs").doc(), { campaignId: award.campaignId, action: "CONSUMED_TRANSACTION_RETRY", properties: { awardId: award.id, nonce: current.nonce, hashes: current.txHistory }, createdAt: new Date() }); return { ...updated, award: { ...award, campaign: job.award.campaign } }; }); }
 
-export async function processJob(job: LeasedJob) {
+export async function processJob(job: LeasedJob, budget: WorkerBudget = {}) {
   try {
-    await assertLease(job); if (job.award.campaign.rewardType !== "USDC") { await deliverCoupon(job); return; }
+    await assertLease(job); checkBudget(budget); if (job.award.campaign.rewardType !== "USDC") { await deliverCoupon(job); return; }
     const { config, publicClient } = await verifyChainConfiguration(), c = job.award.campaign;
     if (c.chainId !== config.chainId || c.escrow !== config.escrow.toLowerCase() || c.token !== config.usdc.toLowerCase()) throw new DomainError("DEPLOYMENT_MISMATCH", "This event belongs to another escrow deployment.", 503);
     let proof = job.award.proof ? proofFromJson(job.award.proof) : proofFor(job.award, c);
@@ -143,6 +148,7 @@ export async function processJob(job: LeasedJob) {
     // Do not let a historical log query block a receipt we can already look up.
     const knownHashes = [...new Set([job.settlementTxHash, job.txHash, ...job.txHistory].filter((hash): hash is string => Boolean(hash)))];
     for (const hash of knownHashes) {
+        checkBudget(budget);
         const result = await receiptForReward(hash as Hex, proof);
         if (result.state === "confirmed") {
           const drained = await nonceIsDrained(job);
@@ -153,7 +159,7 @@ export async function processJob(job: LeasedJob) {
         }
         if (result.state === "reverted" && hash !== job.settlementTxHash) reverted = true;
     }
-    if (recovered === "unpaid") { recovered = await recoverExistingSettlement(job, proof); if (recovered === "done") return; }
+    if (recovered === "unpaid") { recovered = await recoverExistingSettlement(job, proof, budget); if (recovered === "done") return; }
     if (reverted) {
       if (recovered === "paid-needs-drain" || job.award.deadline.getTime() <= Date.now()) { await completeExpired(job, true); return; }
       job = await resetConsumedTransaction(job);
@@ -166,11 +172,14 @@ export async function processJob(job: LeasedJob) {
     if (!job.serializedTx && job.award.deadline.getTime() <= Date.now()) { await completeExpired(job, true); return; }
     let signature = job.award.signature as Hex | null;
     if (!signature) {
+      checkBudget(budget);
       if (c.signer !== signingAccount().address.toLowerCase()) throw new DomainError("SIGNER_MISMATCH", "The worker signer differs from this event.", 503);
       signature = await signAuthorization(proof);
       const saved = await database().runTransaction(async tx => { const { award } = await leasedRecords(tx, job); if (award.proof && award.signature) return award; tx.update(col("awards").doc(award.id), { proof: proofJson(proof), signature }); return { ...award, proof: proofJson(proof), signature }; }); proof = proofFromJson(saved.proof); signature = saved.signature as Hex;
     }
+    checkBudget(budget);
     job = await ensureDurableTransaction(job, proof, signature);
+    checkBudget(budget);
     job = await bumpPendingFee(job, proof, signature);
     if (job.maxFeePerGas && job.serializedTx) enforceFeeCap(job.maxFeePerGas, parseTransaction(job.serializedTx as Hex).gas?.toString());
     await assertLease(job);
@@ -180,7 +189,9 @@ export async function processJob(job: LeasedJob) {
     // so the consumer need not wait for the next scheduled retry when already settled.
     // A timeout still leaves the persisted outbox/transaction for normal recovery.
     try {
-      await publicClient.waitForTransactionReceipt({ hash: job.txHash as Hex, confirmations: config.confirmations, timeout: 15_000, pollingInterval: 1000 });
+      checkBudget(budget);
+      const receiptWaitMs = Math.min(15_000, Math.max(0, budget.receiptWaitMs ?? 15_000));
+      if (receiptWaitMs > 0) await publicClient.waitForTransactionReceipt({ hash: job.txHash as Hex, confirmations: config.confirmations, timeout: receiptWaitMs, pollingInterval: 1000 });
       const settled = await receiptForReward(job.txHash as Hex, proof);
       if (settled.state === "confirmed") { await finalizeConfirmed(job, job.txHash as Hex, settled.receipt.blockNumber, true); return; }
       if (settled.state === "reverted" && (recovered === "paid-needs-drain" || job.award.deadline.getTime() <= Date.now())) { await completeExpired(job, true); return; }
@@ -194,7 +205,29 @@ export async function processJob(job: LeasedJob) {
     try { await retryLater(job, code, Boolean(job.txHash)); } catch (retryError) { if (!(retryError instanceof DomainError && retryError.code === "LEASE_LOST")) throw retryError; }
   }
 }
-export async function workerTick(onlyId?: string) { const job = await leaseNextJob(onlyId); if (!job) return false; await processJob(job); return true; }
+export async function workerTick(onlyId?: string, budget: WorkerBudget = {}) { checkBudget(budget); const job = await leaseNextJob(onlyId); if (!job) return false; await processJob(job, budget); return true; }
+
+/** Recover a finalized direct claim whose unsigned outbox previously expired. */
+export async function reviveFinalizedReward(awardId: string, budget: WorkerBudget = {}) {
+  checkBudget(budget);
+  const award = await read<Award>("awards", awardId), job = await read<PayoutJob>("payoutJobs", awardId);
+  if (!award || !job?.completedAt || award.status !== "EXPIRED") return false;
+  const campaign = await read<Campaign>("campaigns", award.campaignId);
+  if (!campaign || campaign.rewardType !== "USDC" || !campaign.fundingTx) return false;
+  checkBudget(budget);
+  const { config, publicClient } = await verifyChainConfiguration();
+  if (campaign.chainId !== config.chainId || campaign.escrow !== config.escrow.toLowerCase()) return false;
+  const finalized = await finalizedBlock(publicClient);
+  if (!await publicClient.readContract({ address: config.escrow, abi: escrowAbi, functionName: "isRewardClaimed", args: [campaign.chainCampaignId as Hex, award.rewardId as Hex], blockNumber: finalized.number })) return false;
+  return database().runTransaction(async tx => {
+    const jobRef = col("payoutJobs").doc(awardId), awardRef = col("awards").doc(awardId);
+    const [storedJob, storedAward] = await tx.getAll(jobRef, awardRef);
+    const currentJob = record<PayoutJob>(storedJob), currentAward = record<Award>(storedAward);
+    if (!currentJob?.completedAt || currentAward?.status !== "EXPIRED") return false;
+    tx.update(jobRef, { completedAt: null, availableAt: new Date(), leasedUntil: null, leaseOwner: null, recoveryCursor: finalized.number.toString(), lastError: "FINALIZED_SETTLEMENT_RECOVERY" });
+    return true;
+  });
+}
 export async function reconcileCampaign(id: string) {
   const c = await read<Campaign>("campaigns", id); if (!c || c.rewardType !== "USDC" || !c.fundingTx) return { id, skipped: true };
   const { config, publicClient } = await verifyChainConfiguration(); if (c.chainId !== config.chainId || c.escrow !== config.escrow.toLowerCase()) throw new DomainError("DEPLOYMENT_MISMATCH", "Use the event's deployed escrow.", 503);
