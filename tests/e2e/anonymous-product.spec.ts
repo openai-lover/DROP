@@ -5,10 +5,24 @@ import { test, expect, type Page } from "@playwright/test";
 // Scope: actual rendered anonymous/unconfigured product. These tests neither
 // fabricate Privy users nor claim that a testnet settlement has been exercised.
 const runtimeErrors = new WeakMap<Page, string[]>();
-test.beforeEach(({ page }) => { const errors: string[] = []; runtimeErrors.set(page, errors); page.on("pageerror", error => errors.push(error.message)); });
+test.beforeEach(async ({ page, context }) => {
+  // Existing behavior cases intentionally use Korean. Preserve a user selection
+  // across every navigation/reload rather than forcing Korean on each document.
+  await context.addInitScript(() => {
+    try {
+      if (window.localStorage.getItem("drop-language") === null) {
+        window.localStorage.setItem("drop-language", "ko");
+      }
+    } catch { /* Non-origin documents may not expose localStorage. */ }
+  });
+  const errors: string[] = [];
+  runtimeErrors.set(page, errors);
+  page.on("pageerror", error => errors.push(error.message));
+});
 test.afterEach(({ page }) => { expect(runtimeErrors.get(page)).toEqual([]); });
 const main = (page: Page) => page.getByRole("main");
 const next = (page: Page) => main(page).getByRole("button", { name: /^다음/ });
+const language = (page: Page) => page.locator("select.language-select");
 
 async function validStory(page: Page) {
   await page.getByLabel("이벤트 제목", { exact: true }).fill("AMA 후 함께 커피 잡기");
@@ -27,9 +41,10 @@ test("the homepage leads to explicitly unpaid anonymous practice", async ({ page
   const rewardRequests: string[] = [];
   page.on("request", request => { if (request.method() === "POST" && /\/api\/(sessions|campaigns|creator)/.test(request.url())) rewardRequests.push(request.url()); });
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("플레이하게 하자");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("좋은 바이브.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("짜릿한 드롭.");
   await expect(page.getByText("Monad Testnet · 테스트 보상에는 금전적 가치가 없습니다.", { exact: true })).toBeVisible();
-  await page.getByRole("link", { name: /^커피 잡아보기/ }).click();
+  await page.getByRole("link", { name: /^플레이 시작/ }).click();
   await expect(page).toHaveURL(/\/practice$/);
   await expect(main(page).getByText("로그인 없는 연습입니다. 실제 보상·자격·지급 기록은 생성되지 않습니다.", { exact: true })).toBeVisible();
   await expect(main(page).getByText("연습 · 보상 없음", { exact: true })).toBeVisible();
@@ -155,20 +170,29 @@ test("a creator quiz cannot advance until all three custom questions are written
 
 test("English selection persists across navigation and reload", async ({ page }) => {
   await page.goto("/judges");
-  await main(page).getByRole("button", { name: "English →", exact: true }).click();
+  // The server renders English before restoring the explicit Korean fixture.
+  // Wait for that initialized state before dispatching the user's change.
+  await expect(language(page)).toHaveValue("ko");
+  await expect(page.locator("html")).toHaveAttribute("lang", "ko");
+  await language(page).selectOption("en");
+  await expect(language(page)).toHaveValue("en");
   await expect(main(page).getByRole("heading", { name: "Experience DROP", exact: true })).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await main(page).getByRole("link", { name: /^Open practice/ }).click();
   await expect(main(page).getByRole("heading", { name: "Try your first drop.", exact: true })).toBeVisible();
   await page.reload(); await expect(main(page).getByText("Practice · No payout", { exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Change language", exact: true }).click();
+  await language(page).selectOption("ko");
   await expect(main(page).getByRole("heading", { name: "먼저, 한번 즐겨봐요.", exact: true })).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "ko");
 });
 
 test("English creator validation explains required fields and unsupported images", async ({ page }) => {
   await page.goto("/dashboard/new");
-  await page.getByRole("button", { name: "Change language", exact: true }).click();
+  await expect(language(page)).toHaveValue("ko");
+  await expect(page.locator("html")).toHaveAttribute("lang", "ko");
+  await language(page).selectOption("en");
+  await expect(language(page)).toHaveValue("en");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(main(page).getByRole("heading", { name: "Create a drop", exact: true })).toBeVisible();
   await main(page).getByRole("button", { name: /^Next/ }).click();
   await expect(main(page).getByRole("alert")).toContainText("Check the title, organizer, description");
@@ -224,7 +248,8 @@ for (const width of [360, 390, 768, 1440]) test(`core screens fit a ${width}px v
     await page.goto(url); await expect(main(page)).toBeVisible();
     const dimensions = await page.evaluate(() => ({ viewport: window.innerWidth, document: document.documentElement.scrollWidth }));
     expect(dimensions.document, `${url} at ${width}px`).toBeLessThanOrEqual(dimensions.viewport + 1);
-    await expect(page.getByRole("button", { name: "Change language", exact: true })).toBeVisible();
+    await expect(language(page)).toBeVisible();
+    await expect(language(page)).toHaveAccessibleName("언어");
   }
 });
 

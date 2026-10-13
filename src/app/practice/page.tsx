@@ -1,2 +1,5 @@
 import {Practice} from '@/components/practice';
-export default function Page(){return <Practice/>;}
+export default async function Page({searchParams}:{searchParams:Promise<{game?:string}>}) {
+  const {game}=await searchParams;
+  return <Practice initialGame={game==='quiz'?'quiz':'catch'}/>;
+}

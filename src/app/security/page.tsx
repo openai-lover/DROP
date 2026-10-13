@@ -2,7 +2,7 @@
 import {useLanguage} from '@/components/shell';
 export default function Page(){
  const {t}=useLanguage();
- return <main className="page narrow security-text"><p className="eyebrow">KEEP YOUR REWARDS, KEEP CONTROL</p><h1>{t('보안·계정 복구','Security & recovery')}</h1>
+ return <main className="page narrow security-text"><p className="eyebrow">{t('보상도, 관리도 내 손에','KEEP YOUR REWARDS, KEEP CONTROL')}</p><h1>{t('보안·계정 복구','Security & recovery')}</h1>
  <h2>{t('로그인이 곧 지갑 접근입니다.','Your login controls wallet access.')}</h2><p>{t('Privy로 인증한 계정에 사용자 지갑이 연결됩니다. Telegram 계정 정지·탈퇴, 이메일 분실 또는 계정 탈취는 지갑 접근에 영향을 줄 수 있습니다. 공급자 계정의 추가 인증을 켜고 복구 방법을 미리 확인해 주세요. 사용자 승인 없는 관리자 임의 인출 기능은 제공하지 않습니다.','Your Privy account is linked to your wallet. Provider suspension, account loss or compromise may affect access. Enable extra account protection and review your recovery options. DROP provides no administrator withdrawal bypass.')}</p>
  <h2>{t('인앱 브라우저 로그인에 실패했나요?','Having trouble signing in from an in-app browser?')}</h2><p>{t('브라우저 메뉴의 외부 브라우저로 열기를 사용해 같은 HTTPS 주소를 다시 열어 주세요. 로그인 창이 차단됐다면 이메일 로그인 대안을 이용하세요. DROP은 독립 웹사이트입니다.','Open the same HTTPS URL in your normal browser using the in-app browser menu. If the login window is blocked, try email sign-in. DROP is a standalone website.')}</p>
  <h2>{t('받기와 전송은 다른 행동입니다.','Receiving and sending are separate actions.')}</h2><p>{t('보상 수령은 서버의 검증 승인과 지급 작업으로 처리합니다. 받은 USDC를 외부 지갑으로 전송할 때는 주소·네트워크·금액을 확인하고 직접 승인합니다. 테스트넷 토큰에는 금전적 가치가 없으며 원화 출금이나 거래소 입금을 보장하지 않습니다.','The server verifies attempts and arranges reward delivery. Sending received USDC requires checking the address, network and amount and approving the transfer. Testnet assets have no monetary value. Fiat withdrawal and exchange deposits are not guaranteed.')}</p>
