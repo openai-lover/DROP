@@ -1,0 +1,10 @@
+{
+ "indexes":[
+  {"collectionGroup":"campaigns","queryScope":"COLLECTION","fields":[{"fieldPath":"ownerId","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"campaigns","queryScope":"COLLECTION","fields":[{"fieldPath":"status","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"awards","queryScope":"COLLECTION","fields":[{"fieldPath":"userId","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"gameSessions","queryScope":"COLLECTION","fields":[{"fieldPath":"campaignId","order":"ASCENDING"},{"fieldPath":"userId","order":"ASCENDING"}]},
+  {"collectionGroup":"payoutJobs","queryScope":"COLLECTION","fields":[{"fieldPath":"completedAt","order":"ASCENDING"},{"fieldPath":"availableAt","order":"ASCENDING"}]}
+  ,{"collectionGroup":"coupons","queryScope":"COLLECTION","fields":[{"fieldPath":"campaignId","order":"ASCENDING"},{"fieldPath":"status","order":"ASCENDING"},{"fieldPath":"createdAt","order":"ASCENDING"}]}
+ ],"fieldOverrides":[]
+}

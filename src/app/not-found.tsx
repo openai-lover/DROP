@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function NotFound(){return <main className="page narrow"><p className="eyebrow">THIS DROP ISN’T HERE</p><h1>페이지를 찾지 못했어요.</h1><p className="lead">공유 주소를 확인하거나 DROP으로 돌아가 주세요.</p><Link className="button" href="/">DROP으로 돌아가기 →</Link></main>;}

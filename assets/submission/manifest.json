@@ -1,0 +1,46 @@
+{
+  "status": "original-temporary-branding-not-final-approved",
+  "origin": "Original code-native geometric SVG outlines created for DROP; PNGs rendered with the pinned Sharp package.",
+  "externalFontsOrArtwork": false,
+  "assetSpecificLicense": "NOASSERTION",
+  "licenseNote": "No asset-specific public license is assigned by this task. The project owner may choose one. No third-party font or artwork license is required by these source assets.",
+  "palette": {
+    "ink": "#20231e",
+    "coral": "#f6503d",
+    "paper": "#faf9f5"
+  },
+  "renderer": {
+    "sharp": "0.34.4",
+    "svg": "2.61.1"
+  },
+  "assets": [
+    {
+      "filename": "drop-wordmark.png",
+      "source": "drop-wordmark.svg",
+      "format": "png",
+      "width": 1200,
+      "height": 600,
+      "bytes": 9979,
+      "sha256": "41adccd9bf69ab9dbad15ac3ca3b8bdb24618a5fc2af954879dd7d2ec4f079bd",
+      "sourceSha256": "0020812e27462d1e51adac39df796af021bbfb41a5a4be40fd2376ab022277f7",
+      "submissionLimitBytes": 2000000,
+      "minimumDimension": 500,
+      "maximumDimension": 2000,
+      "withinSubmissionLimit": true
+    },
+    {
+      "filename": "drop-square.png",
+      "source": "drop-square.svg",
+      "format": "png",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 11914,
+      "sha256": "9fa9cd116e95b1d56706979556682d40f093d8740e3a8aa6e039f50c95b0f2d4",
+      "sourceSha256": "b3c453ff4c414b92f9bbed64fdf6d84451d02622e70aa615cf5ad79f68e20ed7",
+      "submissionLimitBytes": 2000000,
+      "minimumDimension": 500,
+      "maximumDimension": 2000,
+      "withinSubmissionLimit": true
+    }
+  ]
+}

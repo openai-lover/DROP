@@ -1,0 +1,17 @@
+packages:
+  - '.'
+  - 'functions'
+allowBuilds:
+  '@firebase/util': true
+  '@reown/appkit': false
+  bufferutil: false
+  esbuild: true
+  keccak: false
+  protobufjs: true
+  re2: true
+  sharp: true
+  unrs-resolver: true
+  utf-8-validate: false
+minimumReleaseAgeExclude:
+  - viem@2.57.5
+  - zod@4.6.7

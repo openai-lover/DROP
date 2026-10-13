@@ -1,0 +1,20 @@
+{
+  "recordedAtUtc": "2026-10-13T12:01:20.5477522Z",
+  "scope": "Local tests using official Forge Monad execution rules; no live network deployment",
+  "forgeVersion": "1.8.5",
+  "forgeCommit": "51a52c59cffd940f76eddd0b4bb1791aa4b5ac7f",
+  "compiler": "solc 0.8.28",
+  "openZeppelinVersion": "5.6.1",
+  "command": "forge test --root contracts -vv",
+  "unitAndFuzzTestsPassed": 42,
+  "fuzzRuns": 256,
+  "invariantSuitesPassed": 1,
+  "invariantPropertiesPassed": 2,
+  "invariantRuns": 256,
+  "invariantCalls": 16384,
+  "failed": 0,
+  "skipped": 0,
+  "sourceSha256": "1df6b743f59935af9814e786f04cf1d8984960a797ee1ebaa16c020482115fa6",
+  "abiSha256": "a99deb44f206733fd7c8133fe98283d87b789f8882f1c00f2b97d7f049f39a20",
+  "liveDeployment": false
+}
